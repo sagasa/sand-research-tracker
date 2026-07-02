@@ -381,13 +381,6 @@ function ResearchDependencyTree({
 
   return (
     <Stack spacing={2}>
-      {!dependencyDataAvailable ? (
-        <Alert severity={layoutDataAvailable ? "info" : "warning"} variant="outlined">
-          表示は有志サイト由来のゲーム内進行順と配置スロットを使っています。
-          明示的な前提ノードIDは公開データ内に見当たらないため、前提線と前提込み素材集計は推測せず無効化しています。
-        </Alert>
-      ) : null}
-
       {branchGroups.map(({ branch, nodes: branchNodes }) => {
         const sortedBranchNodes = [...branchNodes].sort(sortResearchNodes);
         const columnGroups = dependencyDataAvailable && !layoutDataAvailable
@@ -781,19 +774,6 @@ export default function App() {
                 <FlagIcon color="primary" />
                 <Typography variant="h2">研究ノード</Typography>
                 <Chip label={`${filteredNodes.length}/${techNodes.length}`} size="small" />
-                <Chip label="Crowns excluded from material totals" size="small" variant="outlined" />
-                <Chip
-                  label={layoutDataAvailable ? "進行スロットあり" : "進行スロット未生成"}
-                  size="small"
-                  color={layoutDataAvailable ? "success" : "warning"}
-                  variant="outlined"
-                />
-                <Chip
-                  label={dependencyDataAvailable ? "前提IDあり" : "前提IDなし"}
-                  size="small"
-                  color={dependencyDataAvailable ? "success" : "warning"}
-                  variant="outlined"
-                />
               </Stack>
               <Divider />
               {techNodes.length === 0 ? (
