@@ -1,0 +1,32 @@
+html {
+  color-scheme: dark;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 260px),
+    #101417;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.node-table-row {
+  vertical-align: top;
+}
+
+.material-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}

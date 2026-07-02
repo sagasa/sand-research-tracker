@@ -1,0 +1,35 @@
+{
+  "name": "sand-research-tracker",
+  "version": "0.1.0",
+  "description": "Static SAND research resource tracker with generated tech-tree data and cookie persistence.",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sagasa/sand-research-tracker.git"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "generate:data": "node scripts/generate-tech-tree.mjs",
+    "check": "tsc -b"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.5",
+    "@mui/material": "^7.3.5",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.2",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "cheerio": "^1.1.2",
+    "typescript": "~5.9.3",
+    "vite": "^7.2.7"
+  }
+}
