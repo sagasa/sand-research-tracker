@@ -2,18 +2,24 @@ import type { TechBranch, TechNode } from "../types";
 
 export const techTreeSource = {
   "sourceUrl": "https://sandraidersofsophie.com/database",
-  "generatedAt": "2026-07-02T12:45:12.785Z",
+  "generatedAt": "2026-07-02T19:02:04.335Z",
   "progressionDescriptionsFile": null,
   "progressionDescriptionCount": 0,
   "progressionMatchedNodes": 0,
   "sandGameDbResearchUrl": "https://sandgamedb.com/tools/research-checklist",
   "sandGameDbResearchNodeCount": 98,
   "sandGameDbMatchedNodes": 93,
+  "cogAndCrownTechUrl": "https://cogandcrown.com/tech/",
+  "cogAndCrownNodeCount": 97,
+  "cogAndCrownMatchedNodes": 90,
+  "cogAndCrownDependencyEdges": 86,
+  "cogAndCrownMatchedDependencyEdges": 72,
   "hasProgressionLayout": true,
   "researchTreeFile": null,
   "researchTreeNodeCount": 0,
-  "dependencyMatchedNodes": 0,
-  "hasExplicitDependencies": false
+  "dependencyMatchedNodes": 90,
+  "dependencyMatchedEdges": 72,
+  "hasExplicitDependencies": true
 } as const;
 
 export const techBranches: TechBranch[] = [
@@ -65,8 +71,10 @@ export const techNodes: TechNode[] = [
       }
     ],
     "requiredNodeIds": [],
-    "dependentNodeIds": [],
-    "isRoot": false,
+    "dependentNodeIds": [
+      "ea6f7be5-8eec-4743-ad5d-b67000bacad1"
+    ],
+    "isRoot": true,
     "isShop": true,
     "uiPriority": 10,
     "treeColumn": 1,
@@ -77,9 +85,11 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/wiki/resources#resource-20"
+      "https://sandraidersofsophie.com/wiki/resources#resource-20",
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/wiki/resources#resource-20"
+    "sourceUrl": "https://sandraidersofsophie.com/wiki/resources#resource-20",
+    "cogAndCrownId": "godlewski-1a-energy-rod"
   },
   {
     "id": "f67098d9-f21c-4cb2-a43c-1319e74b844b",
@@ -96,8 +106,10 @@ export const techNodes: TechNode[] = [
     "crowns": 700,
     "materials": [],
     "requiredNodeIds": [],
-    "dependentNodeIds": [],
-    "isRoot": false,
+    "dependentNodeIds": [
+      "87a93b7c-11af-43ab-94a2-22c284b86315"
+    ],
+    "isRoot": true,
     "isShop": false,
     "uiPriority": 4,
     "treeColumn": 1,
@@ -108,9 +120,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "godlewski-1a-crew-room"
   },
   {
     "id": "71143b7b-2c75-4adc-bffc-8e2c007e6624",
@@ -127,8 +140,10 @@ export const techNodes: TechNode[] = [
     "crowns": 600,
     "materials": [],
     "requiredNodeIds": [],
-    "dependentNodeIds": [],
-    "isRoot": false,
+    "dependentNodeIds": [
+      "6b93cb6a-bce7-492f-962e-11edcdb949eb"
+    ],
+    "isRoot": true,
     "isShop": false,
     "uiPriority": 3,
     "treeColumn": 1,
@@ -139,9 +154,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "godlewski-1a-stairs"
   },
   {
     "id": "08f073c6-c5b8-4074-909d-c8bc966e912e",
@@ -158,8 +174,10 @@ export const techNodes: TechNode[] = [
     "crowns": 1000,
     "materials": [],
     "requiredNodeIds": [],
-    "dependentNodeIds": [],
-    "isRoot": false,
+    "dependentNodeIds": [
+      "f73f99e1-eaac-4489-a46f-cc13be66d9d5"
+    ],
+    "isRoot": true,
     "isShop": false,
     "uiPriority": 2,
     "treeColumn": 1,
@@ -170,9 +188,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "godlewski-1a-motor-reactor"
   },
   {
     "id": "961890f7-e08a-4d21-a338-738563c384e4",
@@ -189,8 +208,10 @@ export const techNodes: TechNode[] = [
     "crowns": 900,
     "materials": [],
     "requiredNodeIds": [],
-    "dependentNodeIds": [],
-    "isRoot": false,
+    "dependentNodeIds": [
+      "0918117d-3d17-4d5b-8ff3-32152d0e841f"
+    ],
+    "isRoot": true,
     "isShop": false,
     "uiPriority": 1,
     "treeColumn": 1,
@@ -201,9 +222,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "godlewski-1a-small-chassis"
   },
   {
     "id": "ea6f7be5-8eec-4743-ad5d-b67000bacad1",
@@ -228,8 +250,12 @@ export const techNodes: TechNode[] = [
         "count": 400
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "00a6a690-f10f-483b-9da9-1a7374aa6aa0"
+    ],
+    "dependentNodeIds": [
+      "846af560-1b57-415f-ae82-efa66a2746c6"
+    ],
     "isRoot": false,
     "isShop": true,
     "uiPriority": 10,
@@ -241,9 +267,11 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/wiki/resources#resource-24"
+      "https://sandraidersofsophie.com/wiki/resources#resource-24",
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/wiki/resources#resource-24"
+    "sourceUrl": "https://sandraidersofsophie.com/wiki/resources#resource-24",
+    "cogAndCrownId": "godlewski-1b-medkit"
   },
   {
     "id": "6b93cb6a-bce7-492f-962e-11edcdb949eb",
@@ -264,8 +292,12 @@ export const techNodes: TechNode[] = [
         "count": 75
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "71143b7b-2c75-4adc-bffc-8e2c007e6624"
+    ],
+    "dependentNodeIds": [
+      "7e4b1db2-4765-4b19-aa37-cac3ff1bc548"
+    ],
     "isRoot": false,
     "isShop": false,
     "uiPriority": 2,
@@ -277,9 +309,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "godlewski-1b-framed-stairs"
   },
   {
     "id": "f73f99e1-eaac-4489-a46f-cc13be66d9d5",
@@ -304,8 +337,12 @@ export const techNodes: TechNode[] = [
         "count": 15
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "08f073c6-c5b8-4074-909d-c8bc966e912e"
+    ],
+    "dependentNodeIds": [
+      "c42f2a15-0ef7-494e-8a78-c24b0d9ff3a3"
+    ],
     "isRoot": false,
     "isShop": false,
     "uiPriority": 1,
@@ -317,9 +354,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "godlewski-1b-motor-reactor"
   },
   {
     "id": "846af560-1b57-415f-ae82-efa66a2746c6",
@@ -348,8 +386,12 @@ export const techNodes: TechNode[] = [
         "count": 400
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "ea6f7be5-8eec-4743-ad5d-b67000bacad1"
+    ],
+    "dependentNodeIds": [
+      "8bf4317c-4d38-4688-a8f3-0d51f22819ac"
+    ],
     "isRoot": false,
     "isShop": true,
     "uiPriority": 10,
@@ -361,9 +403,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "godlewski-2a-shovel"
   },
   {
     "id": "87a93b7c-11af-43ab-94a2-22c284b86315",
@@ -384,8 +427,12 @@ export const techNodes: TechNode[] = [
         "count": 75
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "f67098d9-f21c-4cb2-a43c-1319e74b844b"
+    ],
+    "dependentNodeIds": [
+      "a02f9be8-5563-40ef-a075-145a4fe3f1b1"
+    ],
     "isRoot": false,
     "isShop": false,
     "uiPriority": 4,
@@ -397,9 +444,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "godlewski-2a-captains-cabin"
   },
   {
     "id": "7e4b1db2-4765-4b19-aa37-cac3ff1bc548",
@@ -420,8 +468,12 @@ export const techNodes: TechNode[] = [
         "count": 75
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "6b93cb6a-bce7-492f-962e-11edcdb949eb"
+    ],
+    "dependentNodeIds": [
+      "2d113fa5-bdc0-457a-93e7-c1fd00b46038"
+    ],
     "isRoot": false,
     "isShop": false,
     "uiPriority": 3,
@@ -433,9 +485,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "godlewski-2a-wooden-corridor"
   },
   {
     "id": "c42f2a15-0ef7-494e-8a78-c24b0d9ff3a3",
@@ -464,8 +517,12 @@ export const techNodes: TechNode[] = [
         "count": 15
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "f73f99e1-eaac-4489-a46f-cc13be66d9d5"
+    ],
+    "dependentNodeIds": [
+      "ee23cb69-29cb-4aef-aea9-ff05dcd47fc6"
+    ],
     "isRoot": false,
     "isShop": false,
     "uiPriority": 2,
@@ -477,9 +534,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "godlewski-2a-motor-reactor"
   },
   {
     "id": "0918117d-3d17-4d5b-8ff3-32152d0e841f",
@@ -500,8 +558,12 @@ export const techNodes: TechNode[] = [
         "count": 375
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "961890f7-e08a-4d21-a338-738563c384e4"
+    ],
+    "dependentNodeIds": [
+      "e96a149c-f046-437c-b31c-4513cca2cd46"
+    ],
     "isRoot": false,
     "isShop": false,
     "uiPriority": 1,
@@ -513,9 +575,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "godlewski-2a-middling-chassis"
   },
   {
     "id": "fef52fa6-b14e-4004-9895-72c2457ff2f2",
@@ -572,8 +635,12 @@ export const techNodes: TechNode[] = [
         "count": 100
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "87a93b7c-11af-43ab-94a2-22c284b86315"
+    ],
+    "dependentNodeIds": [
+      "983aebd7-b6d4-4707-b378-2918466968aa"
+    ],
     "isRoot": false,
     "isShop": false,
     "uiPriority": 3,
@@ -585,9 +652,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "godlewski-2b-crew-room"
   },
   {
     "id": "ee23cb69-29cb-4aef-aea9-ff05dcd47fc6",
@@ -620,8 +688,13 @@ export const techNodes: TechNode[] = [
         "count": 15
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "c42f2a15-0ef7-494e-8a78-c24b0d9ff3a3"
+    ],
+    "dependentNodeIds": [
+      "3122fa7f-f40a-4490-9c22-f26fdd631329",
+      "4bba1484-c57b-4451-a4a7-d54555cd944b"
+    ],
     "isRoot": false,
     "isShop": false,
     "uiPriority": 2,
@@ -633,9 +706,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "godlewski-2b-motor-reactor"
   },
   {
     "id": "983aebd7-b6d4-4707-b378-2918466968aa",
@@ -656,7 +730,9 @@ export const techNodes: TechNode[] = [
         "count": 125
       }
     ],
-    "requiredNodeIds": [],
+    "requiredNodeIds": [
+      "a02f9be8-5563-40ef-a075-145a4fe3f1b1"
+    ],
     "dependentNodeIds": [],
     "isRoot": false,
     "isShop": false,
@@ -669,9 +745,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "godlewski-2c-crew-room-2p"
   },
   {
     "id": "3122fa7f-f40a-4490-9c22-f26fdd631329",
@@ -696,8 +773,12 @@ export const techNodes: TechNode[] = [
         "count": 5
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "ee23cb69-29cb-4aef-aea9-ff05dcd47fc6"
+    ],
+    "dependentNodeIds": [
+      "a8259e00-e745-40b8-9882-d9add19f7a49"
+    ],
     "isRoot": false,
     "isShop": false,
     "uiPriority": 1,
@@ -709,9 +790,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "godlewski-2c-small-engine"
   },
   {
     "id": "8bf4317c-4d38-4688-a8f3-0d51f22819ac",
@@ -744,8 +826,12 @@ export const techNodes: TechNode[] = [
         "count": 200
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "846af560-1b57-415f-ae82-efa66a2746c6"
+    ],
+    "dependentNodeIds": [
+      "65af152d-0a49-48c0-ab7a-ba372dfd3335"
+    ],
     "isRoot": false,
     "isShop": true,
     "uiPriority": 10,
@@ -757,9 +843,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "godlewski-3a-crafting-materials"
   },
   {
     "id": "2d113fa5-bdc0-457a-93e7-c1fd00b46038",
@@ -784,7 +871,9 @@ export const techNodes: TechNode[] = [
         "count": 150
       }
     ],
-    "requiredNodeIds": [],
+    "requiredNodeIds": [
+      "7e4b1db2-4765-4b19-aa37-cac3ff1bc548"
+    ],
     "dependentNodeIds": [],
     "isRoot": false,
     "isShop": false,
@@ -797,9 +886,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "godlewski-3a-metal-corridor"
   },
   {
     "id": "4bba1484-c57b-4451-a4a7-d54555cd944b",
@@ -832,8 +922,12 @@ export const techNodes: TechNode[] = [
         "count": 360
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "ee23cb69-29cb-4aef-aea9-ff05dcd47fc6"
+    ],
+    "dependentNodeIds": [
+      "ef262856-9040-4e10-991d-8965bf45909d"
+    ],
     "isRoot": false,
     "isShop": false,
     "uiPriority": 3,
@@ -845,9 +939,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "godlewski-3a-motor-reactor"
   },
   {
     "id": "a8259e00-e745-40b8-9882-d9add19f7a49",
@@ -880,7 +975,9 @@ export const techNodes: TechNode[] = [
         "count": 4
       }
     ],
-    "requiredNodeIds": [],
+    "requiredNodeIds": [
+      "3122fa7f-f40a-4490-9c22-f26fdd631329"
+    ],
     "dependentNodeIds": [],
     "isRoot": false,
     "isShop": false,
@@ -893,9 +990,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "godlewski-3a-medium-engine"
   },
   {
     "id": "e96a149c-f046-437c-b31c-4513cca2cd46",
@@ -924,8 +1022,15 @@ export const techNodes: TechNode[] = [
         "count": 360
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "0918117d-3d17-4d5b-8ff3-32152d0e841f"
+    ],
+    "dependentNodeIds": [
+      "d02797bc-47d0-49d4-9698-bdff0869869e",
+      "3271f0eb-c2fc-4435-9355-5c198f993ec3",
+      "035f23d7-9399-48fd-be7c-02d085660a1f",
+      "ea1b5710-fd30-40d4-a101-937843ca769e"
+    ],
     "isRoot": false,
     "isShop": false,
     "uiPriority": 1,
@@ -937,9 +1042,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "godlewski-3a-great-chassis"
   },
   {
     "id": "65af152d-0a49-48c0-ab7a-ba372dfd3335",
@@ -968,8 +1074,12 @@ export const techNodes: TechNode[] = [
         "count": 750
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "8bf4317c-4d38-4688-a8f3-0d51f22819ac"
+    ],
+    "dependentNodeIds": [
+      "cba57cb2-a524-4578-8666-b524bbe9a154"
+    ],
     "isRoot": false,
     "isShop": true,
     "uiPriority": 10,
@@ -981,9 +1091,11 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/wiki/weapons/rg79s-smoke-grenade"
+      "https://sandraidersofsophie.com/wiki/weapons/rg79s-smoke-grenade",
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons/rg79s-smoke-grenade"
+    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons/rg79s-smoke-grenade",
+    "cogAndCrownId": "godlewski-3b-smoke-grenade"
   },
   {
     "id": "ef262856-9040-4e10-991d-8965bf45909d",
@@ -1016,7 +1128,9 @@ export const techNodes: TechNode[] = [
         "count": 6
       }
     ],
-    "requiredNodeIds": [],
+    "requiredNodeIds": [
+      "4bba1484-c57b-4451-a4a7-d54555cd944b"
+    ],
     "dependentNodeIds": [],
     "isRoot": false,
     "isShop": false,
@@ -1029,9 +1143,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "godlewski-3b-motor-reactor"
   },
   {
     "id": "d02797bc-47d0-49d4-9698-bdff0869869e",
@@ -1064,7 +1179,9 @@ export const techNodes: TechNode[] = [
         "count": 1100
       }
     ],
-    "requiredNodeIds": [],
+    "requiredNodeIds": [
+      "e96a149c-f046-437c-b31c-4513cca2cd46"
+    ],
     "dependentNodeIds": [],
     "isRoot": false,
     "isShop": false,
@@ -1077,9 +1194,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "godlewski-3b-great-chassis-hb"
   },
   {
     "id": "3271f0eb-c2fc-4435-9355-5c198f993ec3",
@@ -1112,7 +1230,9 @@ export const techNodes: TechNode[] = [
         "count": 100
       }
     ],
-    "requiredNodeIds": [],
+    "requiredNodeIds": [
+      "e96a149c-f046-437c-b31c-4513cca2cd46"
+    ],
     "dependentNodeIds": [],
     "isRoot": false,
     "isShop": false,
@@ -1125,9 +1245,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "godlewski-3b-great-chassis-hl"
   },
   {
     "id": "cba57cb2-a524-4578-8666-b524bbe9a154",
@@ -1160,7 +1281,9 @@ export const techNodes: TechNode[] = [
         "count": 3
       }
     ],
-    "requiredNodeIds": [],
+    "requiredNodeIds": [
+      "65af152d-0a49-48c0-ab7a-ba372dfd3335"
+    ],
     "dependentNodeIds": [],
     "isRoot": false,
     "isShop": true,
@@ -1173,9 +1296,11 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/wiki/resources#resource-37"
+      "https://sandraidersofsophie.com/wiki/resources#resource-37",
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/wiki/resources#resource-37"
+    "sourceUrl": "https://sandraidersofsophie.com/wiki/resources#resource-37",
+    "cogAndCrownId": "godlewski-4a-smokeless-rod"
   },
   {
     "id": "035f23d7-9399-48fd-be7c-02d085660a1f",
@@ -1208,7 +1333,9 @@ export const techNodes: TechNode[] = [
         "count": 2
       }
     ],
-    "requiredNodeIds": [],
+    "requiredNodeIds": [
+      "e96a149c-f046-437c-b31c-4513cca2cd46"
+    ],
     "dependentNodeIds": [],
     "isRoot": false,
     "isShop": false,
@@ -1221,9 +1348,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "godlewski-4a-royal-chassis"
   },
   {
     "id": "ea1b5710-fd30-40d4-a101-937843ca769e",
@@ -1256,7 +1384,9 @@ export const techNodes: TechNode[] = [
         "count": 5
       }
     ],
-    "requiredNodeIds": [],
+    "requiredNodeIds": [
+      "e96a149c-f046-437c-b31c-4513cca2cd46"
+    ],
     "dependentNodeIds": [],
     "isRoot": false,
     "isShop": false,
@@ -1269,9 +1399,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "godlewski-4b-royal-chassis"
   },
   {
     "id": "f270bbaf-6727-403a-b41f-b76b06464ea2",
@@ -1293,8 +1424,10 @@ export const techNodes: TechNode[] = [
       }
     ],
     "requiredNodeIds": [],
-    "dependentNodeIds": [],
-    "isRoot": false,
+    "dependentNodeIds": [
+      "ac01a9ee-2043-4214-8591-436d00764eac"
+    ],
+    "isRoot": true,
     "isShop": true,
     "uiPriority": 10,
     "treeColumn": 1,
@@ -1305,9 +1438,11 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/wiki/weapons/70mm-shotgun-cannon"
+      "https://sandraidersofsophie.com/wiki/weapons/70mm-shotgun-cannon",
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons/70mm-shotgun-cannon"
+    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons/70mm-shotgun-cannon",
+    "cogAndCrownId": "kaiser-1a-shotgun-cannon"
   },
   {
     "id": "3e6708b0-b7bd-4827-963a-add838d55194",
@@ -1324,8 +1459,10 @@ export const techNodes: TechNode[] = [
     "crowns": 600,
     "materials": [],
     "requiredNodeIds": [],
-    "dependentNodeIds": [],
-    "isRoot": false,
+    "dependentNodeIds": [
+      "dc553237-db06-4a7b-8ebd-aec87c99eb95"
+    ],
+    "isRoot": true,
     "isShop": false,
     "uiPriority": 4,
     "treeColumn": 1,
@@ -1336,9 +1473,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "kaiser-1a-wooden-decks"
   },
   {
     "id": "1f5919e4-4d93-46cf-8468-dbf1c16c4572",
@@ -1355,8 +1493,10 @@ export const techNodes: TechNode[] = [
     "crowns": 1400,
     "materials": [],
     "requiredNodeIds": [],
-    "dependentNodeIds": [],
-    "isRoot": false,
+    "dependentNodeIds": [
+      "9968fc6c-426b-469e-bf2c-2e1d779636a9"
+    ],
+    "isRoot": true,
     "isShop": false,
     "uiPriority": 2,
     "treeColumn": 1,
@@ -1367,9 +1507,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "kaiser-1a-cargo-deck"
   },
   {
     "id": "ac01a9ee-2043-4214-8591-436d00764eac",
@@ -1390,8 +1531,12 @@ export const techNodes: TechNode[] = [
         "count": 150
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "f270bbaf-6727-403a-b41f-b76b06464ea2"
+    ],
+    "dependentNodeIds": [
+      "93c0ff7f-fd78-4e79-a2ac-a8a7f9ce607b"
+    ],
     "isRoot": false,
     "isShop": true,
     "uiPriority": 10,
@@ -1403,9 +1548,11 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/wiki/weapons/40mm-autocannon"
+      "https://sandraidersofsophie.com/wiki/weapons/40mm-autocannon",
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons/40mm-autocannon"
+    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons/40mm-autocannon",
+    "cogAndCrownId": "kaiser-1b-auto-cannon"
   },
   {
     "id": "efe43bfd-815a-4075-9db3-f7e8854cc8a3",
@@ -1427,8 +1574,11 @@ export const techNodes: TechNode[] = [
       }
     ],
     "requiredNodeIds": [],
-    "dependentNodeIds": [],
-    "isRoot": false,
+    "dependentNodeIds": [
+      "e9c038c2-015a-4c56-b3a2-11087773d2d9",
+      "e36be025-1f40-4732-a2ce-4bad22b78474"
+    ],
+    "isRoot": true,
     "isShop": false,
     "uiPriority": 4,
     "treeColumn": 1,
@@ -1439,9 +1589,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "kaiser-1b-small-chassis"
   },
   {
     "id": "dc553237-db06-4a7b-8ebd-aec87c99eb95",
@@ -1462,8 +1613,12 @@ export const techNodes: TechNode[] = [
         "count": 200
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "3e6708b0-b7bd-4827-963a-add838d55194"
+    ],
+    "dependentNodeIds": [
+      "376b8829-1b50-43bf-a965-8c9b9ee52879"
+    ],
     "isRoot": false,
     "isShop": false,
     "uiPriority": 3,
@@ -1475,9 +1630,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "kaiser-1b-balconies"
   },
   {
     "id": "93c0ff7f-fd78-4e79-a2ac-a8a7f9ce607b",
@@ -1510,8 +1666,12 @@ export const techNodes: TechNode[] = [
         "count": 300
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "ac01a9ee-2043-4214-8591-436d00764eac"
+    ],
+    "dependentNodeIds": [
+      "e8b3a2bd-9e8d-419a-8ba8-7884dfccb7a5"
+    ],
     "isRoot": false,
     "isShop": true,
     "uiPriority": 10,
@@ -1523,9 +1683,11 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/wiki/weapons/80mm-naval-cannon"
+      "https://sandraidersofsophie.com/wiki/weapons/80mm-naval-cannon",
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons/80mm-naval-cannon"
+    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons/80mm-naval-cannon",
+    "cogAndCrownId": "kaiser-2a-cannon"
   },
   {
     "id": "376b8829-1b50-43bf-a965-8c9b9ee52879",
@@ -1546,8 +1708,12 @@ export const techNodes: TechNode[] = [
         "count": 375
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "dc553237-db06-4a7b-8ebd-aec87c99eb95"
+    ],
+    "dependentNodeIds": [
+      "1a473794-8180-4823-9345-2e7763fb7334"
+    ],
     "isRoot": false,
     "isShop": false,
     "uiPriority": 3,
@@ -1559,9 +1725,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "kaiser-2a-armored-balconies"
   },
   {
     "id": "9968fc6c-426b-469e-bf2c-2e1d779636a9",
@@ -1594,7 +1761,9 @@ export const techNodes: TechNode[] = [
         "count": 1
       }
     ],
-    "requiredNodeIds": [],
+    "requiredNodeIds": [
+      "1f5919e4-4d93-46cf-8468-dbf1c16c4572"
+    ],
     "dependentNodeIds": [],
     "isRoot": false,
     "isShop": false,
@@ -1607,9 +1776,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "kaiser-2a-cargo-hold"
   },
   {
     "id": "e8b3a2bd-9e8d-419a-8ba8-7884dfccb7a5",
@@ -1642,8 +1812,12 @@ export const techNodes: TechNode[] = [
         "count": 2
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "93c0ff7f-fd78-4e79-a2ac-a8a7f9ce607b"
+    ],
+    "dependentNodeIds": [
+      "648074b7-5854-4cdf-8b9c-e672c587fafb"
+    ],
     "isRoot": false,
     "isShop": true,
     "uiPriority": 10,
@@ -1655,9 +1829,11 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/wiki/weapons/70mm-shotgun-cannon"
+      "https://sandraidersofsophie.com/wiki/weapons/70mm-shotgun-cannon",
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons/70mm-shotgun-cannon"
+    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons/70mm-shotgun-cannon",
+    "cogAndCrownId": "kaiser-2b-shotgun-cannon"
   },
   {
     "id": "e9c038c2-015a-4c56-b3a2-11087773d2d9",
@@ -1678,7 +1854,9 @@ export const techNodes: TechNode[] = [
         "count": 375
       }
     ],
-    "requiredNodeIds": [],
+    "requiredNodeIds": [
+      "efe43bfd-815a-4075-9db3-f7e8854cc8a3"
+    ],
     "dependentNodeIds": [],
     "isRoot": false,
     "isShop": false,
@@ -1691,9 +1869,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "kaiser-2b-middling-chassis-b"
   },
   {
     "id": "e36be025-1f40-4732-a2ce-4bad22b78474",
@@ -1714,8 +1893,12 @@ export const techNodes: TechNode[] = [
         "count": 375
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "efe43bfd-815a-4075-9db3-f7e8854cc8a3"
+    ],
+    "dependentNodeIds": [
+      "74bec5db-ac65-4095-b995-d69109829937"
+    ],
     "isRoot": false,
     "isShop": false,
     "uiPriority": 3,
@@ -1727,9 +1910,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "kaiser-2b-middling-chassis-l"
   },
   {
     "id": "648074b7-5854-4cdf-8b9c-e672c587fafb",
@@ -1762,8 +1946,12 @@ export const techNodes: TechNode[] = [
         "count": 10
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "e8b3a2bd-9e8d-419a-8ba8-7884dfccb7a5"
+    ],
+    "dependentNodeIds": [
+      "2cffff5f-c3e1-4871-8122-f644bf24d1a6"
+    ],
     "isRoot": false,
     "isShop": true,
     "uiPriority": 10,
@@ -1775,9 +1963,11 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/wiki/weapons/40mm-autocannon"
+      "https://sandraidersofsophie.com/wiki/weapons/40mm-autocannon",
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons/40mm-autocannon"
+    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons/40mm-autocannon",
+    "cogAndCrownId": "kaiser-2c-autocannon"
   },
   {
     "id": "652f26dc-c603-4008-a8de-8ad32773e871",
@@ -1808,7 +1998,7 @@ export const techNodes: TechNode[] = [
     ],
     "requiredNodeIds": [],
     "dependentNodeIds": [],
-    "isRoot": false,
+    "isRoot": true,
     "isShop": false,
     "uiPriority": 1,
     "treeColumn": 2,
@@ -1819,9 +2009,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "kaiser-2c-cargo-bay-l"
   },
   {
     "id": "9281d353-f03c-45c4-8a01-25378e974427",
@@ -1852,7 +2043,7 @@ export const techNodes: TechNode[] = [
     ],
     "requiredNodeIds": [],
     "dependentNodeIds": [],
-    "isRoot": false,
+    "isRoot": true,
     "isShop": false,
     "uiPriority": 1,
     "treeColumn": 2,
@@ -1863,9 +2054,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "kaiser-2c-cargo-bay-p"
   },
   {
     "id": "19dc0b92-9d48-44e4-8a8a-59526bbd8aed",
@@ -1896,7 +2088,7 @@ export const techNodes: TechNode[] = [
     ],
     "requiredNodeIds": [],
     "dependentNodeIds": [],
-    "isRoot": false,
+    "isRoot": true,
     "isShop": false,
     "uiPriority": 2,
     "treeColumn": 2,
@@ -1907,9 +2099,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "kaiser-2c-cargo-bay-u"
   },
   {
     "id": "2cffff5f-c3e1-4871-8122-f644bf24d1a6",
@@ -1942,8 +2135,12 @@ export const techNodes: TechNode[] = [
         "count": 1100
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "648074b7-5854-4cdf-8b9c-e672c587fafb"
+    ],
+    "dependentNodeIds": [
+      "e311d44f-c2bc-48cf-9b9a-521a85744102"
+    ],
     "isRoot": false,
     "isShop": true,
     "uiPriority": 10,
@@ -1955,9 +2152,11 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/wiki/resources"
+      "https://sandraidersofsophie.com/wiki/resources",
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/wiki/resources"
+    "sourceUrl": "https://sandraidersofsophie.com/wiki/resources",
+    "cogAndCrownId": "kaiser-3a-resources"
   },
   {
     "id": "1a473794-8180-4823-9345-2e7763fb7334",
@@ -1982,7 +2181,9 @@ export const techNodes: TechNode[] = [
         "count": 360
       }
     ],
-    "requiredNodeIds": [],
+    "requiredNodeIds": [
+      "376b8829-1b50-43bf-a965-8c9b9ee52879"
+    ],
     "dependentNodeIds": [],
     "isRoot": false,
     "isShop": false,
@@ -1995,9 +2196,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "kaiser-3a-armored-deck"
   },
   {
     "id": "a34fa631-cf64-442f-b423-675e0380454b",
@@ -2031,8 +2233,10 @@ export const techNodes: TechNode[] = [
       }
     ],
     "requiredNodeIds": [],
-    "dependentNodeIds": [],
-    "isRoot": false,
+    "dependentNodeIds": [
+      "1426ac09-99ce-4b9d-9f32-2ed54223e4a0"
+    ],
+    "isRoot": true,
     "isShop": false,
     "uiPriority": 2,
     "treeColumn": 3,
@@ -2043,9 +2247,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "kaiser-3a-cargo-hold"
   },
   {
     "id": "e311d44f-c2bc-48cf-9b9a-521a85744102",
@@ -2078,8 +2283,12 @@ export const techNodes: TechNode[] = [
         "count": 20
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "2cffff5f-c3e1-4871-8122-f644bf24d1a6"
+    ],
+    "dependentNodeIds": [
+      "5f977d25-40f9-423e-b1d0-76d4e601d475"
+    ],
     "isRoot": false,
     "isShop": true,
     "uiPriority": 10,
@@ -2091,9 +2300,11 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/wiki/weapons/80mm-naval-cannon"
+      "https://sandraidersofsophie.com/wiki/weapons/80mm-naval-cannon",
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons/80mm-naval-cannon"
+    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons/80mm-naval-cannon",
+    "cogAndCrownId": "kaiser-3b-cannon"
   },
   {
     "id": "74bec5db-ac65-4095-b995-d69109829937",
@@ -2118,8 +2329,13 @@ export const techNodes: TechNode[] = [
         "count": 750
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "e36be025-1f40-4732-a2ce-4bad22b78474"
+    ],
+    "dependentNodeIds": [
+      "2854b105-8eac-467e-8eed-0dd3d3952f8a",
+      "2adc977b-b3f5-4529-8ac8-19187408921c"
+    ],
     "isRoot": false,
     "isShop": false,
     "uiPriority": 1,
@@ -2131,9 +2347,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "kaiser-3b-great-chassis"
   },
   {
     "id": "1426ac09-99ce-4b9d-9f32-2ed54223e4a0",
@@ -2166,8 +2383,14 @@ export const techNodes: TechNode[] = [
         "count": 2
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "a34fa631-cf64-442f-b423-675e0380454b"
+    ],
+    "dependentNodeIds": [
+      "cbabdaf7-3399-4120-8bb3-1653ca8b950c",
+      "cbe87784-6426-4454-b8a6-1ed35dc68769",
+      "9abc48b0-eb61-4c0a-96c1-eefa4cd44dae"
+    ],
     "isRoot": false,
     "isShop": false,
     "uiPriority": 2,
@@ -2179,9 +2402,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "kaiser-3b-cargo-hold"
   },
   {
     "id": "5f977d25-40f9-423e-b1d0-76d4e601d475",
@@ -2214,8 +2438,12 @@ export const techNodes: TechNode[] = [
         "count": 1100
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "e311d44f-c2bc-48cf-9b9a-521a85744102"
+    ],
+    "dependentNodeIds": [
+      "df23ea85-7212-4d68-9c20-37ef8d7aef4b"
+    ],
     "isRoot": false,
     "isShop": true,
     "uiPriority": 10,
@@ -2227,9 +2455,11 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/wiki/weapons/70mm-shotgun-cannon"
+      "https://sandraidersofsophie.com/wiki/weapons/70mm-shotgun-cannon",
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons/70mm-shotgun-cannon"
+    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons/70mm-shotgun-cannon",
+    "cogAndCrownId": "kaiser-3c-shotgun-cannon"
   },
   {
     "id": "2854b105-8eac-467e-8eed-0dd3d3952f8a",
@@ -2254,7 +2484,9 @@ export const techNodes: TechNode[] = [
         "count": 1100
       }
     ],
-    "requiredNodeIds": [],
+    "requiredNodeIds": [
+      "74bec5db-ac65-4095-b995-d69109829937"
+    ],
     "dependentNodeIds": [],
     "isRoot": false,
     "isShop": false,
@@ -2267,9 +2499,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "kaiser-3c-great-chassis-b"
   },
   {
     "id": "2adc977b-b3f5-4529-8ac8-19187408921c",
@@ -2294,7 +2527,9 @@ export const techNodes: TechNode[] = [
         "count": 410
       }
     ],
-    "requiredNodeIds": [],
+    "requiredNodeIds": [
+      "74bec5db-ac65-4095-b995-d69109829937"
+    ],
     "dependentNodeIds": [],
     "isRoot": false,
     "isShop": false,
@@ -2307,9 +2542,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "kaiser-3c-great-chassis-l"
   },
   {
     "id": "df23ea85-7212-4d68-9c20-37ef8d7aef4b",
@@ -2342,8 +2578,12 @@ export const techNodes: TechNode[] = [
         "count": 70
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "5f977d25-40f9-423e-b1d0-76d4e601d475"
+    ],
+    "dependentNodeIds": [
+      "e7013dd7-480c-45fe-9a61-0f8daab93046"
+    ],
     "isRoot": false,
     "isShop": true,
     "uiPriority": 10,
@@ -2355,9 +2595,11 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/wiki/weapons/40mm-autocannon"
+      "https://sandraidersofsophie.com/wiki/weapons/40mm-autocannon",
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons/40mm-autocannon"
+    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons/40mm-autocannon",
+    "cogAndCrownId": "kaiser-3d-autocannon"
   },
   {
     "id": "e7013dd7-480c-45fe-9a61-0f8daab93046",
@@ -2386,8 +2628,12 @@ export const techNodes: TechNode[] = [
         "count": 2
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "df23ea85-7212-4d68-9c20-37ef8d7aef4b"
+    ],
+    "dependentNodeIds": [
+      "0629d475-1252-4811-a8a4-dc5ee91fafec"
+    ],
     "isRoot": false,
     "isShop": true,
     "uiPriority": 10,
@@ -2399,9 +2645,11 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/wiki/resources"
+      "https://sandraidersofsophie.com/wiki/resources",
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/wiki/resources"
+    "sourceUrl": "https://sandraidersofsophie.com/wiki/resources",
+    "cogAndCrownId": "kaiser-4a-resources"
   },
   {
     "id": "aa8d7636-8ce1-49ca-98ed-2065a5d4950c",
@@ -2530,7 +2778,9 @@ export const techNodes: TechNode[] = [
         "count": 2
       }
     ],
-    "requiredNodeIds": [],
+    "requiredNodeIds": [
+      "1426ac09-99ce-4b9d-9f32-2ed54223e4a0"
+    ],
     "dependentNodeIds": [],
     "isRoot": false,
     "isShop": false,
@@ -2543,9 +2793,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "kaiser-4a-cargo-bay-l"
   },
   {
     "id": "cbe87784-6426-4454-b8a6-1ed35dc68769",
@@ -2578,7 +2829,9 @@ export const techNodes: TechNode[] = [
         "count": 2
       }
     ],
-    "requiredNodeIds": [],
+    "requiredNodeIds": [
+      "1426ac09-99ce-4b9d-9f32-2ed54223e4a0"
+    ],
     "dependentNodeIds": [],
     "isRoot": false,
     "isShop": false,
@@ -2591,9 +2844,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "kaiser-4a-cargo-bay-p"
   },
   {
     "id": "9abc48b0-eb61-4c0a-96c1-eefa4cd44dae",
@@ -2626,7 +2880,9 @@ export const techNodes: TechNode[] = [
         "count": 2
       }
     ],
-    "requiredNodeIds": [],
+    "requiredNodeIds": [
+      "1426ac09-99ce-4b9d-9f32-2ed54223e4a0"
+    ],
     "dependentNodeIds": [],
     "isRoot": false,
     "isShop": false,
@@ -2639,9 +2895,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "kaiser-4a-cargo-bay-u"
   },
   {
     "id": "0629d475-1252-4811-a8a4-dc5ee91fafec",
@@ -2674,8 +2931,12 @@ export const techNodes: TechNode[] = [
         "count": 30
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "e7013dd7-480c-45fe-9a61-0f8daab93046"
+    ],
+    "dependentNodeIds": [
+      "3629b7bd-9052-470f-8cf8-e75a6252c177"
+    ],
     "isRoot": false,
     "isShop": true,
     "uiPriority": 10,
@@ -2687,9 +2948,11 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/wiki/weapons/80mm-naval-cannon"
+      "https://sandraidersofsophie.com/wiki/weapons/80mm-naval-cannon",
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons/80mm-naval-cannon"
+    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons/80mm-naval-cannon",
+    "cogAndCrownId": "kaiser-4b-cannon-altprice"
   },
   {
     "id": "3629b7bd-9052-470f-8cf8-e75a6252c177",
@@ -2722,8 +2985,12 @@ export const techNodes: TechNode[] = [
         "count": 2
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "0629d475-1252-4811-a8a4-dc5ee91fafec"
+    ],
+    "dependentNodeIds": [
+      "b846c283-4d4b-4a39-abac-55bea7b510b1"
+    ],
     "isRoot": false,
     "isShop": true,
     "uiPriority": 10,
@@ -2735,9 +3002,11 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/wiki/weapons/70mm-shotgun-cannon"
+      "https://sandraidersofsophie.com/wiki/weapons/70mm-shotgun-cannon",
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons/70mm-shotgun-cannon"
+    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons/70mm-shotgun-cannon",
+    "cogAndCrownId": "kaiser-4c-shotgun-cannon-altprice"
   },
   {
     "id": "b846c283-4d4b-4a39-abac-55bea7b510b1",
@@ -2770,7 +3039,9 @@ export const techNodes: TechNode[] = [
         "count": 75
       }
     ],
-    "requiredNodeIds": [],
+    "requiredNodeIds": [
+      "3629b7bd-9052-470f-8cf8-e75a6252c177"
+    ],
     "dependentNodeIds": [],
     "isRoot": false,
     "isShop": true,
@@ -2783,9 +3054,11 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/wiki/weapons/40mm-autocannon"
+      "https://sandraidersofsophie.com/wiki/weapons/40mm-autocannon",
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons/40mm-autocannon"
+    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons/40mm-autocannon",
+    "cogAndCrownId": "kaiser-4d-autocannon-altprice"
   },
   {
     "id": "d8547d94-944d-4049-9d8a-407f3a39b01b",
@@ -2807,8 +3080,10 @@ export const techNodes: TechNode[] = [
       }
     ],
     "requiredNodeIds": [],
-    "dependentNodeIds": [],
-    "isRoot": false,
+    "dependentNodeIds": [
+      "23fad41b-5a73-4ee3-8b00-577c603ee869"
+    ],
+    "isRoot": true,
     "isShop": true,
     "uiPriority": 10,
     "treeColumn": 1,
@@ -2819,9 +3094,11 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/wiki/weapons"
+      "https://sandraidersofsophie.com/wiki/weapons",
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons"
+    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons",
+    "cogAndCrownId": "landwehr-1a-shop-weapons"
   },
   {
     "id": "eba82774-c9c0-402c-a762-1f06a45ad7fb",
@@ -2838,8 +3115,10 @@ export const techNodes: TechNode[] = [
     "crowns": 1000,
     "materials": [],
     "requiredNodeIds": [],
-    "dependentNodeIds": [],
-    "isRoot": false,
+    "dependentNodeIds": [
+      "c97a5276-239f-49fb-ba3c-ac92780172b8"
+    ],
+    "isRoot": true,
     "isShop": false,
     "uiPriority": 3,
     "treeColumn": 1,
@@ -2850,9 +3129,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "landwehr-1a-artillery-decks"
   },
   {
     "id": "dd2d62ec-6b96-4b91-a808-eb9ab3c8666f",
@@ -2869,8 +3149,11 @@ export const techNodes: TechNode[] = [
     "crowns": 700,
     "materials": [],
     "requiredNodeIds": [],
-    "dependentNodeIds": [],
-    "isRoot": false,
+    "dependentNodeIds": [
+      "f3c0cf14-e26f-497c-868a-5146b7b43930",
+      "07020bb4-4362-4c61-9bf7-4f5e0d3a5cc3"
+    ],
+    "isRoot": true,
     "isShop": false,
     "uiPriority": 2,
     "treeColumn": 1,
@@ -2881,9 +3164,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "landwehr-1a-framed-steering"
   },
   {
     "id": "f9cd9682-9346-4a8c-8820-20abd97826f2",
@@ -2900,8 +3184,10 @@ export const techNodes: TechNode[] = [
     "crowns": 700,
     "materials": [],
     "requiredNodeIds": [],
-    "dependentNodeIds": [],
-    "isRoot": false,
+    "dependentNodeIds": [
+      "cb5bcfbf-dbba-435c-861d-6855953617cf"
+    ],
+    "isRoot": true,
     "isShop": false,
     "uiPriority": 1,
     "treeColumn": 1,
@@ -2912,9 +3198,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "landwehr-1a-armament-workshop"
   },
   {
     "id": "6f1be0f0-787d-4b0d-86ba-a80f363ea077",
@@ -2931,8 +3218,10 @@ export const techNodes: TechNode[] = [
     "crowns": 1000,
     "materials": [],
     "requiredNodeIds": [],
-    "dependentNodeIds": [],
-    "isRoot": false,
+    "dependentNodeIds": [
+      "47d2f87a-aaf8-4a04-82b2-4c398d957595"
+    ],
+    "isRoot": true,
     "isShop": false,
     "uiPriority": 0,
     "treeColumn": 1,
@@ -2943,9 +3232,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "landwehr-1a-wooden-vestibule"
   },
   {
     "id": "23fad41b-5a73-4ee3-8b00-577c603ee869",
@@ -2966,8 +3256,12 @@ export const techNodes: TechNode[] = [
         "count": 200
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "d8547d94-944d-4049-9d8a-407f3a39b01b"
+    ],
+    "dependentNodeIds": [
+      "f315a416-3369-484d-987d-9b32b37d7c93"
+    ],
     "isRoot": false,
     "isShop": true,
     "uiPriority": 10,
@@ -2979,9 +3273,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "landwehr-1b-shop-armor"
   },
   {
     "id": "c97a5276-239f-49fb-ba3c-ac92780172b8",
@@ -3002,8 +3297,12 @@ export const techNodes: TechNode[] = [
         "count": 200
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "eba82774-c9c0-402c-a762-1f06a45ad7fb"
+    ],
+    "dependentNodeIds": [
+      "f2923d45-df8f-4d42-bdc9-236f27fab7fb"
+    ],
     "isRoot": false,
     "isShop": false,
     "uiPriority": 2,
@@ -3015,9 +3314,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "landwehr-1b-framed-artillery-deck"
   },
   {
     "id": "f3c0cf14-e26f-497c-868a-5146b7b43930",
@@ -3038,8 +3338,12 @@ export const techNodes: TechNode[] = [
         "count": 200
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "dd2d62ec-6b96-4b91-a808-eb9ab3c8666f"
+    ],
+    "dependentNodeIds": [
+      "b712db43-9e04-4b7d-8712-82c92359fad9"
+    ],
     "isRoot": false,
     "isShop": false,
     "uiPriority": 0,
@@ -3051,9 +3355,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "landwehr-1b-large-open-steering"
   },
   {
     "id": "b712db43-9e04-4b7d-8712-82c92359fad9",
@@ -3074,7 +3379,9 @@ export const techNodes: TechNode[] = [
         "count": 225
       }
     ],
-    "requiredNodeIds": [],
+    "requiredNodeIds": [
+      "f3c0cf14-e26f-497c-868a-5146b7b43930"
+    ],
     "dependentNodeIds": [],
     "isRoot": false,
     "isShop": false,
@@ -3087,9 +3394,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "landwehr-1c-large-framed-steering"
   },
   {
     "id": "f315a416-3369-484d-987d-9b32b37d7c93",
@@ -3118,8 +3426,12 @@ export const techNodes: TechNode[] = [
         "count": 450
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "23fad41b-5a73-4ee3-8b00-577c603ee869"
+    ],
+    "dependentNodeIds": [
+      "a99bb493-3f3f-4348-8468-18bcdfd75c0b"
+    ],
     "isRoot": false,
     "isShop": true,
     "uiPriority": 10,
@@ -3131,9 +3443,11 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/wiki/weapons"
+      "https://sandraidersofsophie.com/wiki/weapons",
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons"
+    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons",
+    "cogAndCrownId": "landwehr-2a-shop-weapons"
   },
   {
     "id": "f2923d45-df8f-4d42-bdc9-236f27fab7fb",
@@ -3158,8 +3472,12 @@ export const techNodes: TechNode[] = [
         "count": 2
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "c97a5276-239f-49fb-ba3c-ac92780172b8"
+    ],
+    "dependentNodeIds": [
+      "ae74ec88-08ff-4e3c-b423-818fa3955707"
+    ],
     "isRoot": false,
     "isShop": false,
     "uiPriority": 3,
@@ -3171,9 +3489,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "landwehr-2a-armored-artillery-compartment"
   },
   {
     "id": "07020bb4-4362-4c61-9bf7-4f5e0d3a5cc3",
@@ -3202,8 +3521,13 @@ export const techNodes: TechNode[] = [
         "count": 375
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "dd2d62ec-6b96-4b91-a808-eb9ab3c8666f"
+    ],
+    "dependentNodeIds": [
+      "f600953e-de6a-4658-be88-6cc06864d92a",
+      "12d8d5ab-80df-40a9-9d23-5b113f9d6da8"
+    ],
     "isRoot": false,
     "isShop": false,
     "uiPriority": 2,
@@ -3215,9 +3539,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "landwehr-2a-steering"
   },
   {
     "id": "cb5bcfbf-dbba-435c-861d-6855953617cf",
@@ -3242,7 +3567,9 @@ export const techNodes: TechNode[] = [
         "count": 375
       }
     ],
-    "requiredNodeIds": [],
+    "requiredNodeIds": [
+      "f9cd9682-9346-4a8c-8820-20abd97826f2"
+    ],
     "dependentNodeIds": [],
     "isRoot": false,
     "isShop": false,
@@ -3255,9 +3582,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "landwehr-2a-large-armament-workshop"
   },
   {
     "id": "a99bb493-3f3f-4348-8468-18bcdfd75c0b",
@@ -3286,8 +3614,12 @@ export const techNodes: TechNode[] = [
         "count": 1
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "f315a416-3369-484d-987d-9b32b37d7c93"
+    ],
+    "dependentNodeIds": [
+      "cf0a1391-0c08-4bd5-9005-259d40d755de"
+    ],
     "isRoot": false,
     "isShop": true,
     "uiPriority": 10,
@@ -3299,9 +3631,11 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/wiki/weapons/time-bomb"
+      "https://sandraidersofsophie.com/wiki/weapons/time-bomb",
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons/time-bomb"
+    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons/time-bomb",
+    "cogAndCrownId": "landwehr-2b-shop-time-bomb"
   },
   {
     "id": "ae74ec88-08ff-4e3c-b423-818fa3955707",
@@ -3330,8 +3664,12 @@ export const techNodes: TechNode[] = [
         "count": 5
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "f2923d45-df8f-4d42-bdc9-236f27fab7fb"
+    ],
+    "dependentNodeIds": [
+      "732bc66c-ec33-406c-93e8-619bc30a50ca"
+    ],
     "isRoot": false,
     "isShop": false,
     "uiPriority": 2,
@@ -3343,9 +3681,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "landwehr-2b-armored-artillery-decks"
   },
   {
     "id": "f600953e-de6a-4658-be88-6cc06864d92a",
@@ -3370,8 +3709,13 @@ export const techNodes: TechNode[] = [
         "count": 475
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "07020bb4-4362-4c61-9bf7-4f5e0d3a5cc3"
+    ],
+    "dependentNodeIds": [
+      "3ba411a6-5ff4-46a7-b4e0-1b4f3cf1f54b",
+      "124cb5da-99cb-4ba8-8831-90759383b596"
+    ],
     "isRoot": false,
     "isShop": false,
     "uiPriority": 1,
@@ -3383,9 +3727,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "landwehr-2b-armor-plate"
   },
   {
     "id": "3ba411a6-5ff4-46a7-b4e0-1b4f3cf1f54b",
@@ -3414,7 +3759,9 @@ export const techNodes: TechNode[] = [
         "count": 2
       }
     ],
-    "requiredNodeIds": [],
+    "requiredNodeIds": [
+      "f600953e-de6a-4658-be88-6cc06864d92a"
+    ],
     "dependentNodeIds": [],
     "isRoot": false,
     "isShop": false,
@@ -3427,9 +3774,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "landwehr-2c-battering-ram"
   },
   {
     "id": "cf0a1391-0c08-4bd5-9005-259d40d755de",
@@ -3462,8 +3810,12 @@ export const techNodes: TechNode[] = [
         "count": 750
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "a99bb493-3f3f-4348-8468-18bcdfd75c0b"
+    ],
+    "dependentNodeIds": [
+      "8842ccc4-32ce-4690-a2ed-1685cdd5b361"
+    ],
     "isRoot": false,
     "isShop": true,
     "uiPriority": 10,
@@ -3475,9 +3827,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "landwehr-3a-shop-armor"
   },
   {
     "id": "732bc66c-ec33-406c-93e8-619bc30a50ca",
@@ -3510,8 +3863,12 @@ export const techNodes: TechNode[] = [
         "count": 3
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "ae74ec88-08ff-4e3c-b423-818fa3955707"
+    ],
+    "dependentNodeIds": [
+      "d4c962a1-cd83-41e7-9f01-28f726916e09"
+    ],
     "isRoot": false,
     "isShop": false,
     "uiPriority": 3,
@@ -3523,9 +3880,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "landwehr-3a-framed-armored-artillery-deck"
   },
   {
     "id": "124cb5da-99cb-4ba8-8831-90759383b596",
@@ -3550,8 +3908,12 @@ export const techNodes: TechNode[] = [
         "count": 500
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "f600953e-de6a-4658-be88-6cc06864d92a"
+    ],
+    "dependentNodeIds": [
+      "ce0a3581-1a63-4d5f-8016-2752bbe828ad"
+    ],
     "isRoot": false,
     "isShop": false,
     "uiPriority": 2,
@@ -3563,9 +3925,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "landwehr-3a-armor-plate"
   },
   {
     "id": "12d8d5ab-80df-40a9-9d23-5b113f9d6da8",
@@ -3598,8 +3961,12 @@ export const techNodes: TechNode[] = [
         "count": 10
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "07020bb4-4362-4c61-9bf7-4f5e0d3a5cc3"
+    ],
+    "dependentNodeIds": [
+      "cb11624d-81ce-4952-b19c-84280d91beac"
+    ],
     "isRoot": false,
     "isShop": false,
     "uiPriority": 1,
@@ -3611,9 +3978,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "landwehr-3a-steering"
   },
   {
     "id": "47d2f87a-aaf8-4a04-82b2-4c398d957595",
@@ -3642,7 +4010,9 @@ export const techNodes: TechNode[] = [
         "count": 410
       }
     ],
-    "requiredNodeIds": [],
+    "requiredNodeIds": [
+      "6f1be0f0-787d-4b0d-86ba-a80f363ea077"
+    ],
     "dependentNodeIds": [],
     "isRoot": false,
     "isShop": false,
@@ -3655,9 +4025,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "landwehr-3a-armored-vestibule"
   },
   {
     "id": "8842ccc4-32ce-4690-a2ed-1685cdd5b361",
@@ -3686,8 +4057,12 @@ export const techNodes: TechNode[] = [
         "count": 350
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "cf0a1391-0c08-4bd5-9005-259d40d755de"
+    ],
+    "dependentNodeIds": [
+      "5f29c02a-3d1e-4a29-bb11-0a20275bd870"
+    ],
     "isRoot": false,
     "isShop": true,
     "uiPriority": 10,
@@ -3699,9 +4074,11 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/wiki/weapons/hg-6-contact-grenade"
+      "https://sandraidersofsophie.com/wiki/weapons/hg-6-contact-grenade",
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons/hg-6-contact-grenade"
+    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons/hg-6-contact-grenade",
+    "cogAndCrownId": "landwehr-3b-shop-grenade"
   },
   {
     "id": "ce0a3581-1a63-4d5f-8016-2752bbe828ad",
@@ -3730,7 +4107,9 @@ export const techNodes: TechNode[] = [
         "count": 500
       }
     ],
-    "requiredNodeIds": [],
+    "requiredNodeIds": [
+      "124cb5da-99cb-4ba8-8831-90759383b596"
+    ],
     "dependentNodeIds": [],
     "isRoot": false,
     "isShop": false,
@@ -3743,9 +4122,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "landwehr-3b-embrasure"
   },
   {
     "id": "cb11624d-81ce-4952-b19c-84280d91beac",
@@ -3778,7 +4158,9 @@ export const techNodes: TechNode[] = [
         "count": 40
       }
     ],
-    "requiredNodeIds": [],
+    "requiredNodeIds": [
+      "12d8d5ab-80df-40a9-9d23-5b113f9d6da8"
+    ],
     "dependentNodeIds": [],
     "isRoot": false,
     "isShop": false,
@@ -3791,9 +4173,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "landwehr-3b-steering"
   },
   {
     "id": "5f29c02a-3d1e-4a29-bb11-0a20275bd870",
@@ -3826,8 +4209,12 @@ export const techNodes: TechNode[] = [
         "count": 600
       }
     ],
-    "requiredNodeIds": [],
-    "dependentNodeIds": [],
+    "requiredNodeIds": [
+      "8842ccc4-32ce-4690-a2ed-1685cdd5b361"
+    ],
+    "dependentNodeIds": [
+      "84ebe031-6120-436e-830d-2442314ecc99"
+    ],
     "isRoot": false,
     "isShop": true,
     "uiPriority": 10,
@@ -3839,9 +4226,11 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/wiki/ammunition"
+      "https://sandraidersofsophie.com/wiki/ammunition",
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/wiki/ammunition"
+    "sourceUrl": "https://sandraidersofsophie.com/wiki/ammunition",
+    "cogAndCrownId": "landwehr-4a-shop-improved-ammo"
   },
   {
     "id": "d4c962a1-cd83-41e7-9f01-28f726916e09",
@@ -3874,7 +4263,9 @@ export const techNodes: TechNode[] = [
         "count": 50
       }
     ],
-    "requiredNodeIds": [],
+    "requiredNodeIds": [
+      "732bc66c-ec33-406c-93e8-619bc30a50ca"
+    ],
     "dependentNodeIds": [],
     "isRoot": false,
     "isShop": false,
@@ -3887,9 +4278,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/database"
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/database"
+    "sourceUrl": "https://sandraidersofsophie.com/database",
+    "cogAndCrownId": "landwehr-4a-enclosed-artillery-compartment"
   },
   {
     "id": "84ebe031-6120-436e-830d-2442314ecc99",
@@ -3922,7 +4314,9 @@ export const techNodes: TechNode[] = [
         "count": 1
       }
     ],
-    "requiredNodeIds": [],
+    "requiredNodeIds": [
+      "5f29c02a-3d1e-4a29-bb11-0a20275bd870"
+    ],
     "dependentNodeIds": [],
     "isRoot": false,
     "isShop": true,
@@ -3935,8 +4329,10 @@ export const techNodes: TechNode[] = [
     "sourceUrls": [
       "https://sandraidersofsophie.com/database",
       "https://sandgamedb.com/tools/research-checklist",
-      "https://sandraidersofsophie.com/wiki/weapons"
+      "https://sandraidersofsophie.com/wiki/weapons",
+      "https://cogandcrown.com/tech/"
     ],
-    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons"
+    "sourceUrl": "https://sandraidersofsophie.com/wiki/weapons",
+    "cogAndCrownId": "landwehr-4b-shop-weapons"
   }
 ];

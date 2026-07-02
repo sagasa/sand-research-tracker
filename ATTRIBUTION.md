@@ -15,10 +15,11 @@ The bundled research-node data is generated from publicly available reference pa
 
 - SAND: Raiders of Sophie Database - Trampler Tech Tree: https://sandraidersofsophie.com/database
 - SAND Game DB - Research checklist: https://sandgamedb.com/tools/research-checklist
+- Cog & Crown - Faction Tech Tree: https://cogandcrown.com/tech/
 
-The generated data uses SAND Guide for unlock costs/materials and SAND Game DB for public research node IDs and in-game progression slot ordering. The generator records source page URLs in `src/generated/techTreeData.ts` so each generated node can be traced back to the public reference pages used at generation time.
+The generated data uses SAND Guide for unlock costs/materials, SAND Game DB for public research node IDs and in-game progression slot ordering, and Cog & Crown for prerequisite links. The generator records source page URLs in `src/generated/techTreeData.ts` so each generated node can be traced back to the public reference pages used at generation time.
 
-Public fan-site data currently does not expose explicit prerequisite edge IDs for each node. The app therefore does not infer prerequisite lines from tier order; prerequisite expansion is enabled only when generated data includes explicit prerequisite IDs.
+Prerequisite links are used only when the generator can match the public fan-site node to a bundled research node. The app does not infer prerequisite lines from tier order or visual proximity.
 
 ## Asset and Content Policy
 

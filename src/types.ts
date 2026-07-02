@@ -35,6 +35,7 @@ export type TechNode = {
   treeOrder?: number | null;
   sandGameDbSlug?: string;
   sandGameDbDisplayName?: string;
+  cogAndCrownId?: string;
   sourceUrls?: string[];
   sourceUrl: string;
 };

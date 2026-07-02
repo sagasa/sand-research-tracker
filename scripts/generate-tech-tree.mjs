@@ -4,6 +4,7 @@ import { dirname, resolve } from "node:path";
 
 const SOURCE_URL = "https://sandraidersofsophie.com/database";
 const SAND_GAME_DB_RESEARCH_URL = "https://sandgamedb.com/tools/research-checklist";
+const COG_AND_CROWN_TECH_URL = "https://cogandcrown.com/tech/";
 const OUT_FILE = resolve("src/generated/techTreeData.ts");
 const PROGRESSION_DESCRIPTIONS_FILE = process.env.SAND_PROGRESSION_DESCRIPTIONS_JSON
   ? resolve(process.env.SAND_PROGRESSION_DESCRIPTIONS_JSON)
@@ -157,6 +158,94 @@ async function fetchSandGameDbResearchNodes() {
     sourceUrl: SAND_GAME_DB_RESEARCH_URL,
     assetUrl,
     nodes: extractSandGameDbResearchNodesFromScript(script),
+  };
+}
+
+function decodeAstroPropValue(value) {
+  if (Array.isArray(value) && value.length === 2 && typeof value[0] === "number") {
+    const [tag, payload] = value;
+    if (tag === 0) return decodeAstroPropValue(payload);
+    if (tag === 1) return Array.isArray(payload) ? payload.map(decodeAstroPropValue) : [];
+    return decodeAstroPropValue(payload);
+  }
+
+  if (Array.isArray(value)) return value.map(decodeAstroPropValue);
+
+  if (value && typeof value === "object") {
+    return Object.fromEntries(
+      Object.entries(value).map(([key, nested]) => [key, decodeAstroPropValue(nested)]),
+    );
+  }
+
+  return value;
+}
+
+function cleanCogAndCrownDisplayName(value) {
+  return compact(
+    String(value ?? "")
+      .replace(/^\s*[IVX]+\([a-z]\)\.\s*/i, "")
+      .replace(/^\(Shop\)\s*/i, ""),
+  );
+}
+
+function cogAndCrownSlot(value) {
+  return String(value ?? "").match(/^[IVX]+\(([a-z])\)\./i)?.[1]?.toLowerCase() ?? null;
+}
+
+function extractCogAndCrownTechTree(html) {
+  const $ = cheerio.load(html);
+  const propsRaw = $("astro-island[component-url*='TechTree']").attr("props");
+  if (!propsRaw) {
+    throw new Error("Cog & Crown tech page did not expose TechTree props.");
+  }
+
+  const props = decodeAstroPropValue(JSON.parse(propsRaw));
+  const nodesByFaction = props?.nodesByFaction;
+  if (!nodesByFaction || typeof nodesByFaction !== "object") {
+    throw new Error("Cog & Crown TechTree props did not contain nodesByFaction.");
+  }
+
+  const nodes = [];
+  for (const [fallbackBranchSlug, factionNodes] of Object.entries(nodesByFaction)) {
+    if (!Array.isArray(factionNodes)) continue;
+
+    for (const sourceNode of factionNodes) {
+      const id = sourceNode?.id;
+      const displayName = sourceNode?.displayName;
+      const tier = Number(sourceNode?.tier);
+      if (typeof id !== "string" || typeof displayName !== "string" || !Number.isFinite(tier)) {
+        continue;
+      }
+
+      nodes.push({
+        id,
+        branchSlug:
+          typeof sourceNode.factionId === "string" && sourceNode.factionId
+            ? sourceNode.factionId
+            : fallbackBranchSlug,
+        tier,
+        displayName,
+        name: cleanCogAndCrownDisplayName(displayName),
+        treeSlot: cogAndCrownSlot(displayName),
+        col: Number.isFinite(Number(sourceNode.col)) ? Number(sourceNode.col) : null,
+        row: Number.isFinite(Number(sourceNode.row)) ? Number(sourceNode.row) : null,
+        prerequisites: uniqueStrings(sourceNode.prerequisites),
+      });
+    }
+  }
+
+  if (nodes.length < 80) {
+    throw new Error(`Unexpectedly low Cog & Crown node count: ${nodes.length}`);
+  }
+
+  return nodes;
+}
+
+async function fetchCogAndCrownTechTree() {
+  const html = await fetchText(COG_AND_CROWN_TECH_URL);
+  return {
+    sourceUrl: COG_AND_CROWN_TECH_URL,
+    nodes: extractCogAndCrownTechTree(html),
   };
 }
 
@@ -379,6 +468,121 @@ function takeSandGameDbNode(publicNode, sandGameDbIndex, usedSandGameDbIds) {
   return unused;
 }
 
+function cogAndCrownExactKey(branchSlug, tier, name, treeSlot) {
+  return `${branchSlug}|${tier}|${String(treeSlot ?? "").toLowerCase()}|${publicResearchNameKey(name)}`;
+}
+
+function cogAndCrownLooseKey(branchSlug, tier, name) {
+  return `${branchSlug}|${tier}|${publicResearchNameKey(name)}`;
+}
+
+function addToBucket(map, key, value) {
+  const bucket = map.get(key) ?? [];
+  bucket.push(value);
+  map.set(key, bucket);
+}
+
+function buildCogAndCrownNodeMapping(nodes, cogAndCrownNodes) {
+  const appByExactKey = new Map();
+  const appByLooseKey = new Map();
+  for (const node of nodes) {
+    addToBucket(
+      appByExactKey,
+      cogAndCrownExactKey(node.branchSlug, node.tier, node.name, node.treeSlot),
+      node,
+    );
+    addToBucket(appByLooseKey, cogAndCrownLooseKey(node.branchSlug, node.tier, node.name), node);
+  }
+
+  const cogToApp = new Map();
+  const usedNodeIds = new Set();
+  const assign = (cogNode, appNode) => {
+    cogToApp.set(cogNode.id, appNode);
+    usedNodeIds.add(appNode.id);
+  };
+
+  for (const cogNode of cogAndCrownNodes) {
+    const exactKey = cogAndCrownExactKey(
+      cogNode.branchSlug,
+      cogNode.tier,
+      cogNode.name,
+      cogNode.treeSlot,
+    );
+    const appNode = (appByExactKey.get(exactKey) ?? []).find((candidate) => !usedNodeIds.has(candidate.id));
+    if (appNode) assign(cogNode, appNode);
+  }
+
+  for (const cogNode of cogAndCrownNodes) {
+    if (cogToApp.has(cogNode.id)) continue;
+
+    const looseKey = cogAndCrownLooseKey(cogNode.branchSlug, cogNode.tier, cogNode.name);
+    const unusedCandidates = (appByLooseKey.get(looseKey) ?? []).filter(
+      (candidate) => !usedNodeIds.has(candidate.id),
+    );
+    if (unusedCandidates.length === 1) {
+      assign(cogNode, unusedCandidates[0]);
+    }
+  }
+
+  return cogToApp;
+}
+
+function applyCogAndCrownDependencies(nodes, cogAndCrownNodes) {
+  const cogToApp = buildCogAndCrownNodeMapping(nodes, cogAndCrownNodes);
+  const nodesById = new Map(nodes.map((node) => [node.id, node]));
+  const cogNodesById = new Map(cogAndCrownNodes.map((node) => [node.id, node]));
+  const totalEdges = cogAndCrownNodes.reduce(
+    (sum, node) => sum + (Array.isArray(node.prerequisites) ? node.prerequisites.length : 0),
+    0,
+  );
+  let matchedEdges = 0;
+
+  for (const node of nodes) {
+    node.requiredNodeIds = [];
+    node.dependentNodeIds = [];
+    node.isRoot = false;
+  }
+
+  for (const cogNode of cogAndCrownNodes) {
+    const appNode = cogToApp.get(cogNode.id);
+    if (!appNode) continue;
+
+    const requiredIds = [];
+    for (const prerequisiteId of cogNode.prerequisites) {
+      const prerequisiteNode = cogNodesById.get(prerequisiteId);
+      const appPrerequisite = prerequisiteNode ? cogToApp.get(prerequisiteNode.id) : null;
+      if (!appPrerequisite) continue;
+
+      matchedEdges += 1;
+      requiredIds.push(appPrerequisite.id);
+    }
+
+    appNode.requiredNodeIds = uniqueStrings(requiredIds);
+    appNode.isRoot = appNode.requiredNodeIds.length === 0;
+    appNode.cogAndCrownId = cogNode.id;
+    appNode.sourceUrls = uniqueStrings([
+      ...(appNode.sourceUrls ?? []),
+      COG_AND_CROWN_TECH_URL,
+      appNode.sourceUrl,
+    ]);
+  }
+
+  for (const node of nodes) {
+    for (const requiredId of node.requiredNodeIds ?? []) {
+      const requiredNode = nodesById.get(requiredId);
+      if (!requiredNode) continue;
+      requiredNode.dependentNodeIds = uniqueStrings([...(requiredNode.dependentNodeIds ?? []), node.id]);
+    }
+  }
+
+  return {
+    sourceNodeCount: cogAndCrownNodes.length,
+    matchedNodes: cogToApp.size,
+    totalEdges,
+    matchedEdges,
+  };
+}
+
 async function writeGeneratedOutput({ nodes, branches, sourceInfo }) {
   const content = `import type { TechBranch, TechNode } from "../types";\n\n`
     + `export const techTreeSource = ${JSON.stringify(sourceInfo, null, 2)} as const;\n\n`
@@ -479,6 +683,7 @@ async function main() {
     return;
   }
 
+  const cogAndCrownTechTree = await fetchCogAndCrownTechTree();
   const html = await fetchText(SOURCE_URL);
   const $ = cheerio.load(html);
   const nodes = [];
@@ -575,31 +780,8 @@ async function main() {
     node.sourceUrls = [SOURCE_URL, SAND_GAME_DB_RESEARCH_URL, node.sourceUrl];
   }
 
-  let dependencyMatchedNodes = 0;
-  if (researchTree) {
-    const gameIdToPublicId = new Map();
-    for (const node of nodes) {
-      if (node.guid && researchTree.nodesById.has(node.guid)) {
-        gameIdToPublicId.set(node.guid, node.id);
-      }
-      if (researchTree.nodesById.has(node.id)) {
-        gameIdToPublicId.set(node.id, node.id);
-      }
-    }
-
-    for (const node of nodes) {
-      const treeNode = node.guid
-        ? researchTree.nodesById.get(node.guid)
-        : researchTree.nodesById.get(node.id);
-      if (!treeNode) continue;
-
-      dependencyMatchedNodes += 1;
-      node.requiredNodeIds = treeNode.requiredIds.map((id) => gameIdToPublicId.get(id) ?? id);
-      node.dependentNodeIds = treeNode.dependentIds.map((id) => gameIdToPublicId.get(id) ?? id);
-      node.isRoot = researchTree.roots.includes(treeNode.id);
-      node.treeColumn = Number.isFinite(treeNode.tier) ? treeNode.tier : null;
-    }
-  }
+  const cogAndCrownDependencies = applyCogAndCrownDependencies(nodes, cogAndCrownTechTree.nodes);
+  const dependencyMatchedNodes = cogAndCrownDependencies.matchedNodes;
 
   const branches = buildBranches(branchOrder, nodes);
 
@@ -613,21 +795,25 @@ async function main() {
     sandGameDbResearchUrl: sandGameDbResearch.sourceUrl,
     sandGameDbResearchNodeCount: sandGameDbResearch.nodes.length,
     sandGameDbMatchedNodes,
+    cogAndCrownTechUrl: cogAndCrownTechTree.sourceUrl,
+    cogAndCrownNodeCount: cogAndCrownDependencies.sourceNodeCount,
+    cogAndCrownMatchedNodes: cogAndCrownDependencies.matchedNodes,
+    cogAndCrownDependencyEdges: cogAndCrownDependencies.totalEdges,
+    cogAndCrownMatchedDependencyEdges: cogAndCrownDependencies.matchedEdges,
     hasProgressionLayout: sandGameDbMatchedNodes > 0,
     researchTreeFile: researchTree ? "local ResearchTreeJsonDto JSON" : null,
     researchTreeNodeCount: researchTree?.nodeCount ?? 0,
     dependencyMatchedNodes,
-    hasExplicitDependencies: Boolean(researchTree),
+    dependencyMatchedEdges: cogAndCrownDependencies.matchedEdges,
+    hasExplicitDependencies: cogAndCrownDependencies.matchedEdges > 0,
   };
   await writeGeneratedOutput({ nodes, branches, sourceInfo });
   console.log(`Generated ${nodes.length} nodes -> ${OUT_FILE}`);
   console.log(`sandgamedb research nodes matched: ${sandGameDbMatchedNodes}/${sandGameDbResearch.nodes.length}`);
+  console.log(
+    `Cog & Crown dependencies matched: ${cogAndCrownDependencies.matchedEdges}/${cogAndCrownDependencies.totalEdges} edges across ${cogAndCrownDependencies.matchedNodes}/${cogAndCrownDependencies.sourceNodeCount} nodes`,
+  );
   console.log(`Local progression descriptions matched: ${progressionMatchedNodes}/${progressionDescriptions.length}`);
-  if (researchTree) {
-    console.log(`Research tree dependencies matched: ${dependencyMatchedNodes}/${researchTree.nodeCount}`);
-  } else {
-    console.log("Research tree dependency file not provided; generated explicit empty dependency arrays.");
-  }
 }
 
 main().catch((error) => {
