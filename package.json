@@ -4,6 +4,10 @@
   "description": "Static SAND research resource tracker with generated tech-tree data and cookie persistence.",
   "license": "MIT",
   "type": "module",
+  "engines": {
+    "node": ">=22.12.0",
+    "npm": ">=10"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/sagasa/sand-research-tracker.git"

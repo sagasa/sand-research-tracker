@@ -4,6 +4,8 @@ SAND の研究ノードを目標指定し、アンロックに必要な素材と
 
 This is an unofficial fan utility for SAND: Raiders of Sophie. It is not affiliated with the game developers or publisher.
 
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/sagasa/sand-research-tracker)
+
 ## 方針
 
 - クラウンは集計対象にしません。各ノードの参考表示だけに留めます。
@@ -43,12 +45,14 @@ npm run dev -- --host 127.0.0.1 --port 5174
 ```
 
 Netlify へ配置する場合は、生成済みの `src/generated/techTreeData.ts` をリポジトリに含めてください。ビルド時に外部サイトへ取りに行く構成にはしていません。
+装備スタッツは `src/generated/equipmentStatsData.ts`、武器アイコンは `public/equipment-icons/` に同梱します。
 
 Netlify の設定値:
 
 - Build command: `npm run build`
 - Publish directory: `dist`
-- Node version: Netlify の現行 LTS で動作する想定です。
+- Node version: `22` (`netlify.toml` と `.nvmrc` で固定)
+- Environment variables: none required
 
 ## Cookie
 

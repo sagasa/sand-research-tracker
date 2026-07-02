@@ -37,9 +37,11 @@ Settings:
 
 - Build command: `npm run build`
 - Publish directory: `dist`
+- Node version: `22`
 - Environment variables: none required
 
 The app is a static Vite build. Runtime data fetching is intentionally not used; generated data is bundled in `src/generated/techTreeData.ts` and `src/generated/equipmentStatsData.ts`.
+Netlify reads these settings from `netlify.toml`, so the Git deploy setup should not require manual build-setting edits after selecting the repository.
 
 ## Data Updates
 
