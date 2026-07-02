@@ -1,7 +1,7 @@
 import type { AmmoStat, ArmorStat, EquipmentStatsSource, ProjectileStat, WeaponStat } from "../types";
 
 export const equipmentStatsSource: EquipmentStatsSource = {
-  "generatedAt": "2026-07-02T00:49:57.306Z",
+  "generatedAt": "2026-07-02T02:03:42.603Z",
   "sourceFiles": [
     "infantry_weapon_summary.tsv",
     "infantry_ammo_summary.tsv",
@@ -11,9 +11,8 @@ export const equipmentStatsSource: EquipmentStatsSource = {
   ],
   "notes": [
     "Generated from local SAND reference tables bundled at build time.",
-    "Damage display uses item damage and range modifiers from the local data tables. Runtime server or balance modifiers may differ.",
-    "Weapon icons are bundled for convenience; SAND assets and trademarks belong to their respective rightsholders.",
-    "Damage notes indicate headshot multiplier is applied from ammo when present, otherwise weapon; critical multiplier is shown as reference data."
+    "Damage display uses item damage and distance data from the local data tables. Runtime server or balance modifiers may differ.",
+    "Weapon icons are bundled for convenience; SAND assets and trademarks belong to their respective rightsholders."
   ]
 };
 
@@ -71,12 +70,6 @@ export const weaponStats: WeaponStat[] = [
       }
     ],
     "recoilPower": "idle:0..0;hip:0.055..0.055;scope:0.055..0.055",
-    "headshotMultiplier": {
-      "all": 2
-    },
-    "criticalMultiplier": {
-      "all": 2
-    },
     "magnification": {
       "idle": 1,
       "hip": 1,
@@ -111,8 +104,6 @@ export const weaponStats: WeaponStat[] = [
     "spread": "hip:x..,y..;scope:x..,y..",
     "weaponRangeModifiers": [],
     "recoilPower": "idle:..;hip:..;scope:..",
-    "headshotMultiplier": {},
-    "criticalMultiplier": {},
     "magnification": {
       "idle": 1,
       "hip": 1.1,
@@ -167,8 +158,6 @@ export const weaponStats: WeaponStat[] = [
     "spread": "",
     "weaponRangeModifiers": [],
     "recoilPower": "",
-    "headshotMultiplier": {},
-    "criticalMultiplier": {},
     "magnification": {
       "idle": 1,
       "hip": 1,
@@ -256,14 +245,6 @@ export const weaponStats: WeaponStat[] = [
       }
     ],
     "recoilPower": "idle:0..0;hip:0.25..0.25;scope:0.2..0.2",
-    "headshotMultiplier": {
-      "all": 3
-    },
-    "criticalMultiplier": {
-      "idle": 2,
-      "hip": 2,
-      "scope": 3
-    },
     "magnification": {
       "idle": 1,
       "hip": 1,
@@ -343,12 +324,6 @@ export const weaponStats: WeaponStat[] = [
       }
     ],
     "recoilPower": "idle:0..0;hip:0.075..0.075;scope:0.075..0.085",
-    "headshotMultiplier": {
-      "all": 2
-    },
-    "criticalMultiplier": {
-      "all": 2
-    },
     "magnification": {
       "idle": 1,
       "hip": 1,
@@ -428,12 +403,6 @@ export const weaponStats: WeaponStat[] = [
       }
     ],
     "recoilPower": "idle:0..0;hip:0.075..0.075;scope:0.075..0.085",
-    "headshotMultiplier": {
-      "all": 2
-    },
-    "criticalMultiplier": {
-      "all": 2
-    },
     "magnification": {
       "idle": 1,
       "hip": 1,
@@ -523,14 +492,6 @@ export const weaponStats: WeaponStat[] = [
       }
     ],
     "recoilPower": "idle:0..0;hip:0.15..0.15;scope:0.1..0.1",
-    "headshotMultiplier": {
-      "all": 3
-    },
-    "criticalMultiplier": {
-      "idle": 2,
-      "hip": 2,
-      "scope": 3
-    },
     "magnification": {
       "idle": 1,
       "hip": 1,
@@ -620,14 +581,6 @@ export const weaponStats: WeaponStat[] = [
       }
     ],
     "recoilPower": "idle:0..0;hip:0.35..0.35;scope:0.3..0.3",
-    "headshotMultiplier": {
-      "all": 3
-    },
-    "criticalMultiplier": {
-      "idle": 2,
-      "hip": 2,
-      "scope": 3
-    },
     "magnification": {
       "idle": 1,
       "hip": 1,
@@ -717,14 +670,6 @@ export const weaponStats: WeaponStat[] = [
       }
     ],
     "recoilPower": "idle:0..0;hip:0.15..0.15;scope:0.1..0.1",
-    "headshotMultiplier": {
-      "all": 3
-    },
-    "criticalMultiplier": {
-      "idle": 2,
-      "hip": 2,
-      "scope": 3
-    },
     "magnification": {
       "idle": 1,
       "hip": 1,
@@ -814,14 +759,6 @@ export const weaponStats: WeaponStat[] = [
       }
     ],
     "recoilPower": "idle:0..0;hip:0.25..0.25;scope:0.2..0.2",
-    "headshotMultiplier": {
-      "all": 3
-    },
-    "criticalMultiplier": {
-      "idle": 2,
-      "hip": 2,
-      "scope": 3
-    },
     "magnification": {
       "idle": 1,
       "hip": 1,
@@ -877,12 +814,6 @@ export const weaponStats: WeaponStat[] = [
     "spread": "hip:x-1.5..1.5,y-1.5..1.5;scope:x0..0,y0..0",
     "weaponRangeModifiers": [],
     "recoilPower": "idle:0..0;hip:0.075..0.075;scope:0.075..0.085",
-    "headshotMultiplier": {
-      "all": 2
-    },
-    "criticalMultiplier": {
-      "all": 2
-    },
     "magnification": {
       "idle": 1,
       "hip": 1,
@@ -962,12 +893,6 @@ export const weaponStats: WeaponStat[] = [
       }
     ],
     "recoilPower": "idle:0..0;hip:0.055..0.055;scope:0.055..0.055",
-    "headshotMultiplier": {
-      "all": 2
-    },
-    "criticalMultiplier": {
-      "all": 2
-    },
     "magnification": {
       "idle": 1,
       "hip": 1,
@@ -1047,12 +972,6 @@ export const weaponStats: WeaponStat[] = [
       }
     ],
     "recoilPower": "idle:0..0;hip:0.035..0.035;scope:0.035..0.035",
-    "headshotMultiplier": {
-      "all": 2
-    },
-    "criticalMultiplier": {
-      "all": 2
-    },
     "magnification": {
       "idle": 1,
       "hip": 1,
@@ -1132,12 +1051,6 @@ export const weaponStats: WeaponStat[] = [
       }
     ],
     "recoilPower": "idle:0..0;hip:0.07..0.07;scope:0.07..0.07",
-    "headshotMultiplier": {
-      "all": 2
-    },
-    "criticalMultiplier": {
-      "all": 2
-    },
     "magnification": {
       "idle": 1,
       "hip": 1,
@@ -1215,12 +1128,6 @@ export const weaponStats: WeaponStat[] = [
       }
     ],
     "recoilPower": "idle:0..0;hip:0.2..0.2;scope:0.2..0.2",
-    "headshotMultiplier": {
-      "all": 2
-    },
-    "criticalMultiplier": {
-      "all": 2
-    },
     "magnification": {
       "idle": 1,
       "hip": 1,
@@ -1301,12 +1208,6 @@ export const weaponStats: WeaponStat[] = [
       }
     ],
     "recoilPower": "idle:0..0;hip:0.2..0.2;scope:0.2..0.2",
-    "headshotMultiplier": {
-      "all": 2
-    },
-    "criticalMultiplier": {
-      "all": 2
-    },
     "magnification": {
       "idle": 1,
       "hip": 1,
@@ -1389,12 +1290,6 @@ export const weaponStats: WeaponStat[] = [
       }
     ],
     "recoilPower": "idle:0..0;hip:0.2..0.2;scope:0.2..0.2",
-    "headshotMultiplier": {
-      "all": 2
-    },
-    "criticalMultiplier": {
-      "all": 2
-    },
     "magnification": {
       "idle": 1,
       "hip": 1,
@@ -1472,12 +1367,6 @@ export const weaponStats: WeaponStat[] = [
       }
     ],
     "recoilPower": "idle:0..0;hip:0.3..0.3;scope:0.3..0.3",
-    "headshotMultiplier": {
-      "all": 2
-    },
-    "criticalMultiplier": {
-      "all": 2
-    },
     "magnification": {
       "idle": 1,
       "hip": 1,
@@ -1554,14 +1443,6 @@ export const weaponStats: WeaponStat[] = [
       }
     ],
     "recoilPower": "idle:0..0;hip:0.3..0.3;scope:0.06..0.06",
-    "headshotMultiplier": {
-      "all": 2.5
-    },
-    "criticalMultiplier": {
-      "idle": 2,
-      "hip": 2,
-      "scope": 3
-    },
     "magnification": {
       "idle": 1,
       "hip": 1,
@@ -1640,14 +1521,6 @@ export const weaponStats: WeaponStat[] = [
       }
     ],
     "recoilPower": "idle:0..0;hip:0.3..0.3;scope:0.06..0.06",
-    "headshotMultiplier": {
-      "all": 2.5
-    },
-    "criticalMultiplier": {
-      "idle": 2,
-      "hip": 2,
-      "scope": 3
-    },
     "magnification": {
       "idle": 1,
       "hip": 1,
@@ -1724,14 +1597,6 @@ export const weaponStats: WeaponStat[] = [
       }
     ],
     "recoilPower": "idle:0..0;hip:0.3..0.3;scope:0.06..0.06",
-    "headshotMultiplier": {
-      "all": 2.5
-    },
-    "criticalMultiplier": {
-      "idle": 2,
-      "hip": 2,
-      "scope": 3
-    },
     "magnification": {
       "idle": 1,
       "hip": 1,
@@ -1797,14 +1662,6 @@ export const weaponStats: WeaponStat[] = [
       }
     ],
     "recoilPower": "idle:0..0;hip:0.3..0.3;scope:0.06..0.06",
-    "headshotMultiplier": {
-      "all": 2.5
-    },
-    "criticalMultiplier": {
-      "idle": 2,
-      "hip": 2,
-      "scope": 3
-    },
     "magnification": {
       "idle": 1,
       "hip": 1,
@@ -1870,14 +1727,6 @@ export const weaponStats: WeaponStat[] = [
       }
     ],
     "recoilPower": "idle:0..0;hip:0.2..0.2;scope:0.04..0.04",
-    "headshotMultiplier": {
-      "all": 2.5
-    },
-    "criticalMultiplier": {
-      "idle": 2,
-      "hip": 2,
-      "scope": 3
-    },
     "magnification": {
       "idle": 1,
       "hip": 1,

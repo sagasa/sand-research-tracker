@@ -421,7 +421,7 @@ export default function App() {
             <Typography variant="caption" color="text.secondary">
               {activeTab === "research"
                 ? `data: ${techNodes.length} nodes / generated ${generatedDate}`
-                : "weapon, ammo, projectile, and armor stats from generated reference data"}
+                : "銃と弾のダメージ確認 / アーマー参考表"}
             </Typography>
           </Box>
           {activeTab === "research" ? (
@@ -447,7 +447,7 @@ export default function App() {
             scrollButtons="auto"
           >
             <Tab value="research" label="Research Tracker" />
-            <Tab value="equipment" label="Weapons / Armor Stats" />
+            <Tab value="equipment" label="武器・アーマー" />
           </Tabs>
         </Box>
       </AppBar>

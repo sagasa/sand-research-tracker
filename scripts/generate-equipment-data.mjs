@@ -125,8 +125,6 @@ function mapWeapon(row, iconManifestByItemId) {
     spread: row.spread,
     weaponRangeModifiers: parseRangeModifiers(row.weapon_range_modifiers),
     recoilPower: row.recoil_power,
-    headshotMultiplier: parseStateNumberMap(row.headshot_multiplier),
-    criticalMultiplier: parseStateNumberMap(row.critical_multiplier),
     magnification: parseStateNumberMap(row.magnification),
     movementSpeedModifier: parseStateNumberMap(row.movement_speed_modifier),
     spawnBlueprint: row.spawn_blueprint,
@@ -208,9 +206,8 @@ async function main() {
     sourceFiles: Object.values(SOURCE_FILES),
     notes: [
       "Generated from local SAND reference tables bundled at build time.",
-      "Damage display uses item damage and range modifiers from the local data tables. Runtime server or balance modifiers may differ.",
+      "Damage display uses item damage and distance data from the local data tables. Runtime server or balance modifiers may differ.",
       "Weapon icons are bundled for convenience; SAND assets and trademarks belong to their respective rightsholders.",
-      "Damage notes indicate headshot multiplier is applied from ammo when present, otherwise weapon; critical multiplier is shown as reference data.",
     ],
   };
 

@@ -83,8 +83,6 @@ export type WeaponStat = {
   spread: string;
   weaponRangeModifiers: RangeModifierPoint[];
   recoilPower: string;
-  headshotMultiplier: StateNumberMap;
-  criticalMultiplier: StateNumberMap;
   magnification: StateNumberMap;
   movementSpeedModifier: StateNumberMap;
   spawnBlueprint: string;
