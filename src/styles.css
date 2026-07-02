@@ -30,3 +30,9 @@ select {
   flex-wrap: wrap;
   gap: 6px;
 }
+
+.stat-pair-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px;
+}

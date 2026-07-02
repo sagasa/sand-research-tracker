@@ -39,17 +39,16 @@ Settings:
 - Publish directory: `dist`
 - Environment variables: none required
 
-The app is a static Vite build. Runtime research data fetching is intentionally not used; generated data is bundled in `src/generated/techTreeData.ts`.
+The app is a static Vite build. Runtime data fetching is intentionally not used; generated data is bundled in `src/generated/techTreeData.ts` and `src/generated/equipmentStatsData.ts`.
 
 ## Data Updates
 
-Only run the generator when intentionally refreshing the bundled research data:
+Only run the generators when intentionally refreshing the bundled research or equipment data:
 
 ```powershell
-npm run generate:data
+npm run generate:all
 npm run check
 npm run build
 ```
 
-Commit the regenerated `src/generated/techTreeData.ts` together with any generator changes.
-
+Commit regenerated files under `src/generated/` and any changed files under `public/equipment-icons/` together with generator changes.

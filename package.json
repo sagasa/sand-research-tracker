@@ -13,6 +13,8 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "generate:data": "node scripts/generate-tech-tree.mjs",
+    "generate:equipment": "node scripts/generate-equipment-data.mjs",
+    "generate:all": "npm run generate:data && npm run generate:equipment",
     "check": "tsc -b"
   },
   "dependencies": {

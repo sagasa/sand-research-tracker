@@ -44,3 +44,104 @@ export type MaterialSummary = {
   remaining: number;
   nodeIds: string[];
 };
+
+export type DamagePart = {
+  type: string;
+  amount: number;
+};
+
+export type RangeModifierPoint = {
+  distance: number | null;
+  modifier: number;
+};
+
+export type StateNumberMap = Record<string, number>;
+
+export type WeaponAction = {
+  name: string;
+  mode: string;
+  intervalSeconds: number | null;
+  projectileName: string;
+};
+
+export type WeaponStat = {
+  textAsset: string;
+  category: string;
+  itemId: string;
+  templateChain: string[];
+  niceName: string;
+  rarity: string;
+  iconName: string;
+  iconPath: string;
+  iconWidth: number | null;
+  iconHeight: number | null;
+  damageParts: DamagePart[];
+  clipSize: number | null;
+  ammoTypeIds: string[];
+  rangeActions: WeaponAction[];
+  reloadActions: WeaponAction[];
+  spread: string;
+  weaponRangeModifiers: RangeModifierPoint[];
+  recoilPower: string;
+  headshotMultiplier: StateNumberMap;
+  criticalMultiplier: StateNumberMap;
+  magnification: StateNumberMap;
+  movementSpeedModifier: StateNumberMap;
+  spawnBlueprint: string;
+  rewardCount: number | null;
+};
+
+export type AmmoStat = {
+  textAsset: string;
+  itemId: string;
+  templateChain: string[];
+  niceName: string;
+  rarity: string;
+  damageParts: DamagePart[];
+  rangeModifiers: RangeModifierPoint[];
+  customProjectile: string;
+  raytraceSpread: string;
+  stackSmall: number | null;
+  stackMedium: number | null;
+  stackLarge: number | null;
+  rewardCount: number | null;
+  spawnBlueprint: string;
+};
+
+export type ProjectileStat = {
+  textAsset: string;
+  projectileName: string;
+  projectileType: string;
+  velocity: number | null;
+  weight: number | null;
+  gravity: number | null;
+  drag: number | null;
+  radiusStart: number | null;
+  radiusEnd: number | null;
+  autoDestroy: number | null;
+  ricochetAngle: number | null;
+  ricochetCount: number | null;
+  penetrationAngle: number | null;
+  penetrationCount: number | null;
+  newProjectileOnPenetration: string;
+  newAmmoOnPenetration: string;
+};
+
+export type ArmorStat = {
+  kind: string;
+  textAsset: string;
+  entryName: string;
+  templateChain: string[];
+  healthValue: number | null;
+  healthCount: number | null;
+  damageMasks: string[];
+  regenDelay: number | null;
+  regenSpeed: number | null;
+  initialItems: string[];
+};
+
+export type EquipmentStatsSource = {
+  generatedAt: string;
+  sourceFiles: string[];
+  notes: string[];
+};

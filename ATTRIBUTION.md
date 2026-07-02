@@ -19,10 +19,10 @@ The generator records source page URLs in `src/generated/techTreeData.ts` so eac
 
 ## Asset and Content Policy
 
-- This repository does not include game files, dumped assets, screenshots, icons, or textures from SAND: Raiders of Sophie.
+- This repository includes small weapon icon images for convenience.
+- SAND names, imagery, icons, assets, and trademarks belong to their respective rightsholders.
 - The web app does not hotlink images from the game, Steam, or fan databases.
 - The bundled data is limited to functional facts needed for a checklist-style tracker, such as node names, branches, tiers, Crown reference values, and material quantities.
 - Crown costs are displayed only for context and are not included in tracked resource totals.
 
 If a rightsholder or source-site maintainer wants attribution adjusted or generated data removed, please open an issue on the repository.
-

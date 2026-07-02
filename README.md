@@ -10,7 +10,7 @@ This is an unofficial fan utility for SAND: Raiders of Sophie. It is not affilia
 - 進捗、研究済みノード、所持素材数、表示フィルタは Cookie に保存します。
 - ブラウザ実行時に研究ツリーデータを取得したり再構築したりしません。
 - 研究ツリーデータは `scripts/generate-tech-tree.mjs` で生成し、`src/generated/techTreeData.ts` としてバンドルします。
-- ゲームファイル、画像、アイコン、スクリーンショットは同梱しません。
+- 武器アイコンは利便性のため同梱します。権利帰属は [ATTRIBUTION.md](./ATTRIBUTION.md) にまとめています。
 
 ## 出典と権利表記
 
@@ -22,15 +22,15 @@ This is an unofficial fan utility for SAND: Raiders of Sophie. It is not affilia
 
 ```powershell
 npm install
-npm run generate:data
+npm run generate:all
 npm run check
 npm run build
 npm run dev -- --host 127.0.0.1 --port 5174
 ```
 
-通常の編集だけなら `npm run generate:data` は不要です。公開 Wiki 側の研究データを更新したい場合だけ実行してください。
+通常の編集だけなら `npm run generate:all` は不要です。研究ツリーや装備スタッツの元データを更新したい場合だけ実行してください。
 
-生成スクリプトは公開参考ページから機能的な事実データだけを抽出し、画像URLや説明文はバンドルしません。
+生成スクリプトは参考データから機能的な事実データを生成し、クライアント実行時の外部取得を避けます。装備タブの武器アイコンは `public/equipment-icons/` に配置します。
 
 ## Netlify
 

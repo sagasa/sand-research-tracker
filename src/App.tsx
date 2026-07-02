@@ -17,12 +17,14 @@ import {
   Select,
   Stack,
   Switch,
+  Tab,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
+  Tabs,
   TextField,
   Toolbar,
   Tooltip,
@@ -38,9 +40,12 @@ import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import ScienceIcon from "@mui/icons-material/Science";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import { loadStateFromCookie, saveStateToCookie, type CookieSaveResult } from "./cookieStorage";
+import { EquipmentStatsPage } from "./features/equipment/EquipmentStatsPage";
 import { techBranches, techNodes, techTreeSource } from "./generated/techTreeData";
 import { computeMaterialSummaries, defaultTrackerState, formatNumber, normalizeTrackerState } from "./tracker";
 import type { MaterialSummary, TechNode, TrackerState } from "./types";
+
+type AppTab = "research" | "equipment";
 
 function toggleId(values: string[], id: string): string[] {
   return values.includes(id) ? values.filter((value) => value !== id) : [...values, id];
@@ -290,6 +295,7 @@ function NodeTable({
 }
 
 export default function App() {
+  const [activeTab, setActiveTab] = useState<AppTab>("research");
   const [state, setState] = useState<TrackerState>(() =>
     normalizeTrackerState(loadStateFromCookie(defaultTrackerState)),
   );
@@ -413,24 +419,44 @@ export default function App() {
           <Box sx={{ flex: 1, minWidth: 260 }}>
             <Typography variant="h1">SAND Research Resource Tracker</Typography>
             <Typography variant="caption" color="text.secondary">
-              data: {techNodes.length} nodes / generated {generatedDate}
+              {activeTab === "research"
+                ? `data: ${techNodes.length} nodes / generated ${generatedDate}`
+                : "weapon, ammo, projectile, and armor stats from generated reference data"}
             </Typography>
           </Box>
-          <Button startIcon={<DownloadIcon />} onClick={() => exportJson(state)}>
-            Export
-          </Button>
-          <Button component="label" startIcon={<UploadFileIcon />}>
-            Import
-            <input hidden type="file" accept="application/json,.json" onChange={handleImport} />
-          </Button>
-          <Button startIcon={<RestartAltIcon />} color="warning" onClick={resetState}>
-            Reset
-          </Button>
+          {activeTab === "research" ? (
+            <>
+              <Button startIcon={<DownloadIcon />} onClick={() => exportJson(state)}>
+                Export
+              </Button>
+              <Button component="label" startIcon={<UploadFileIcon />}>
+                Import
+                <input hidden type="file" accept="application/json,.json" onChange={handleImport} />
+              </Button>
+              <Button startIcon={<RestartAltIcon />} color="warning" onClick={resetState}>
+                Reset
+              </Button>
+            </>
+          ) : null}
         </Toolbar>
+        <Box sx={{ px: 3 }}>
+          <Tabs
+            value={activeTab}
+            onChange={(_event, value: AppTab) => setActiveTab(value)}
+            variant="scrollable"
+            scrollButtons="auto"
+          >
+            <Tab value="research" label="Research Tracker" />
+            <Tab value="equipment" label="Weapons / Armor Stats" />
+          </Tabs>
+        </Box>
       </AppBar>
 
       <Container maxWidth={false} sx={{ py: 3 }}>
-        <Stack spacing={2.5}>
+        {activeTab === "equipment" ? (
+          <EquipmentStatsPage />
+        ) : (
+          <Stack spacing={2.5}>
           <Box
             sx={{
               display: "grid",
@@ -592,7 +618,8 @@ export default function App() {
               </Stack>
             </Paper>
           ) : null}
-        </Stack>
+          </Stack>
+        )}
       </Container>
     </Box>
   );
