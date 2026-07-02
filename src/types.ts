@@ -13,6 +13,7 @@ export type TechBranch = {
 
 export type TechNode = {
   id: string;
+  guid?: string;
   name: string;
   branch: string;
   branchSlug: string;
@@ -24,6 +25,17 @@ export type TechNode = {
   category: string;
   crowns: number;
   materials: MaterialRequirement[];
+  requiredNodeIds?: string[];
+  dependentNodeIds?: string[];
+  isRoot?: boolean;
+  isShop?: boolean;
+  uiPriority?: number | null;
+  treeColumn?: number | null;
+  treeSlot?: number | string | null;
+  treeOrder?: number | null;
+  sandGameDbSlug?: string;
+  sandGameDbDisplayName?: string;
+  sourceUrls?: string[];
   sourceUrl: string;
 };
 

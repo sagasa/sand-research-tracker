@@ -42,6 +42,14 @@ import UploadFileIcon from "@mui/icons-material/UploadFile";
 import { loadStateFromCookie, saveStateToCookie, type CookieSaveResult } from "./cookieStorage";
 import { EquipmentStatsPage } from "./features/equipment/EquipmentStatsPage";
 import { techBranches, techNodes, techTreeSource } from "./generated/techTreeData";
+import {
+  collectPrerequisiteClosure,
+  getDirectMissingRequirementIds,
+  getRequiredNodeIds,
+  getResearchDepth,
+  getUnknownRequirementIds,
+  hasExplicitResearchDependencies,
+} from "./researchGraph";
 import { computeMaterialSummaries, defaultTrackerState, formatNumber, normalizeTrackerState } from "./tracker";
 import type { MaterialSummary, TechNode, TrackerState } from "./types";
 
@@ -68,6 +76,13 @@ function branchLabel(node: TechNode) {
 function materialText(node: TechNode) {
   if (node.materials.length === 0) return "素材なし";
   return node.materials.map((material) => `${formatNumber(material.count)} ${material.name}`).join(", ");
+}
+
+function shortMaterialText(node: TechNode) {
+  if (node.materials.length === 0) return "素材なし";
+  const visible = node.materials.slice(0, 3).map((material) => `${formatNumber(material.count)} ${material.name}`);
+  if (node.materials.length > 3) visible.push(`+${node.materials.length - 3}`);
+  return visible.join(" / ");
 }
 
 function nodeMatchesSearch(node: TechNode, search: string) {
@@ -196,101 +211,286 @@ function MaterialSummaryTable({
   );
 }
 
-function NodeTable({
+function ResearchNodeCard({
+  node,
+  target,
+  unlocked,
+  nodesById,
+  unlockedIds,
+  dependencyDataAvailable,
+  onToggleTarget,
+  onToggleUnlocked,
+}: {
+  node: TechNode;
+  target: boolean;
+  unlocked: boolean;
+  nodesById: Map<string, TechNode>;
+  unlockedIds: Set<string>;
+  dependencyDataAvailable: boolean;
+  onToggleTarget: (id: string) => void;
+  onToggleUnlocked: (id: string) => void;
+}) {
+  const requiredIds = getRequiredNodeIds(node);
+  const missingRequirementIds = getDirectMissingRequirementIds(node, unlockedIds, nodesById);
+  const unknownRequirementIds = getUnknownRequirementIds(node, nodesById);
+
+  return (
+    <Box
+      className="research-node-card"
+      sx={{
+        position: "relative",
+        p: 1.15,
+        minHeight: dependencyDataAvailable ? 178 : 142,
+        border: "1px solid",
+        borderColor:
+          target ? node.branchColor : missingRequirementIds.length > 0 ? "warning.main" : "rgba(255,255,255,0.13)",
+        borderRadius: 1,
+        backgroundColor: target ? `${node.branchColor}1f` : "rgba(255,255,255,0.035)",
+        boxShadow: target ? `0 0 0 1px ${node.branchColor}33 inset` : "none",
+        opacity: unlocked ? 0.48 : 1,
+        transition: "border-color 140ms ease, background-color 140ms ease, opacity 140ms ease",
+      }}
+    >
+      <Stack spacing={1}>
+        <Stack direction="row" spacing={0.75} alignItems="center">
+          <Chip
+            label={node.category}
+            size="small"
+            sx={{ borderColor: node.branchColor, color: node.branchColor, maxWidth: 142 }}
+            variant="outlined"
+          />
+          <Box sx={{ flex: 1 }} />
+          <Tooltip title="目標">
+            <Checkbox
+              checked={target}
+              onChange={() => onToggleTarget(node.id)}
+              size="small"
+              sx={{ p: 0.25 }}
+            />
+          </Tooltip>
+          <Tooltip title="研究済み">
+            <Checkbox
+              checked={unlocked}
+              onChange={() => onToggleUnlocked(node.id)}
+              size="small"
+              sx={{ p: 0.25 }}
+            />
+          </Tooltip>
+        </Stack>
+        <Typography fontWeight={800} sx={{ lineHeight: 1.2 }}>
+          {node.name}
+        </Typography>
+        <Stack direction="row" spacing={0.75} flexWrap="wrap">
+          <Chip label={node.tierCostRange || node.tierLabel} size="small" />
+          {node.treeSlot ? (
+            <Chip label={`Slot ${String(node.treeSlot).toUpperCase()}`} size="small" variant="outlined" />
+          ) : null}
+          <Chip label={`${formatNumber(node.crowns)} Crowns`} size="small" variant="outlined" />
+        </Stack>
+        {dependencyDataAvailable ? (
+          <Box>
+            <Typography variant="caption" color="text.secondary">
+              前提
+            </Typography>
+            <Stack direction="row" spacing={0.6} useFlexGap flexWrap="wrap" sx={{ mt: 0.4 }}>
+              {requiredIds.length === 0 ? (
+                <Chip label={node.isRoot ? "Root" : "前提なし"} size="small" variant="outlined" />
+              ) : (
+                requiredIds.map((requiredId) => {
+                  const requiredNode = nodesById.get(requiredId);
+                  const missing = missingRequirementIds.includes(requiredId);
+                  const unknown = unknownRequirementIds.includes(requiredId);
+                  return (
+                    <Tooltip
+                      title={unknown ? requiredId : missing ? "未研究の前提ノード" : "前提ノード"}
+                      key={`${node.id}-${requiredId}`}
+                    >
+                      <Chip
+                        label={requiredNode?.name ?? requiredId}
+                        color={unknown ? "error" : missing ? "warning" : "default"}
+                        size="small"
+                        variant={requiredNode && unlockedIds.has(requiredId) ? "filled" : "outlined"}
+                        sx={{ maxWidth: 210 }}
+                      />
+                    </Tooltip>
+                  );
+                })
+              )}
+            </Stack>
+          </Box>
+        ) : null}
+        <Tooltip title={materialText(node)}>
+          <Typography variant="caption" color="text.secondary" sx={{ display: "block", lineHeight: 1.35 }}>
+            {shortMaterialText(node)}
+          </Typography>
+        </Tooltip>
+      </Stack>
+    </Box>
+  );
+}
+
+function sortResearchNodes(a: TechNode, b: TechNode): number {
+  const aColumn = a.treeColumn ?? a.tier;
+  const bColumn = b.treeColumn ?? b.tier;
+  if (aColumn !== bColumn) return aColumn - bColumn;
+  if (a.tier !== b.tier) return a.tier - b.tier;
+
+  const slotCompare = String(a.treeSlot ?? "").localeCompare(String(b.treeSlot ?? ""), "ja", {
+    numeric: true,
+  });
+  if (slotCompare !== 0) return slotCompare;
+
+  return a.name.localeCompare(b.name, "ja");
+}
+
+function ResearchDependencyTree({
   nodes,
+  nodesById,
   targetIds,
   unlockedIds,
+  layoutDataAvailable,
+  dependencyDataAvailable,
   onToggleTarget,
   onToggleUnlocked,
 }: {
   nodes: TechNode[];
+  nodesById: Map<string, TechNode>;
   targetIds: Set<string>;
   unlockedIds: Set<string>;
+  layoutDataAvailable: boolean;
+  dependencyDataAvailable: boolean;
   onToggleTarget: (id: string) => void;
   onToggleUnlocked: (id: string) => void;
 }) {
-  return (
-    <TableContainer sx={{ maxHeight: 680 }}>
-      <Table stickyHeader size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell padding="checkbox">目標</TableCell>
-            <TableCell padding="checkbox">済</TableCell>
-            <TableCell>研究ノード</TableCell>
-            <TableCell>系統</TableCell>
-            <TableCell align="right">Crowns</TableCell>
-            <TableCell>必要素材</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {nodes.map((node) => {
-            const target = targetIds.has(node.id);
-            const unlocked = unlockedIds.has(node.id);
+  const branchGroups = techBranches
+    .map((branch) => ({
+      branch,
+      nodes: nodes
+        .filter((node) => node.branchSlug === branch.slug)
+        .sort((a, b) => a.tier - b.tier || a.name.localeCompare(b.name)),
+    }))
+    .filter((group) => group.nodes.length > 0);
 
-            return (
-              <TableRow
-                key={node.id}
-                hover
-                selected={target}
-                className="node-table-row"
+  if (branchGroups.length === 0) {
+    return (
+      <Alert severity="info" variant="outlined">
+        条件に一致する研究ノードがありません。
+      </Alert>
+    );
+  }
+
+  return (
+    <Stack spacing={2}>
+      {!dependencyDataAvailable ? (
+        <Alert severity={layoutDataAvailable ? "info" : "warning"} variant="outlined">
+          表示は有志サイト由来のゲーム内進行順と配置スロットを使っています。
+          明示的な前提ノードIDは公開データ内に見当たらないため、前提線と前提込み素材集計は推測せず無効化しています。
+        </Alert>
+      ) : null}
+
+      {branchGroups.map(({ branch, nodes: branchNodes }) => {
+        const sortedBranchNodes = [...branchNodes].sort(sortResearchNodes);
+        const columnGroups = dependencyDataAvailable && !layoutDataAvailable
+          ? [...new Set(sortedBranchNodes.map((node) => getResearchDepth(node, nodesById)))]
+              .sort((a, b) => a - b)
+              .map((depth) => ({
+                key: `depth-${depth}`,
+                label: depth === 0 ? "Root" : `Step ${depth + 1}`,
+                nodes: sortedBranchNodes
+                  .filter((node) => getResearchDepth(node, nodesById) === depth)
+                  .sort(sortResearchNodes),
+              }))
+          : layoutDataAvailable
+            ? [...new Set(sortedBranchNodes.map((node) => node.treeColumn ?? node.tier))]
+                .sort((a, b) => Number(a) - Number(b))
+                .map((column) => ({
+                  key: `tier-${column}`,
+                  label: `Tier ${column}`,
+                  nodes: sortedBranchNodes
+                    .filter((node) => (node.treeColumn ?? node.tier) === column)
+                    .sort(sortResearchNodes),
+                }))
+          : [
+              {
+                key: "checklist",
+                label: "Checklist",
+                nodes: sortedBranchNodes,
+              },
+            ];
+
+        return (
+          <Box className="research-branch-tree" key={branch.slug}>
+            <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap" sx={{ mb: 1.25 }}>
+              <Box
                 sx={{
-                  opacity: unlocked ? 0.58 : 1,
-                  "&.Mui-selected": {
-                    backgroundColor: "rgba(95, 179, 255, 0.11)",
-                  },
+                  width: 10,
+                  height: 10,
+                  borderRadius: "50%",
+                  backgroundColor: branch.color,
+                  boxShadow: `0 0 18px ${branch.color}66`,
+                }}
+              />
+              <Typography variant="h2">{branch.name}</Typography>
+              <Chip label={branch.summary} size="small" variant="outlined" />
+              <Chip label={`${branchNodes.length} nodes`} size="small" />
+            </Stack>
+
+            <Box sx={{ overflowX: "auto", pb: 1 }}>
+              <Box
+                className="research-tree-grid"
+                sx={{
+                  display: "grid",
+                  gridTemplateColumns: layoutDataAvailable || dependencyDataAvailable
+                    ? `repeat(${columnGroups.length}, minmax(270px, 1fr))`
+                    : "repeat(auto-fit, minmax(270px, 1fr))",
+                  gap: 2,
+                  minWidth: layoutDataAvailable || dependencyDataAvailable
+                    ? `${Math.max(760, columnGroups.length * 302)}px`
+                    : 0,
                 }}
               >
-                <TableCell padding="checkbox">
-                  <Checkbox checked={target} onChange={() => onToggleTarget(node.id)} />
-                </TableCell>
-                <TableCell padding="checkbox">
-                  <Checkbox checked={unlocked} onChange={() => onToggleUnlocked(node.id)} />
-                </TableCell>
-                <TableCell sx={{ minWidth: 230 }}>
-                  <Stack spacing={0.6}>
-                    <Stack direction="row" spacing={1} alignItems="center">
-                      <Chip
-                        label={node.category}
-                        size="small"
-                        sx={{ borderColor: node.branchColor, color: node.branchColor }}
-                        variant="outlined"
-                      />
-                      <Typography fontWeight={700}>{node.name}</Typography>
+                {columnGroups.map((columnGroup) => (
+                  <Box className="research-tier-column" key={`${branch.slug}-${columnGroup.key}`}>
+                    <Stack spacing={1.25}>
+                      <Box
+                        sx={{
+                          position: "sticky",
+                          top: 0,
+                          zIndex: 1,
+                          py: 0.75,
+                          px: 1,
+                          border: "1px solid rgba(255,255,255,0.12)",
+                          borderRadius: 1,
+                          backgroundColor: "rgba(16,20,23,0.92)",
+                        }}
+                      >
+                        <Typography variant="caption" color="text.secondary">
+                          {columnGroup.label}
+                        </Typography>
+                        <Typography fontWeight={800}>{columnGroup.nodes.length} nodes</Typography>
+                      </Box>
+                      {columnGroup.nodes.map((node) => (
+                        <ResearchNodeCard
+                          key={node.id}
+                          node={node}
+                          target={targetIds.has(node.id)}
+                          unlocked={unlockedIds.has(node.id)}
+                          nodesById={nodesById}
+                          unlockedIds={unlockedIds}
+                          dependencyDataAvailable={dependencyDataAvailable}
+                          onToggleTarget={onToggleTarget}
+                          onToggleUnlocked={onToggleUnlocked}
+                        />
+                      ))}
                     </Stack>
-                  </Stack>
-                </TableCell>
-                <TableCell sx={{ minWidth: 220 }}>
-                  <Typography variant="body2">{branchLabel(node)}</Typography>
-                  <Typography variant="caption" color="text.secondary">
-                    {node.tierCostRange}
-                  </Typography>
-                </TableCell>
-                <TableCell align="right" sx={{ color: "text.secondary" }}>
-                  {formatNumber(node.crowns)}
-                </TableCell>
-                <TableCell sx={{ minWidth: 320 }}>
-                  <Box className="material-chip-list">
-                    {node.materials.length === 0 ? (
-                      <Chip label="素材なし" size="small" variant="outlined" />
-                    ) : (
-                      node.materials.map((material) => (
-                        <Tooltip title={node.name} key={`${node.id}-${material.name}`}>
-                          <Chip
-                            label={`${formatNumber(material.count)} ${material.name}`}
-                            size="small"
-                            variant="outlined"
-                          />
-                        </Tooltip>
-                      ))
-                    )}
                   </Box>
-                </TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </TableContainer>
+                ))}
+              </Box>
+            </Box>
+          </Box>
+        );
+      })}
+    </Stack>
   );
 }
 
@@ -307,6 +507,13 @@ export default function App() {
 
   const nodesById = useMemo(() => new Map(techNodes.map((node) => [node.id, node])), []);
   const validNodeIds = useMemo(() => new Set(techNodes.map((node) => node.id)), []);
+  const dependencyDataAvailable = useMemo(() => hasExplicitResearchDependencies(techNodes), []);
+  const layoutDataAvailable = useMemo(
+    () =>
+      (Boolean("hasProgressionLayout" in techTreeSource && techTreeSource.hasProgressionLayout) ||
+        techNodes.some((node) => node.treeColumn !== null && node.treeColumn !== undefined && node.treeSlot)),
+    [],
+  );
 
   const targetNodeIds = useMemo(
     () => state.targetNodeIds.filter((id) => validNodeIds.has(id)),
@@ -318,9 +525,19 @@ export default function App() {
   );
   const targetIds = useMemo(() => new Set(targetNodeIds), [targetNodeIds]);
   const unlockedIds = useMemo(() => new Set(unlockedNodeIds), [unlockedNodeIds]);
+  const targetNodeIdsWithPrerequisites = useMemo(
+    () =>
+      dependencyDataAvailable
+        ? collectPrerequisiteClosure(targetNodeIds, nodesById)
+        : targetNodeIds,
+    [dependencyDataAvailable, nodesById, targetNodeIds],
+  );
   const activeTargetNodeIds = useMemo(
-    () => (state.hideUnlocked ? targetNodeIds.filter((id) => !unlockedIds.has(id)) : targetNodeIds),
-    [state.hideUnlocked, targetNodeIds, unlockedIds],
+    () =>
+      state.hideUnlocked
+        ? targetNodeIdsWithPrerequisites.filter((id) => !unlockedIds.has(id))
+        : targetNodeIdsWithPrerequisites,
+    [state.hideUnlocked, targetNodeIdsWithPrerequisites, unlockedIds],
   );
 
   const summaries = useMemo(
@@ -565,6 +782,18 @@ export default function App() {
                 <Typography variant="h2">研究ノード</Typography>
                 <Chip label={`${filteredNodes.length}/${techNodes.length}`} size="small" />
                 <Chip label="Crowns excluded from material totals" size="small" variant="outlined" />
+                <Chip
+                  label={layoutDataAvailable ? "進行スロットあり" : "進行スロット未生成"}
+                  size="small"
+                  color={layoutDataAvailable ? "success" : "warning"}
+                  variant="outlined"
+                />
+                <Chip
+                  label={dependencyDataAvailable ? "前提IDあり" : "前提IDなし"}
+                  size="small"
+                  color={dependencyDataAvailable ? "success" : "warning"}
+                  variant="outlined"
+                />
               </Stack>
               <Divider />
               {techNodes.length === 0 ? (
@@ -572,10 +801,13 @@ export default function App() {
                   研究ツリーデータが未生成です。`npm run generate:data` を実行してください。
                 </Alert>
               ) : (
-                <NodeTable
+                <ResearchDependencyTree
                   nodes={filteredNodes}
+                  nodesById={nodesById}
                   targetIds={targetIds}
                   unlockedIds={unlockedIds}
+                  layoutDataAvailable={layoutDataAvailable}
+                  dependencyDataAvailable={dependencyDataAvailable}
                   onToggleTarget={toggleTarget}
                   onToggleUnlocked={toggleUnlocked}
                 />
@@ -593,6 +825,15 @@ export default function App() {
                   const node = nodesById.get(nodeId);
                   if (!node) return null;
                   const excluded = state.hideUnlocked && unlockedIds.has(node.id);
+                  const prerequisiteIds = dependencyDataAvailable
+                    ? collectPrerequisiteClosure([node.id], nodesById).filter((id) => id !== node.id)
+                    : [];
+                  const prerequisiteText =
+                    prerequisiteIds.length === 0
+                      ? "前提なし"
+                      : prerequisiteIds
+                          .map((id) => nodesById.get(id)?.name ?? id)
+                          .join(", ");
                   return (
                     <Stack
                       key={node.id}
@@ -611,6 +852,7 @@ export default function App() {
                       </Typography>
                       <Typography variant="body2" color="text.secondary" sx={{ flex: 1 }}>
                         {branchLabel(node)} / {materialText(node)}
+                        {dependencyDataAvailable ? ` / ${prerequisiteText}` : ""}
                       </Typography>
                     </Stack>
                   );
