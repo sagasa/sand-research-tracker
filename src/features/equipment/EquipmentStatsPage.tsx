@@ -35,7 +35,7 @@ type DamagePoint = {
 
 const selectableWeapons = weaponStats
   .filter((weapon) => !weapon.itemId.toLowerCase().startsWith("dev"))
-  .sort((a, b) => displayName(a.niceName, a.itemId).localeCompare(displayName(b.niceName, b.itemId)));
+  .sort((a, b) => weaponName(a).localeCompare(weaponName(b), "ja"));
 
 const rarityColors: Record<string, "default" | "primary" | "secondary" | "success" | "warning" | "error"> = {
   COMMON: "default",
@@ -48,6 +48,20 @@ const rarityColors: Record<string, "default" | "primary" | "secondary" | "succes
 
 function displayName(value: string, fallback: string) {
   return value && !value.startsWith("###TODO") ? value : fallback;
+}
+
+function weaponName(weapon: WeaponStat) {
+  return displayName(weapon.displayNameJa, displayName(weapon.niceName, weapon.itemId));
+}
+
+function ammoName(ammo: AmmoStat | undefined) {
+  if (!ammo) return "";
+  return displayName(ammo.displayNameJa, displayName(ammo.niceName, ammo.itemId));
+}
+
+function secondaryName(primary: string, englishName: string, itemId: string) {
+  const english = displayName(englishName, itemId);
+  return primary && primary !== english ? english : itemId;
 }
 
 function totalDamage(parts: DamagePart[]) {
@@ -149,6 +163,45 @@ function WeaponIcon({ weapon, size = 44 }: { weapon: WeaponStat; size?: number }
     <Box
       component="img"
       src={weapon.iconPath}
+      alt=""
+      loading="lazy"
+      sx={{
+        width: size,
+        height: size,
+        objectFit: "contain",
+        border: "1px solid rgba(255,255,255,0.16)",
+        borderRadius: 1,
+        backgroundColor: "rgba(0,0,0,0.25)",
+        flex: "0 0 auto",
+      }}
+    />
+  );
+}
+
+function AmmoIcon({ ammo, size = 40 }: { ammo: AmmoStat | undefined; size?: number }) {
+  if (!ammo?.iconPath) {
+    return (
+      <Box
+        sx={{
+          width: size,
+          height: size,
+          border: "1px solid rgba(255,255,255,0.16)",
+          borderRadius: 1,
+          display: "grid",
+          placeItems: "center",
+          color: "text.secondary",
+          flex: "0 0 auto",
+        }}
+      >
+        <Inventory2Icon fontSize="small" />
+      </Box>
+    );
+  }
+
+  return (
+    <Box
+      component="img"
+      src={ammo.iconPath}
       alt=""
       loading="lazy"
       sx={{
@@ -293,9 +346,16 @@ function AmmoComparisonTable({
               onClick={() => onSelectAmmo(ammo.itemId)}
               sx={{ cursor: "pointer" }}
             >
-              <TableCell sx={{ minWidth: 220 }}>
-                <Typography fontWeight={700}>{displayName(ammo.niceName, ammo.itemId)}</Typography>
-                <Typography variant="caption" color="text.secondary">{ammo.rarity || "UNKNOWN"}</Typography>
+              <TableCell sx={{ minWidth: 260 }}>
+                <Stack direction="row" spacing={1} alignItems="center">
+                  <AmmoIcon ammo={ammo} size={34} />
+                  <Box>
+                    <Typography fontWeight={700}>{ammoName(ammo)}</Typography>
+                    <Typography variant="caption" color="text.secondary">
+                      {secondaryName(ammoName(ammo), ammo.niceName, ammo.itemId)} / {ammo.rarity || "UNKNOWN"}
+                    </Typography>
+                  </Box>
+                </Stack>
               </TableCell>
               <TableCell align="right">{formatDamage(totalDamage(ammo.damageParts))}</TableCell>
               <TableCell align="right">{formatDamage(damageAtDistance(weapon, ammo, selectedDistance))}</TableCell>
@@ -418,15 +478,17 @@ export function EquipmentStatsPage() {
                 label="銃"
                 value={selectedWeapon.itemId}
                 onChange={handleWeaponChange}
-                renderValue={() => displayName(selectedWeapon.niceName, selectedWeapon.itemId)}
+                renderValue={() => weaponName(selectedWeapon)}
               >
                 {selectableWeapons.map((weapon) => (
                   <MenuItem key={weapon.itemId} value={weapon.itemId}>
                     <Stack direction="row" spacing={1.25} alignItems="center">
                       <WeaponIcon weapon={weapon} size={34} />
                       <Box>
-                        <Typography>{displayName(weapon.niceName, weapon.itemId)}</Typography>
-                        <Typography variant="caption" color="text.secondary">{weapon.category}</Typography>
+                        <Typography>{weaponName(weapon)}</Typography>
+                        <Typography variant="caption" color="text.secondary">
+                          {secondaryName(weaponName(weapon), weapon.niceName, weapon.itemId)} / {weapon.category}
+                        </Typography>
                       </Box>
                     </Stack>
                   </MenuItem>
@@ -441,16 +503,19 @@ export function EquipmentStatsPage() {
                 label="弾"
                 value={selectedAmmo?.itemId ?? ""}
                 onChange={(event) => setSelectedAmmoId(event.target.value)}
-                renderValue={() => selectedAmmo ? displayName(selectedAmmo.niceName, selectedAmmo.itemId) : ""}
+                renderValue={() => ammoName(selectedAmmo)}
               >
                 {ammoRows.map((ammo) => (
                   <MenuItem key={ammo.itemId} value={ammo.itemId}>
-                    <Box>
-                      <Typography>{displayName(ammo.niceName, ammo.itemId)}</Typography>
-                      <Typography variant="caption" color="text.secondary">
-                        基礎 {formatDamage(totalDamage(ammo.damageParts))}
-                      </Typography>
-                    </Box>
+                    <Stack direction="row" spacing={1.25} alignItems="center">
+                      <AmmoIcon ammo={ammo} size={34} />
+                      <Box>
+                        <Typography>{ammoName(ammo)}</Typography>
+                        <Typography variant="caption" color="text.secondary">
+                          {secondaryName(ammoName(ammo), ammo.niceName, ammo.itemId)} / 基礎 {formatDamage(totalDamage(ammo.damageParts))}
+                        </Typography>
+                      </Box>
+                    </Stack>
                   </MenuItem>
                 ))}
               </Select>
@@ -477,7 +542,10 @@ export function EquipmentStatsPage() {
             <Stack direction="row" spacing={1.5} alignItems="center">
               <WeaponIcon weapon={selectedWeapon} size={72} />
               <Box>
-                <Typography variant="h2">{displayName(selectedWeapon.niceName, selectedWeapon.itemId)}</Typography>
+                <Typography variant="h2">{weaponName(selectedWeapon)}</Typography>
+                <Typography variant="caption" color="text.secondary">
+                  {secondaryName(weaponName(selectedWeapon), selectedWeapon.niceName, selectedWeapon.itemId)}
+                </Typography>
                 <Stack direction="row" spacing={0.75} flexWrap="wrap" sx={{ mt: 0.75 }}>
                   <CategoryBadge weapon={selectedWeapon} />
                   <Chip label={selectedWeapon.rarity || "UNKNOWN"} size="small" color={rarityColors[selectedWeapon.rarity] ?? "default"} />
@@ -488,6 +556,15 @@ export function EquipmentStatsPage() {
             <Divider />
 
             <Box>
+              <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 1 }}>
+                <AmmoIcon ammo={selectedAmmo} size={42} />
+                <Box>
+                  <Typography fontWeight={700}>{ammoName(selectedAmmo)}</Typography>
+                  <Typography variant="caption" color="text.secondary">
+                    {selectedAmmo ? secondaryName(ammoName(selectedAmmo), selectedAmmo.niceName, selectedAmmo.itemId) : ""}
+                  </Typography>
+                </Box>
+              </Stack>
               <Typography variant="caption" color="text.secondary">{selectedDistance}m の通常ダメージ</Typography>
               <Typography variant="h1" sx={{ lineHeight: 1.05 }}>{formatDamage(selectedDamage)}</Typography>
             </Box>
@@ -540,7 +617,7 @@ export function EquipmentStatsPage() {
             <Stack direction="row" spacing={1.25} alignItems="baseline" flexWrap="wrap">
               <Typography variant="h2">距離グラフ</Typography>
               <Typography color="text.secondary">
-                {displayName(selectedAmmo?.niceName ?? "", selectedAmmo?.itemId ?? "")}
+                {ammoName(selectedAmmo)}
               </Typography>
             </Stack>
             <DamageChart weapon={selectedWeapon} ammo={selectedAmmo} selectedDistance={selectedDistance} />

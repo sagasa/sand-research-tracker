@@ -70,6 +70,7 @@ export type WeaponStat = {
   itemId: string;
   templateChain: string[];
   niceName: string;
+  displayNameJa: string;
   rarity: string;
   iconName: string;
   iconPath: string;
@@ -95,7 +96,13 @@ export type AmmoStat = {
   itemId: string;
   templateChain: string[];
   niceName: string;
+  displayNameJa: string;
   rarity: string;
+  iconName: string;
+  ammoIconName: string;
+  iconPath: string;
+  iconWidth: number | null;
+  iconHeight: number | null;
   damageParts: DamagePart[];
   rangeModifiers: RangeModifierPoint[];
   customProjectile: string;

@@ -12,7 +12,7 @@ This is an unofficial fan utility for SAND: Raiders of Sophie. It is not affilia
 - 進捗、研究済みノード、所持素材数、表示フィルタは Cookie に保存します。
 - ブラウザ実行時に研究ツリーデータを取得したり再構築したりしません。
 - 研究ツリーデータは `scripts/generate-tech-tree.mjs` で生成し、`src/generated/techTreeData.ts` としてバンドルします。
-- 武器アイコンは利便性のため同梱します。権利帰属は [ATTRIBUTION.md](./ATTRIBUTION.md) にまとめています。
+- 武器/弾アイコンは利便性のため同梱します。権利帰属は [ATTRIBUTION.md](./ATTRIBUTION.md) にまとめています。
 
 ## 出典と権利表記
 
@@ -32,7 +32,7 @@ npm run dev -- --host 127.0.0.1 --port 5174
 
 通常の編集だけなら `npm run generate:all` は不要です。研究ツリーや装備スタッツの元データを更新したい場合だけ実行してください。
 
-生成スクリプトは参考データから機能的な事実データを生成し、クライアント実行時の外部取得を避けます。装備タブの武器アイコンは `public/equipment-icons/` に配置します。
+生成スクリプトは参考データから機能的な事実データを生成し、クライアント実行時の外部取得を避けます。装備タブの武器/弾アイコンは `public/equipment-icons/` に配置します。
 
 ## Netlify
 
@@ -45,7 +45,7 @@ npm run dev -- --host 127.0.0.1 --port 5174
 ```
 
 Netlify へ配置する場合は、生成済みの `src/generated/techTreeData.ts` をリポジトリに含めてください。ビルド時に外部サイトへ取りに行く構成にはしていません。
-装備スタッツは `src/generated/equipmentStatsData.ts`、武器アイコンは `public/equipment-icons/` に同梱します。
+装備スタッツは `src/generated/equipmentStatsData.ts`、武器/弾アイコンは `public/equipment-icons/` に同梱します。
 
 Netlify の設定値:
 

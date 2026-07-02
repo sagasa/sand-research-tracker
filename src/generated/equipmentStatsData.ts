@@ -1,16 +1,18 @@
 import type { AmmoStat, ArmorStat, EquipmentStatsSource, ProjectileStat, WeaponStat } from "../types";
 
 export const equipmentStatsSource: EquipmentStatsSource = {
-  "generatedAt": "2026-07-02T02:23:11.012Z",
+  "generatedAt": "2026-07-02T04:32:23.844Z",
   "sourceFiles": [
     "infantry_weapon_summary.tsv",
     "infantry_ammo_summary.tsv",
     "infantry_projectile_summary.tsv",
     "player_armor_summary.tsv",
-    "infantry_weapon_icon_manifest.tsv"
+    "infantry_weapon_icon_manifest.tsv",
+    "item_gui_manifest.tsv"
   ],
   "notes": [
     "Generated from local SAND reference tables bundled at build time.",
+    "Japanese display names use local overrides when no local Japanese table is available.",
     "Damage display uses item damage and distance data from the local data tables. Runtime server or balance modifiers may differ.",
     "Headshot display uses weapon headshot data from the local data tables.",
     "Weapon icons are bundled for convenience; SAND assets and trademarks belong to their respective rightsholders."
@@ -26,6 +28,7 @@ export const weaponStats: WeaponStat[] = [
       "item_semiAutomaticPistol"
     ],
     "niceName": "O'Donnel \"Blitz\" SA Pistol",
+    "displayNameJa": "O'Donnel \"Blitz\" セミオートピストル",
     "rarity": "UNCOMMON",
     "iconName": "icon_pistol",
     "iconPath": "/equipment-icons/DevSiegeRevolver.png",
@@ -93,6 +96,7 @@ export const weaponStats: WeaponStat[] = [
     "itemId": "item_antiReactorGun",
     "templateChain": [],
     "niceName": "###TODO: item_antiReactorGunAmmo name",
+    "displayNameJa": "対リアクター銃",
     "rarity": "EXPERIMENTAL",
     "iconName": "icon_item_antiReactorGun",
     "iconPath": "/equipment-icons/item_antiReactorGun.png",
@@ -128,6 +132,7 @@ export const weaponStats: WeaponStat[] = [
     "itemId": "item_orbitalStrikeGun",
     "templateChain": [],
     "niceName": "Orbital Strike Gun",
+    "displayNameJa": "軌道攻撃ガン",
     "rarity": "EXPERIMENTAL",
     "iconName": "icon_item_orbitalStrikeGun",
     "iconPath": "/equipment-icons/item_orbitalStrikeGun.png",
@@ -183,6 +188,7 @@ export const weaponStats: WeaponStat[] = [
     "itemId": "item_repeaterRifle",
     "templateChain": [],
     "niceName": "SGOW M82 Revolver Rifle",
+    "displayNameJa": "SGOW M82 リボルバーライフル",
     "rarity": "RARE",
     "iconName": "icon_rifle",
     "iconPath": "/equipment-icons/item_repeaterRifle.png",
@@ -273,6 +279,7 @@ export const weaponStats: WeaponStat[] = [
     "itemId": "item_revolverSmall",
     "templateChain": [],
     "niceName": "EB Zseb Revolver",
+    "displayNameJa": "EB Zseb リボルバー",
     "rarity": "COMMON",
     "iconName": "icon_revolverSmall",
     "iconPath": "/equipment-icons/item_revolverSmall.png",
@@ -355,6 +362,7 @@ export const weaponStats: WeaponStat[] = [
     "itemId": "item_revolverSmall_dusters",
     "templateChain": [],
     "niceName": "EB Zseb Revolver",
+    "displayNameJa": "EB Zseb リボルバー（ダスター）",
     "rarity": "UNCOMMON",
     "iconName": "icon_lowTierRevolverBrass",
     "iconPath": "/equipment-icons/item_revolverSmall_dusters.png",
@@ -439,6 +447,7 @@ export const weaponStats: WeaponStat[] = [
       "item_repeaterRifle"
     ],
     "niceName": "SGOW M82 Revolver Rifle",
+    "displayNameJa": "SGOW M82 リボルバーライフル（単発）",
     "rarity": "COMMON",
     "iconName": "icon_item_repeaterRifleOneShot",
     "iconPath": "/equipment-icons/item_rifleMusket.png",
@@ -531,6 +540,7 @@ export const weaponStats: WeaponStat[] = [
       "item_repeaterRifle"
     ],
     "niceName": "SGOW M82 Revolver Rifle",
+    "displayNameJa": "SGOW M82 リボルバーライフル（クリップ）",
     "rarity": "NOTEWORTHY",
     "iconName": "icon_rifleMusketClip",
     "iconPath": "/equipment-icons/item_rifleMusketClip.png",
@@ -623,6 +633,7 @@ export const weaponStats: WeaponStat[] = [
       "item_repeaterRifle"
     ],
     "niceName": "SGOW M82 Revolver Rifle",
+    "displayNameJa": "SGOW M82 リボルバーライフル（ベテラン）",
     "rarity": "COMMON",
     "iconName": "icon_rifleMusketVeteran",
     "iconPath": "/equipment-icons/item_rifleMusketVeteran.png",
@@ -715,6 +726,7 @@ export const weaponStats: WeaponStat[] = [
       "item_repeaterRifle"
     ],
     "niceName": "SGOW M82 Revolver Rifle",
+    "displayNameJa": "SGOW M82 リボルバーライフル（アパーチャ）",
     "rarity": "NOTEWORTHY",
     "iconName": "icon_item_rifleRepeaterAperture",
     "iconPath": "/equipment-icons/item_rifleRepeaterAperture.png",
@@ -805,6 +817,7 @@ export const weaponStats: WeaponStat[] = [
     "itemId": "item_rocketLauncher",
     "templateChain": [],
     "niceName": "",
+    "displayNameJa": "ロケットランチャー",
     "rarity": "REMARKABLE",
     "iconName": "icon_item_rocketLauncher",
     "iconPath": "/equipment-icons/item_rocketLauncher.png",
@@ -863,6 +876,7 @@ export const weaponStats: WeaponStat[] = [
     "itemId": "item_semiAutomaticPistol",
     "templateChain": [],
     "niceName": "O'Donnel \"Blitz\" SA Pistol",
+    "displayNameJa": "O'Donnel \"Blitz\" セミオートピストル",
     "rarity": "UNCOMMON",
     "iconName": "icon_pistol",
     "iconPath": "/equipment-icons/item_semiAutomaticPistol.png",
@@ -945,6 +959,7 @@ export const weaponStats: WeaponStat[] = [
     "itemId": "item_semiAutomaticPistol_decreasedMag",
     "templateChain": [],
     "niceName": "O'Donnel \"Blitz\" SA Pistol",
+    "displayNameJa": "O'Donnel \"Blitz\" セミオートピストル（小型マガジン）",
     "rarity": "COMMON",
     "iconName": "icon_pistol_rust",
     "iconPath": "/equipment-icons/item_semiAutomaticPistol_decreasedMag.png",
@@ -1027,6 +1042,7 @@ export const weaponStats: WeaponStat[] = [
     "itemId": "item_semiAutomaticPistol_increasedMag",
     "templateChain": [],
     "niceName": "O'Donnel \"Blitz\" SA Pistol",
+    "displayNameJa": "O'Donnel \"Blitz\" セミオートピストル（大型マガジン）",
     "rarity": "RARE",
     "iconName": "icon_item_semiAutomaticPistol_increasedMag",
     "iconPath": "/equipment-icons/item_semiAutomaticPistol_increasedMag.png",
@@ -1109,6 +1125,7 @@ export const weaponStats: WeaponStat[] = [
     "itemId": "item_shotgun",
     "templateChain": [],
     "niceName": "O'Donnel \"Pepper Mill\" Shothgun",
+    "displayNameJa": "O'Donnel \"Pepper Mill\" ショットガン",
     "rarity": "RARE",
     "iconName": "icon_shotgun",
     "iconPath": "/equipment-icons/item_shotgun.png",
@@ -1189,6 +1206,7 @@ export const weaponStats: WeaponStat[] = [
     "itemId": "item_shotgunHandmade",
     "templateChain": [],
     "niceName": "KF \"Drobulet\" Shotgun",
+    "displayNameJa": "KF \"Drobulet\" ショットガン",
     "rarity": "COMMON",
     "iconName": "icon_shotgunHandmade",
     "iconPath": "/equipment-icons/item_shotgunHandmade.png",
@@ -1274,6 +1292,7 @@ export const weaponStats: WeaponStat[] = [
       "item_shotgunHandmade"
     ],
     "niceName": "KF \"Drobulet\" Shotgun",
+    "displayNameJa": "KF \"Drobulet\" ショットガン（チョーク）",
     "rarity": "UNCOMMON",
     "iconName": "icon_item_shotgunHandmade_choke",
     "iconPath": "/equipment-icons/item_shotgunHandmade_choke.png",
@@ -1359,6 +1378,7 @@ export const weaponStats: WeaponStat[] = [
       "item_shotgun"
     ],
     "niceName": "O'Donnel \"Pepper Mill\" Shothgun",
+    "displayNameJa": "O'Donnel \"Pepper Mill\" トリプルショットガン",
     "rarity": "NOTEWORTHY",
     "iconName": "icon_item_shotgunTriplet",
     "iconPath": "/equipment-icons/item_shotgunTriplet.png",
@@ -1437,6 +1457,7 @@ export const weaponStats: WeaponStat[] = [
     "itemId": "item_sniperRifle",
     "templateChain": [],
     "niceName": "Bartka \"Petros\" Sniper Rifle",
+    "displayNameJa": "Bartka \"Petros\" スナイパーライフル",
     "rarity": "NOTEWORTHY",
     "iconName": "icon_item_sniperRifle",
     "iconPath": "/equipment-icons/item_sniperRifle.png",
@@ -1518,6 +1539,7 @@ export const weaponStats: WeaponStat[] = [
       "item_sniperRifle"
     ],
     "niceName": "Bartka \"Petros\" Sniper Rifle",
+    "displayNameJa": "Bartka \"Petros\" 二連スナイパーライフル",
     "rarity": "NOTEWORTHY",
     "iconName": "icon_item_sniperRifle_2",
     "iconPath": "/equipment-icons/item_sniperRifleDoubleBarrel.png",
@@ -1597,6 +1619,7 @@ export const weaponStats: WeaponStat[] = [
     "itemId": "item_sniperRifle_ironSights",
     "templateChain": [],
     "niceName": "Bartka \"Petros\" Sniper Rifle",
+    "displayNameJa": "Bartka \"Petros\" スナイパーライフル（アイアンサイト）",
     "rarity": "UNCOMMON",
     "iconName": "icon_item_sniperRifle_ironSights",
     "iconPath": "/equipment-icons/item_sniperRifle_ironSights.png",
@@ -1678,6 +1701,7 @@ export const weaponStats: WeaponStat[] = [
       "item_sniperRifle_ironSights"
     ],
     "niceName": "Bartka \"Petros\" Sniper Rifle",
+    "displayNameJa": "Bartka \"Petros\" スナイパーライフル（アイアンサイト/サプレッサー）",
     "rarity": "RARE",
     "iconName": "icon_item_sniperRifle_ironSights_silencer",
     "iconPath": "/equipment-icons/item_sniperRifle_ironSights_silencer.png",
@@ -1746,6 +1770,7 @@ export const weaponStats: WeaponStat[] = [
       "item_sniperRifle"
     ],
     "niceName": "Bartka \"Petros\" Sniper Rifle",
+    "displayNameJa": "Bartka \"Petros\" スナイパーライフル（サプレッサー）",
     "rarity": "REMARKABLE",
     "iconName": "icon_item_sniperRifle_silencer",
     "iconPath": "/equipment-icons/item_sniperRifle_silencer.png",
@@ -1816,7 +1841,13 @@ export const ammoStats: AmmoStat[] = [
       "item_pistolAmmo"
     ],
     "niceName": "8x21mm Ammo",
+    "displayNameJa": "8x21mm弾",
     "rarity": "UNCOMMON",
+    "iconName": "icon_ammo_pistol_toxic",
+    "ammoIconName": "icon_ammo_type_toxic",
+    "iconPath": "/equipment-icons/DevSiegeRevolverAmmo.png",
+    "iconWidth": 180,
+    "iconHeight": 180,
     "damageParts": [
       {
         "type": "Physical",
@@ -1844,7 +1875,13 @@ export const ammoStats: AmmoStat[] = [
       "item_pistolAmmo"
     ],
     "niceName": "8x21mm Ammo",
+    "displayNameJa": "8x21mm焼夷弾",
     "rarity": "UNCOMMON",
+    "iconName": "icon_ammo_pistol",
+    "ammoIconName": "icon_ammo_type_pistol",
+    "iconPath": "/equipment-icons/IncendiaryPistolAmmo.png",
+    "iconWidth": 256,
+    "iconHeight": 256,
     "damageParts": [
       {
         "type": "Physical",
@@ -1892,7 +1929,13 @@ export const ammoStats: AmmoStat[] = [
       "item_pistolAmmo"
     ],
     "niceName": "8x21mm Ammo",
+    "displayNameJa": "8x21mm低品質弾",
     "rarity": "COMMON",
+    "iconName": "icon_ammo_pistol",
+    "ammoIconName": "icon_ammo_type_pistol",
+    "iconPath": "/equipment-icons/LowQualityPistolAmmo.png",
+    "iconWidth": 256,
+    "iconHeight": 256,
     "damageParts": [
       {
         "type": "Physical",
@@ -1928,7 +1971,13 @@ export const ammoStats: AmmoStat[] = [
       "item_pistolAmmo"
     ],
     "niceName": "###TODO name",
+    "displayNameJa": "対リアクター弾",
     "rarity": "COMMON",
+    "iconName": "icon_ammo_antiReactorGun",
+    "ammoIconName": "icon_ammo_type_pistol",
+    "iconPath": "/equipment-icons/item_antiReactorGunAmmo.png",
+    "iconWidth": 187,
+    "iconHeight": 204,
     "damageParts": [
       {
         "type": "Physical",
@@ -1970,7 +2019,13 @@ export const ammoStats: AmmoStat[] = [
     "itemId": "item_pistolAmmo",
     "templateChain": [],
     "niceName": "8x21mm Ammo",
+    "displayNameJa": "8x21mm弾",
     "rarity": "COMMON",
+    "iconName": "icon_ammo_pistol",
+    "ammoIconName": "icon_ammo_type_pistol",
+    "iconPath": "/equipment-icons/item_pistolAmmo.png",
+    "iconWidth": 256,
+    "iconHeight": 256,
     "damageParts": [
       {
         "type": "Physical",
@@ -2012,7 +2067,13 @@ export const ammoStats: AmmoStat[] = [
     "itemId": "item_pistolAmmo_Armor",
     "templateChain": [],
     "niceName": "8x21mm FMJ Ammo",
+    "displayNameJa": "8x21mm FMJ弾",
     "rarity": "RARE",
+    "iconName": "icon_ammo_pistol_armor",
+    "ammoIconName": "icon_ammo_type_armor",
+    "iconPath": "/equipment-icons/item_pistolAmmo_Armor.png",
+    "iconWidth": 256,
+    "iconHeight": 256,
     "damageParts": [
       {
         "type": "True",
@@ -2056,7 +2117,13 @@ export const ammoStats: AmmoStat[] = [
       "item_pistolAmmo"
     ],
     "niceName": "8x21mm Incendiary Ammo",
+    "displayNameJa": "8x21mm焼夷弾",
     "rarity": "UNCOMMON",
+    "iconName": "icon_ammo_pistol_fire",
+    "ammoIconName": "icon_ammo_type_fire",
+    "iconPath": "/equipment-icons/item_pistolAmmo_Fire.png",
+    "iconWidth": 180,
+    "iconHeight": 180,
     "damageParts": [
       {
         "type": "Physical",
@@ -2108,7 +2175,13 @@ export const ammoStats: AmmoStat[] = [
       "item_pistolAmmo"
     ],
     "niceName": "8x21mm Toxic Ammo",
+    "displayNameJa": "8x21mm毒性弾",
     "rarity": "UNCOMMON",
+    "iconName": "icon_ammo_pistol_toxic",
+    "ammoIconName": "icon_ammo_type_toxic",
+    "iconPath": "/equipment-icons/item_pistolAmmo_Toxic.png",
+    "iconWidth": 180,
+    "iconHeight": 180,
     "damageParts": [
       {
         "type": "Physical",
@@ -2154,7 +2227,13 @@ export const ammoStats: AmmoStat[] = [
     "itemId": "item_pistolAmmo_highVelocity",
     "templateChain": [],
     "niceName": "8x21mm Ammo",
+    "displayNameJa": "8x21mm高速弾",
     "rarity": "UNCOMMON",
+    "iconName": "icon_ammo_pistol_highVelocity",
+    "ammoIconName": "icon_ammo_type_armor",
+    "iconPath": "/equipment-icons/item_pistolAmmo_highVelocity.png",
+    "iconWidth": 256,
+    "iconHeight": 256,
     "damageParts": [
       {
         "type": "Physical",
@@ -2198,7 +2277,13 @@ export const ammoStats: AmmoStat[] = [
       "item_pistolAmmo"
     ],
     "niceName": "9x42mm Ammo",
+    "displayNameJa": "9x42mm弾",
     "rarity": "COMMON",
+    "iconName": "icon_ammo_rifle",
+    "ammoIconName": "icon_shotgun_type",
+    "iconPath": "/equipment-icons/item_rifleAmmo.png",
+    "iconWidth": 256,
+    "iconHeight": 256,
     "damageParts": [
       {
         "type": "Physical",
@@ -2248,7 +2333,13 @@ export const ammoStats: AmmoStat[] = [
     "itemId": "item_rifleAmmo_Armor",
     "templateChain": [],
     "niceName": "9x42mm FMJ Ammo",
+    "displayNameJa": "9x42mm FMJ弾",
     "rarity": "RARE",
+    "iconName": "icon_ammo_rifle_armor",
+    "ammoIconName": "icon_ammo_type_armor",
+    "iconPath": "/equipment-icons/item_rifleAmmo_Armor.png",
+    "iconWidth": 256,
+    "iconHeight": 256,
     "damageParts": [
       {
         "type": "True",
@@ -2301,7 +2392,13 @@ export const ammoStats: AmmoStat[] = [
       "item_pistolAmmo"
     ],
     "niceName": "9x42mm Incendiary Ammo",
+    "displayNameJa": "9x42mm焼夷弾",
     "rarity": "UNCOMMON",
+    "iconName": "icon_ammo_rifle_fire",
+    "ammoIconName": "icon_ammo_type_fire",
+    "iconPath": "/equipment-icons/item_rifleAmmo_Fire.png",
+    "iconWidth": 180,
+    "iconHeight": 180,
     "damageParts": [
       {
         "type": "Physical",
@@ -2358,7 +2455,13 @@ export const ammoStats: AmmoStat[] = [
       "item_pistolAmmo"
     ],
     "niceName": "9x42mm Toxic Ammo",
+    "displayNameJa": "9x42mm毒性弾",
     "rarity": "UNCOMMON",
+    "iconName": "icon_ammo_rifle_toxic",
+    "ammoIconName": "icon_ammo_type_toxic",
+    "iconPath": "/equipment-icons/item_rifleAmmo_Toxic.png",
+    "iconWidth": 180,
+    "iconHeight": 180,
     "damageParts": [
       {
         "type": "Physical",
@@ -2414,7 +2517,13 @@ export const ammoStats: AmmoStat[] = [
       "item_pistolAmmo"
     ],
     "niceName": "9x42mm Ammo",
+    "displayNameJa": "9x42mm高速弾",
     "rarity": "UNCOMMON",
+    "iconName": "icon_ammo_rifle_highVelocity",
+    "ammoIconName": "icon_ammo_type_armor",
+    "iconPath": "/equipment-icons/item_rifleAmmo_highVelocity.png",
+    "iconWidth": 256,
+    "iconHeight": 256,
     "damageParts": [
       {
         "type": "Physical",
@@ -2466,7 +2575,13 @@ export const ammoStats: AmmoStat[] = [
       "item_pistolAmmo"
     ],
     "niceName": "8x21mm FMJ Ammo",
+    "displayNameJa": "ロケット徹甲弾",
     "rarity": "NOTEWORTHY",
+    "iconName": "icon_item_rocketLauncherAmmoArmorPiercing",
+    "ammoIconName": "icon_ammo_type_armor",
+    "iconPath": "/equipment-icons/item_rocketLauncherAmmoArmorPiercing.png",
+    "iconWidth": 256,
+    "iconHeight": 256,
     "damageParts": [
       {
         "type": "Physical",
@@ -2512,7 +2627,13 @@ export const ammoStats: AmmoStat[] = [
     "itemId": "item_rocketLauncherAmmoHighExplosion",
     "templateChain": [],
     "niceName": "8x21mm Ammo",
+    "displayNameJa": "高爆ロケット弾",
     "rarity": "NOTEWORTHY",
+    "iconName": "icon_item_rocketLauncherAmmoHighExplosive",
+    "ammoIconName": "icon_ammo_type_pistol",
+    "iconPath": "/equipment-icons/item_rocketLauncherAmmoHighExplosion.png",
+    "iconWidth": 256,
+    "iconHeight": 256,
     "damageParts": [
       {
         "type": "Physical",
@@ -2537,7 +2658,13 @@ export const ammoStats: AmmoStat[] = [
     "itemId": "item_shotgunAmmo",
     "templateChain": [],
     "niceName": "12 GA Ammo",
+    "displayNameJa": "12 GA バックショット弾",
     "rarity": "COMMON",
+    "iconName": "icon_ammo_shotgun",
+    "ammoIconName": "icon_ammo_type_shotgun",
+    "iconPath": "/equipment-icons/item_shotgunAmmo.png",
+    "iconWidth": 256,
+    "iconHeight": 256,
     "damageParts": [
       {
         "type": "Physical",
@@ -2581,7 +2708,13 @@ export const ammoStats: AmmoStat[] = [
       "item_shotgunAmmo"
     ],
     "niceName": "12 GA Heavy Buckshot Ammo",
+    "displayNameJa": "12 GA ヘビーバックショット弾",
     "rarity": "COMMON",
+    "iconName": "icon_ammo_shotgun_armor",
+    "ammoIconName": "icon_ammo_type_armor",
+    "iconPath": "/equipment-icons/item_shotgunAmmo_Armor.png",
+    "iconWidth": 180,
+    "iconHeight": 180,
     "damageParts": [
       {
         "type": "Physical",
@@ -2625,7 +2758,13 @@ export const ammoStats: AmmoStat[] = [
       "item_shotgunAmmo"
     ],
     "niceName": "12 GA Dragon Breath Ammo",
+    "displayNameJa": "12 GA ドラゴンブレス弾",
     "rarity": "UNCOMMON",
+    "iconName": "icon_ammo_shotgun_fire",
+    "ammoIconName": "icon_ammo_type_armor",
+    "iconPath": "/equipment-icons/item_shotgunAmmo_Fire.png",
+    "iconWidth": 180,
+    "iconHeight": 180,
     "damageParts": [
       {
         "type": "Physical",
@@ -2673,7 +2812,13 @@ export const ammoStats: AmmoStat[] = [
       "item_shotgunAmmo"
     ],
     "niceName": "12 GA Toxic Ammo",
+    "displayNameJa": "12 GA 毒性弾",
     "rarity": "UNCOMMON",
+    "iconName": "icon_ammo_shotgun_toxic",
+    "ammoIconName": "icon_ammo_type_toxic",
+    "iconPath": "/equipment-icons/item_shotgunAmmo_Toxic.png",
+    "iconWidth": 180,
+    "iconHeight": 180,
     "damageParts": [
       {
         "type": "Physical",
@@ -2721,7 +2866,13 @@ export const ammoStats: AmmoStat[] = [
       "item_shotgunAmmo"
     ],
     "niceName": "12 GA Dragon Breath Ammo",
+    "displayNameJa": "12 GA ドラゴンブレス弾",
     "rarity": "RARE",
+    "iconName": "icon_ammo_shotgun_explosive",
+    "ammoIconName": "icon_ammo_type_fire",
+    "iconPath": "/equipment-icons/item_shotgunAmmo_explosive.png",
+    "iconWidth": 256,
+    "iconHeight": 256,
     "damageParts": [
       {
         "type": "Physical",
@@ -2769,7 +2920,13 @@ export const ammoStats: AmmoStat[] = [
       "item_shotgunAmmo"
     ],
     "niceName": "12 GA Slug Ammo",
+    "displayNameJa": "12 GA スラッグ弾",
     "rarity": "UNCOMMON",
+    "iconName": "icon_ammo_shotgun_slug",
+    "ammoIconName": "icon_ammo_type_armor",
+    "iconPath": "/equipment-icons/item_shotgunAmmo_slug.png",
+    "iconWidth": 256,
+    "iconHeight": 256,
     "damageParts": [
       {
         "type": "Physical",
@@ -2811,7 +2968,13 @@ export const ammoStats: AmmoStat[] = [
     "itemId": "item_sniperRifleAmmo",
     "templateChain": [],
     "niceName": "11x54mm Ammo",
+    "displayNameJa": "11x54mm弾",
     "rarity": "RARE",
+    "iconName": "icon_ammo_sniperRifle",
+    "ammoIconName": "icon_shotgun_type",
+    "iconPath": "/equipment-icons/item_sniperRifleAmmo.png",
+    "iconWidth": 256,
+    "iconHeight": 256,
     "damageParts": [
       {
         "type": "Physical",
@@ -2853,7 +3016,13 @@ export const ammoStats: AmmoStat[] = [
     "itemId": "item_sniperRifleAmmo_highPenetration",
     "templateChain": [],
     "niceName": "11x54mm Ammo",
+    "displayNameJa": "11x54mm高貫通弾",
     "rarity": "NOTEWORTHY",
+    "iconName": "icon_ammo_sniperRifle_highPenetration",
+    "ammoIconName": "icon_ammo_type_armor",
+    "iconPath": "/equipment-icons/item_sniperRifleAmmo_highPenetration.png",
+    "iconWidth": 256,
+    "iconHeight": 256,
     "damageParts": [
       {
         "type": "Physical",

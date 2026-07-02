@@ -19,7 +19,7 @@ The generator records source page URLs in `src/generated/techTreeData.ts` so eac
 
 ## Asset and Content Policy
 
-- This repository includes small weapon icon images for convenience.
+- This repository includes small weapon and ammo icon images for convenience.
 - SAND names, imagery, icons, assets, and trademarks belong to their respective rightsholders.
 - The web app does not hotlink images from the game, Steam, or fan databases.
 - The bundled data is limited to functional facts needed for a checklist-style tracker, such as node names, branches, tiers, Crown reference values, and material quantities.

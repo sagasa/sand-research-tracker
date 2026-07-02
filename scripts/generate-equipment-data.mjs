@@ -10,6 +10,57 @@ const SOURCE_FILES = {
   projectiles: "infantry_projectile_summary.tsv",
   armor: "player_armor_summary.tsv",
   icons: "infantry_weapon_icon_manifest.tsv",
+  itemGui: "item_gui_manifest.tsv",
+};
+
+const JA_NAME_OVERRIDES = {
+  DevSiegeRevolver: 'O\'Donnel "Blitz" セミオートピストル',
+  DevSiegeRevolverAmmo: "8x21mm弾",
+  IncendiaryPistolAmmo: "8x21mm焼夷弾",
+  LowQualityPistolAmmo: "8x21mm低品質弾",
+  item_antiReactorGun: "対リアクター銃",
+  item_antiReactorGunAmmo: "対リアクター弾",
+  item_orbitalStrikeGun: "軌道攻撃ガン",
+  item_pistolAmmo: "8x21mm弾",
+  item_pistolAmmo_Armor: "8x21mm FMJ弾",
+  item_pistolAmmo_Fire: "8x21mm焼夷弾",
+  item_pistolAmmo_Toxic: "8x21mm毒性弾",
+  item_pistolAmmo_highVelocity: "8x21mm高速弾",
+  item_repeaterRifle: "SGOW M82 リボルバーライフル",
+  item_revolverSmall: "EB Zseb リボルバー",
+  item_revolverSmall_dusters: "EB Zseb リボルバー（ダスター）",
+  item_rifleAmmo: "9x42mm弾",
+  item_rifleAmmo_Armor: "9x42mm FMJ弾",
+  item_rifleAmmo_Fire: "9x42mm焼夷弾",
+  item_rifleAmmo_Toxic: "9x42mm毒性弾",
+  item_rifleAmmo_highVelocity: "9x42mm高速弾",
+  item_rifleMusket: "SGOW M82 リボルバーライフル（単発）",
+  item_rifleMusketClip: "SGOW M82 リボルバーライフル（クリップ）",
+  item_rifleMusketVeteran: "SGOW M82 リボルバーライフル（ベテラン）",
+  item_rifleRepeaterAperture: "SGOW M82 リボルバーライフル（アパーチャ）",
+  item_rocketLauncher: "ロケットランチャー",
+  item_rocketLauncherAmmoArmorPiercing: "ロケット徹甲弾",
+  item_rocketLauncherAmmoHighExplosion: "高爆ロケット弾",
+  item_semiAutomaticPistol: 'O\'Donnel "Blitz" セミオートピストル',
+  item_semiAutomaticPistol_decreasedMag: 'O\'Donnel "Blitz" セミオートピストル（小型マガジン）',
+  item_semiAutomaticPistol_increasedMag: 'O\'Donnel "Blitz" セミオートピストル（大型マガジン）',
+  item_shotgun: 'O\'Donnel "Pepper Mill" ショットガン',
+  item_shotgunAmmo: "12 GA バックショット弾",
+  item_shotgunAmmo_Armor: "12 GA ヘビーバックショット弾",
+  item_shotgunAmmo_Fire: "12 GA ドラゴンブレス弾",
+  item_shotgunAmmo_Toxic: "12 GA 毒性弾",
+  item_shotgunAmmo_explosive: "12 GA ドラゴンブレス弾",
+  item_shotgunAmmo_slug: "12 GA スラッグ弾",
+  item_shotgunHandmade: 'KF "Drobulet" ショットガン',
+  item_shotgunHandmade_choke: 'KF "Drobulet" ショットガン（チョーク）',
+  item_shotgunTriplet: 'O\'Donnel "Pepper Mill" トリプルショットガン',
+  item_sniperRifle: 'Bartka "Petros" スナイパーライフル',
+  item_sniperRifleAmmo: "11x54mm弾",
+  item_sniperRifleAmmo_highPenetration: "11x54mm高貫通弾",
+  item_sniperRifleDoubleBarrel: 'Bartka "Petros" 二連スナイパーライフル',
+  item_sniperRifle_ironSights: 'Bartka "Petros" スナイパーライフル（アイアンサイト）',
+  item_sniperRifle_ironSights_silencer: 'Bartka "Petros" スナイパーライフル（アイアンサイト/サプレッサー）',
+  item_sniperRifle_silencer: 'Bartka "Petros" スナイパーライフル（サプレッサー）',
 };
 
 function clean(value) {
@@ -103,15 +154,31 @@ function parseActionList(value) {
   });
 }
 
-function mapWeapon(row, iconManifestByItemId) {
+function iconFileFromPath(path) {
+  return path ? path.split(/[\\/]/).pop() : "";
+}
+
+function isRealLocalizedName(row) {
+  return row?.display_name_ja && row.display_name_ja !== row.display_name_en && !String(row.ja_name_source ?? "").startsWith("missing");
+}
+
+function japaneseName(itemId, guiRow) {
+  if (JA_NAME_OVERRIDES[itemId]) return JA_NAME_OVERRIDES[itemId];
+  if (isRealLocalizedName(guiRow)) return guiRow.display_name_ja;
+  return "";
+}
+
+function mapWeapon(row, iconManifestByItemId, itemGuiByItemId) {
   const icon = iconManifestByItemId.get(row.item_id);
-  const iconFile = icon?.path ? icon.path.split(/[\\/]/).pop() : "";
+  const gui = itemGuiByItemId.get(row.item_id);
+  const iconFile = iconFileFromPath(icon?.path);
   return {
     textAsset: row.text_asset,
     category: row.category,
     itemId: row.item_id,
     templateChain: splitList(row.template_chain),
     niceName: row.nice_name,
+    displayNameJa: japaneseName(row.item_id, gui),
     rarity: row.rarity,
     iconName: row.icon_name,
     iconPath: iconFile ? `/equipment-icons/${iconFile}` : "",
@@ -133,13 +200,21 @@ function mapWeapon(row, iconManifestByItemId) {
   };
 }
 
-function mapAmmo(row) {
+function mapAmmo(row, itemGuiByItemId) {
+  const gui = itemGuiByItemId.get(row.item_id);
+  const iconFile = iconFileFromPath(gui?.icon_path);
   return {
     textAsset: row.text_asset,
     itemId: row.item_id,
     templateChain: splitList(row.template_chain),
     niceName: row.nice_name,
+    displayNameJa: japaneseName(row.item_id, gui),
     rarity: row.rarity,
+    iconName: gui?.icon_name ?? "",
+    ammoIconName: gui?.ammo_icon_name ?? "",
+    iconPath: iconFile ? `/equipment-icons/${iconFile}` : "",
+    iconWidth: toNumber(gui?.icon_width),
+    iconHeight: toNumber(gui?.icon_height),
     damageParts: parseDamage(row.damage),
     rangeModifiers: parseRangeModifiers(row.range_modifiers),
     customProjectile: row.custom_projectile,
@@ -200,13 +275,16 @@ async function main() {
     readTsv(SOURCE_FILES.armor),
   ]);
   const iconManifestRows = await readTsv(SOURCE_FILES.icons);
+  const itemGuiRows = await readTsv(SOURCE_FILES.itemGui);
   const iconManifestByItemId = new Map(iconManifestRows.map((row) => [row.item_id, row]));
+  const itemGuiByItemId = new Map(itemGuiRows.map((row) => [row.item_id, row]));
 
   const source = {
     generatedAt: new Date().toISOString(),
     sourceFiles: Object.values(SOURCE_FILES),
     notes: [
       "Generated from local SAND reference tables bundled at build time.",
+      "Japanese display names use local overrides when no local Japanese table is available.",
       "Damage display uses item damage and distance data from the local data tables. Runtime server or balance modifiers may differ.",
       "Headshot display uses weapon headshot data from the local data tables.",
       "Weapon icons are bundled for convenience; SAND assets and trademarks belong to their respective rightsholders.",
@@ -215,8 +293,8 @@ async function main() {
 
   const content = `import type { AmmoStat, ArmorStat, EquipmentStatsSource, ProjectileStat, WeaponStat } from "../types";\n\n`
     + `export const equipmentStatsSource: EquipmentStatsSource = ${JSON.stringify(source, null, 2)};\n\n`
-    + `export const weaponStats: WeaponStat[] = ${JSON.stringify(weaponRows.map((row) => mapWeapon(row, iconManifestByItemId)), null, 2)};\n\n`
-    + `export const ammoStats: AmmoStat[] = ${JSON.stringify(ammoRows.map(mapAmmo), null, 2)};\n\n`
+    + `export const weaponStats: WeaponStat[] = ${JSON.stringify(weaponRows.map((row) => mapWeapon(row, iconManifestByItemId, itemGuiByItemId)), null, 2)};\n\n`
+    + `export const ammoStats: AmmoStat[] = ${JSON.stringify(ammoRows.map((row) => mapAmmo(row, itemGuiByItemId)), null, 2)};\n\n`
     + `export const projectileStats: ProjectileStat[] = ${JSON.stringify(projectileRows.map(mapProjectile), null, 2)};\n\n`
     + `export const armorStats: ArmorStat[] = ${JSON.stringify(armorRows.map(mapArmor), null, 2)};\n`;
 
