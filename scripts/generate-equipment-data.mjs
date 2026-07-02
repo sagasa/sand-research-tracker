@@ -125,6 +125,7 @@ function mapWeapon(row, iconManifestByItemId) {
     spread: row.spread,
     weaponRangeModifiers: parseRangeModifiers(row.weapon_range_modifiers),
     recoilPower: row.recoil_power,
+    headshotMultiplier: parseStateNumberMap(row.headshot_multiplier),
     magnification: parseStateNumberMap(row.magnification),
     movementSpeedModifier: parseStateNumberMap(row.movement_speed_modifier),
     spawnBlueprint: row.spawn_blueprint,
@@ -207,6 +208,7 @@ async function main() {
     notes: [
       "Generated from local SAND reference tables bundled at build time.",
       "Damage display uses item damage and distance data from the local data tables. Runtime server or balance modifiers may differ.",
+      "Headshot display uses weapon headshot data from the local data tables.",
       "Weapon icons are bundled for convenience; SAND assets and trademarks belong to their respective rightsholders.",
     ],
   };

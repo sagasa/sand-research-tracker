@@ -26,7 +26,7 @@ import SecurityIcon from "@mui/icons-material/Security";
 import TrackChangesIcon from "@mui/icons-material/TrackChanges";
 import { ammoStats, armorStats, projectileStats, weaponStats } from "../../generated/equipmentStatsData";
 import { formatNumber } from "../../tracker";
-import type { AmmoStat, ArmorStat, DamagePart, RangeModifierPoint, WeaponStat } from "../../types";
+import type { AmmoStat, ArmorStat, DamagePart, RangeModifierPoint, StateNumberMap, WeaponStat } from "../../types";
 
 type DamagePoint = {
   distance: number;
@@ -79,6 +79,13 @@ function modifierAt(points: RangeModifierPoint[], distance: number) {
     current = point.modifier;
   }
   return current;
+}
+
+function primaryMultiplier(value: StateNumberMap, fallback = 1) {
+  if (typeof value.all === "number") return value.all;
+  if (typeof value.scope === "number") return value.scope;
+  const values = Object.values(value).filter(Number.isFinite);
+  return values.length > 0 ? Math.max(...values) : fallback;
 }
 
 function damageAtDistance(weapon: WeaponStat, ammo: AmmoStat | undefined, distance: number) {
@@ -167,8 +174,13 @@ function DamageChart({
   selectedDistance: number;
 }) {
   const points = useMemo(() => buildDamageCurve(weapon, ammo), [ammo, weapon]);
+  const headshotMultiplier = primaryMultiplier(weapon.headshotMultiplier);
+  const headshotPoints = points.map((point) => ({
+    distance: point.distance,
+    damage: point.damage * headshotMultiplier,
+  }));
   const maxDistance = Math.max(...points.map((point) => point.distance), 300);
-  const maxDamage = Math.max(...points.map((point) => point.damage), 1);
+  const maxDamage = Math.max(...headshotPoints.map((point) => point.damage), ...points.map((point) => point.damage), 1);
 
   if (!ammo || maxDamage <= 0) {
     return (
@@ -190,7 +202,9 @@ function DamageChart({
   const y = (damage: number) => paddingTop + plotHeight - (damage / maxDamage) * plotHeight;
   const selectedX = x(Math.min(selectedDistance, maxDistance));
   const selectedDamage = damageAtDistance(weapon, ammo, selectedDistance);
+  const selectedHeadshotDamage = selectedDamage * headshotMultiplier;
   const path = points.map((point) => `${x(point.distance)},${y(point.damage)}`).join(" ");
+  const headshotPath = headshotPoints.map((point) => `${x(point.distance)},${y(point.damage)}`).join(" ");
   const ticks = [...new Set([0, Math.round(maxDamage / 2), Math.round(maxDamage)])].sort((a, b) => a - b);
 
   return (
@@ -214,12 +228,18 @@ function DamageChart({
           </g>
         ))}
         <polyline fill="none" stroke="#79d48b" strokeWidth="4" strokeLinejoin="round" strokeLinecap="round" points={path} />
+        <polyline fill="none" stroke="#ffb15f" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round" points={headshotPath} />
         <line x1={selectedX} y1={paddingTop} x2={selectedX} y2={height - paddingBottom} stroke="#d8e2ea" strokeDasharray="5 5" />
         <circle cx={selectedX} cy={y(selectedDamage)} r="6" fill="#79d48b" stroke="#0b1116" strokeWidth="2" />
+        <circle cx={selectedX} cy={y(selectedHeadshotDamage)} r="5" fill="#ffb15f" stroke="#0b1116" strokeWidth="2" />
         <text x={paddingLeft} y={18} fill="#d8e2ea" fontSize="13">
           距離ごとのダメージ
         </text>
       </svg>
+      <Stack direction="row" spacing={1} flexWrap="wrap" sx={{ mt: 1 }}>
+        <Chip label="通常" size="small" sx={{ borderColor: "#79d48b", color: "#79d48b" }} variant="outlined" />
+        <Chip label="ヘッドショット" size="small" sx={{ borderColor: "#ffb15f", color: "#ffb15f" }} variant="outlined" />
+      </Stack>
     </Box>
   );
 }
@@ -260,6 +280,7 @@ function AmmoComparisonTable({
             <TableCell>弾</TableCell>
             <TableCell align="right">基礎</TableCell>
             <TableCell align="right">{selectedDistance}m</TableCell>
+            <TableCell align="right">ヘッドショット {selectedDistance}m</TableCell>
             <TableCell>補足</TableCell>
           </TableRow>
         </TableHead>
@@ -278,6 +299,9 @@ function AmmoComparisonTable({
               </TableCell>
               <TableCell align="right">{formatDamage(totalDamage(ammo.damageParts))}</TableCell>
               <TableCell align="right">{formatDamage(damageAtDistance(weapon, ammo, selectedDistance))}</TableCell>
+              <TableCell align="right">
+                {formatDamage(damageAtDistance(weapon, ammo, selectedDistance) * primaryMultiplier(weapon.headshotMultiplier))}
+              </TableCell>
               <TableCell>{ammo.customProjectile || "-"}</TableCell>
             </TableRow>
           ))}
@@ -358,6 +382,8 @@ export function EquipmentStatsPage() {
     ? projectileByName.get(selectedAmmo.customProjectile)
     : undefined;
   const selectedDamage = damageAtDistance(selectedWeapon, selectedAmmo, selectedDistance);
+  const selectedHeadshotMultiplier = primaryMultiplier(selectedWeapon.headshotMultiplier);
+  const selectedHeadshotDamage = selectedDamage * selectedHeadshotMultiplier;
   const baseDamage = selectedAmmo ? totalDamage(selectedAmmo.damageParts) : 0;
   const weaponDamage = totalDamage(selectedWeapon.damageParts);
 
@@ -462,11 +488,19 @@ export function EquipmentStatsPage() {
             <Divider />
 
             <Box>
-              <Typography variant="caption" color="text.secondary">{selectedDistance}m のダメージ</Typography>
+              <Typography variant="caption" color="text.secondary">{selectedDistance}m の通常ダメージ</Typography>
               <Typography variant="h1" sx={{ lineHeight: 1.05 }}>{formatDamage(selectedDamage)}</Typography>
             </Box>
 
             <Box className="stat-pair-grid">
+              <Box>
+                <Typography variant="caption" color="text.secondary">ヘッドショット</Typography>
+                <Typography>{formatDamage(selectedHeadshotDamage)}</Typography>
+              </Box>
+              <Box>
+                <Typography variant="caption" color="text.secondary">ヘッドショット倍率</Typography>
+                <Typography>{selectedHeadshotMultiplier}x</Typography>
+              </Box>
               <Box>
                 <Typography variant="caption" color="text.secondary">弾の基礎ダメージ</Typography>
                 <Typography>{formatDamage(baseDamage)}</Typography>
