@@ -1,21 +1,23 @@
-import type { AmmoStat, ArmorStat, EquipmentStatsSource, ProjectileStat, WeaponStat } from "../types";
+import type { AmmoStat, ArmorStat, EquipmentStatsSource, ProjectileStat, ShotgunPelletStat, WeaponStat } from "../types";
 
 export const equipmentStatsSource: EquipmentStatsSource = {
-  "generatedAt": "2026-07-02T04:32:23.844Z",
+  "generatedAt": "2026-07-02T05:12:06.239Z",
   "sourceFiles": [
     "infantry_weapon_summary.tsv",
     "infantry_ammo_summary.tsv",
     "infantry_projectile_summary.tsv",
     "player_armor_summary.tsv",
     "infantry_weapon_icon_manifest.tsv",
-    "item_gui_manifest.tsv"
+    "item_gui_manifest.tsv",
+    "shotgun_pellet_summary.tsv"
   ],
   "notes": [
     "Generated from local SAND reference tables bundled at build time.",
     "Japanese display names use local overrides when no local Japanese table is available.",
     "Damage display uses item damage and distance data from the local data tables. Runtime server or balance modifiers may differ.",
+    "Shotgun damage display uses effective pellet counts from shotgun_pellet_summary.tsv.",
     "Headshot display uses weapon headshot data from the local data tables.",
-    "Weapon icons are bundled for convenience; SAND assets and trademarks belong to their respective rightsholders."
+    "Weapon and ammo icons are bundled for convenience; SAND assets and trademarks belong to their respective rightsholders."
   ]
 };
 
@@ -3058,6 +3060,2381 @@ export const ammoStats: AmmoStat[] = [
     "stackLarge": 100,
     "rewardCount": 10,
     "spawnBlueprint": "item_sniperRifleAmmo_highPenetration"
+  }
+];
+
+export const shotgunPelletStats: ShotgunPelletStat[] = [
+  {
+    "weaponId": "item_shotgun",
+    "weaponName": "O'Donnel \"Pepper Mill\" Shothgun",
+    "weaponSource": "Shotgun",
+    "action": "ShotgunAttack_Hip",
+    "actionSource": "Shotgun",
+    "actionTargetData": 10,
+    "actionSpreadCount": 10,
+    "mode": "hip",
+    "ammoId": "item_shotgunAmmo",
+    "ammoName": "12 GA Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 0,
+    "effectivePelletCount": 10,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 22
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 220
+      }
+    ],
+    "projectile": "ShotgunShotProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "item_shotgun",
+    "weaponName": "O'Donnel \"Pepper Mill\" Shothgun",
+    "weaponSource": "Shotgun",
+    "action": "ShotgunAttack_Hip",
+    "actionSource": "Shotgun",
+    "actionTargetData": 10,
+    "actionSpreadCount": 10,
+    "mode": "hip",
+    "ammoId": "item_shotgunAmmo_slug",
+    "ammoName": "12 GA Slug Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 150
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 150
+      }
+    ],
+    "projectile": "ShotgunShotProjectile",
+    "ammoCustomProjectile": "ShotgunAmmoSlugProjectile"
+  },
+  {
+    "weaponId": "item_shotgun",
+    "weaponName": "O'Donnel \"Pepper Mill\" Shothgun",
+    "weaponSource": "Shotgun",
+    "action": "ShotgunAttack_Hip",
+    "actionSource": "Shotgun",
+    "actionTargetData": 10,
+    "actionSpreadCount": 10,
+    "mode": "hip",
+    "ammoId": "item_shotgunAmmo_explosive",
+    "ammoName": "12 GA Dragon Breath Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 15,
+    "effectivePelletCount": 15,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 10
+      },
+      {
+        "type": "Siege",
+        "amount": 10
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 150
+      },
+      {
+        "type": "Siege",
+        "amount": 150
+      }
+    ],
+    "projectile": "ShotgunShotProjectile",
+    "ammoCustomProjectile": "ShotgunAmmoExplosiveProjectile"
+  },
+  {
+    "weaponId": "item_shotgun",
+    "weaponName": "O'Donnel \"Pepper Mill\" Shothgun",
+    "weaponSource": "Shotgun",
+    "action": "ShotgunAttack_Scope",
+    "actionSource": "Shotgun",
+    "actionTargetData": 10,
+    "actionSpreadCount": 10,
+    "mode": "scope",
+    "ammoId": "item_shotgunAmmo",
+    "ammoName": "12 GA Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 0,
+    "effectivePelletCount": 10,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 22
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 220
+      }
+    ],
+    "projectile": "ShotgunShotProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "item_shotgun",
+    "weaponName": "O'Donnel \"Pepper Mill\" Shothgun",
+    "weaponSource": "Shotgun",
+    "action": "ShotgunAttack_Scope",
+    "actionSource": "Shotgun",
+    "actionTargetData": 10,
+    "actionSpreadCount": 10,
+    "mode": "scope",
+    "ammoId": "item_shotgunAmmo_slug",
+    "ammoName": "12 GA Slug Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 150
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 150
+      }
+    ],
+    "projectile": "ShotgunShotProjectile",
+    "ammoCustomProjectile": "ShotgunAmmoSlugProjectile"
+  },
+  {
+    "weaponId": "item_shotgun",
+    "weaponName": "O'Donnel \"Pepper Mill\" Shothgun",
+    "weaponSource": "Shotgun",
+    "action": "ShotgunAttack_Scope",
+    "actionSource": "Shotgun",
+    "actionTargetData": 10,
+    "actionSpreadCount": 10,
+    "mode": "scope",
+    "ammoId": "item_shotgunAmmo_explosive",
+    "ammoName": "12 GA Dragon Breath Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 15,
+    "effectivePelletCount": 15,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 10
+      },
+      {
+        "type": "Siege",
+        "amount": 10
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 150
+      },
+      {
+        "type": "Siege",
+        "amount": 150
+      }
+    ],
+    "projectile": "ShotgunShotProjectile",
+    "ammoCustomProjectile": "ShotgunAmmoExplosiveProjectile"
+  },
+  {
+    "weaponId": "item_shotgunHandmade",
+    "weaponName": "KF \"Drobulet\" Shotgun",
+    "weaponSource": "HandmadeShotgun",
+    "action": "HandmadeShotgunAttack_Hip",
+    "actionSource": "HandmadeShotgun",
+    "actionTargetData": 10,
+    "actionSpreadCount": 10,
+    "mode": "hip",
+    "ammoId": "item_shotgunAmmo",
+    "ammoName": "12 GA Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 0,
+    "effectivePelletCount": 10,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 22
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 220
+      }
+    ],
+    "projectile": "HandmadeShotgunShotProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "item_shotgunHandmade",
+    "weaponName": "KF \"Drobulet\" Shotgun",
+    "weaponSource": "HandmadeShotgun",
+    "action": "HandmadeShotgunAttack_Hip",
+    "actionSource": "HandmadeShotgun",
+    "actionTargetData": 10,
+    "actionSpreadCount": 10,
+    "mode": "hip",
+    "ammoId": "item_shotgunAmmo_Armor",
+    "ammoName": "12 GA Heavy Buckshot Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 0,
+    "effectivePelletCount": 10,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 12
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 120
+      }
+    ],
+    "projectile": "HandmadeShotgunShotProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "item_shotgunHandmade",
+    "weaponName": "KF \"Drobulet\" Shotgun",
+    "weaponSource": "HandmadeShotgun",
+    "action": "HandmadeShotgunAttack_Hip",
+    "actionSource": "HandmadeShotgun",
+    "actionTargetData": 10,
+    "actionSpreadCount": 10,
+    "mode": "hip",
+    "ammoId": "item_shotgunAmmo_Fire",
+    "ammoName": "12 GA Dragon Breath Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 22
+      },
+      {
+        "type": "Fire",
+        "amount": 12
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 22
+      },
+      {
+        "type": "Fire",
+        "amount": 12
+      }
+    ],
+    "projectile": "HandmadeShotgunShotProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "item_shotgunHandmade",
+    "weaponName": "KF \"Drobulet\" Shotgun",
+    "weaponSource": "HandmadeShotgun",
+    "action": "HandmadeShotgunAttack_Hip",
+    "actionSource": "HandmadeShotgun",
+    "actionTargetData": 10,
+    "actionSpreadCount": 10,
+    "mode": "hip",
+    "ammoId": "item_shotgunAmmo_Toxic",
+    "ammoName": "12 GA Toxic Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 0,
+    "effectivePelletCount": 10,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 22
+      },
+      {
+        "type": "Poison",
+        "amount": 9
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 220
+      },
+      {
+        "type": "Poison",
+        "amount": 90
+      }
+    ],
+    "projectile": "HandmadeShotgunShotProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "item_shotgunHandmade",
+    "weaponName": "KF \"Drobulet\" Shotgun",
+    "weaponSource": "HandmadeShotgun",
+    "action": "HandmadeShotgunAttack_Hip",
+    "actionSource": "HandmadeShotgun",
+    "actionTargetData": 10,
+    "actionSpreadCount": 10,
+    "mode": "hip",
+    "ammoId": "item_shotgunAmmo_slug",
+    "ammoName": "12 GA Slug Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 150
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 150
+      }
+    ],
+    "projectile": "HandmadeShotgunShotProjectile",
+    "ammoCustomProjectile": "ShotgunAmmoSlugProjectile"
+  },
+  {
+    "weaponId": "item_shotgunHandmade",
+    "weaponName": "KF \"Drobulet\" Shotgun",
+    "weaponSource": "HandmadeShotgun",
+    "action": "HandmadeShotgunAttack_Hip",
+    "actionSource": "HandmadeShotgun",
+    "actionTargetData": 10,
+    "actionSpreadCount": 10,
+    "mode": "hip",
+    "ammoId": "item_shotgunAmmo_explosive",
+    "ammoName": "12 GA Dragon Breath Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 15,
+    "effectivePelletCount": 15,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 10
+      },
+      {
+        "type": "Siege",
+        "amount": 10
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 150
+      },
+      {
+        "type": "Siege",
+        "amount": 150
+      }
+    ],
+    "projectile": "HandmadeShotgunShotProjectile",
+    "ammoCustomProjectile": "ShotgunAmmoExplosiveProjectile"
+  },
+  {
+    "weaponId": "item_shotgunHandmade",
+    "weaponName": "KF \"Drobulet\" Shotgun",
+    "weaponSource": "HandmadeShotgun",
+    "action": "HandmadeShotgunAttack_Scope",
+    "actionSource": "HandmadeShotgun",
+    "actionTargetData": 10,
+    "actionSpreadCount": 10,
+    "mode": "scope",
+    "ammoId": "item_shotgunAmmo",
+    "ammoName": "12 GA Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 0,
+    "effectivePelletCount": 10,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 22
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 220
+      }
+    ],
+    "projectile": "HandmadeShotgunShotProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "item_shotgunHandmade",
+    "weaponName": "KF \"Drobulet\" Shotgun",
+    "weaponSource": "HandmadeShotgun",
+    "action": "HandmadeShotgunAttack_Scope",
+    "actionSource": "HandmadeShotgun",
+    "actionTargetData": 10,
+    "actionSpreadCount": 10,
+    "mode": "scope",
+    "ammoId": "item_shotgunAmmo_Armor",
+    "ammoName": "12 GA Heavy Buckshot Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 0,
+    "effectivePelletCount": 10,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 12
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 120
+      }
+    ],
+    "projectile": "HandmadeShotgunShotProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "item_shotgunHandmade",
+    "weaponName": "KF \"Drobulet\" Shotgun",
+    "weaponSource": "HandmadeShotgun",
+    "action": "HandmadeShotgunAttack_Scope",
+    "actionSource": "HandmadeShotgun",
+    "actionTargetData": 10,
+    "actionSpreadCount": 10,
+    "mode": "scope",
+    "ammoId": "item_shotgunAmmo_Fire",
+    "ammoName": "12 GA Dragon Breath Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 22
+      },
+      {
+        "type": "Fire",
+        "amount": 12
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 22
+      },
+      {
+        "type": "Fire",
+        "amount": 12
+      }
+    ],
+    "projectile": "HandmadeShotgunShotProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "item_shotgunHandmade",
+    "weaponName": "KF \"Drobulet\" Shotgun",
+    "weaponSource": "HandmadeShotgun",
+    "action": "HandmadeShotgunAttack_Scope",
+    "actionSource": "HandmadeShotgun",
+    "actionTargetData": 10,
+    "actionSpreadCount": 10,
+    "mode": "scope",
+    "ammoId": "item_shotgunAmmo_Toxic",
+    "ammoName": "12 GA Toxic Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 0,
+    "effectivePelletCount": 10,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 22
+      },
+      {
+        "type": "Poison",
+        "amount": 9
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 220
+      },
+      {
+        "type": "Poison",
+        "amount": 90
+      }
+    ],
+    "projectile": "HandmadeShotgunShotProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "item_shotgunHandmade",
+    "weaponName": "KF \"Drobulet\" Shotgun",
+    "weaponSource": "HandmadeShotgun",
+    "action": "HandmadeShotgunAttack_Scope",
+    "actionSource": "HandmadeShotgun",
+    "actionTargetData": 10,
+    "actionSpreadCount": 10,
+    "mode": "scope",
+    "ammoId": "item_shotgunAmmo_slug",
+    "ammoName": "12 GA Slug Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 150
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 150
+      }
+    ],
+    "projectile": "HandmadeShotgunShotProjectile",
+    "ammoCustomProjectile": "ShotgunAmmoSlugProjectile"
+  },
+  {
+    "weaponId": "item_shotgunHandmade",
+    "weaponName": "KF \"Drobulet\" Shotgun",
+    "weaponSource": "HandmadeShotgun",
+    "action": "HandmadeShotgunAttack_Scope",
+    "actionSource": "HandmadeShotgun",
+    "actionTargetData": 10,
+    "actionSpreadCount": 10,
+    "mode": "scope",
+    "ammoId": "item_shotgunAmmo_explosive",
+    "ammoName": "12 GA Dragon Breath Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 15,
+    "effectivePelletCount": 15,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 10
+      },
+      {
+        "type": "Siege",
+        "amount": 10
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 150
+      },
+      {
+        "type": "Siege",
+        "amount": 150
+      }
+    ],
+    "projectile": "HandmadeShotgunShotProjectile",
+    "ammoCustomProjectile": "ShotgunAmmoExplosiveProjectile"
+  },
+  {
+    "weaponId": "item_shotgunHandmade_choke",
+    "weaponName": "KF \"Drobulet\" Shotgun",
+    "weaponSource": "HandmadeShotgunChoke",
+    "action": "HandmadeShotgun_chokeAttack_Hip",
+    "actionSource": "HandmadeShotgunChoke",
+    "actionTargetData": 10,
+    "actionSpreadCount": 10,
+    "mode": "hip",
+    "ammoId": "item_shotgunAmmo",
+    "ammoName": "12 GA Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 0,
+    "effectivePelletCount": 10,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 22
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 220
+      }
+    ],
+    "projectile": "HandmadeShotgunChokeShotProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "item_shotgunHandmade_choke",
+    "weaponName": "KF \"Drobulet\" Shotgun",
+    "weaponSource": "HandmadeShotgunChoke",
+    "action": "HandmadeShotgun_chokeAttack_Hip",
+    "actionSource": "HandmadeShotgunChoke",
+    "actionTargetData": 10,
+    "actionSpreadCount": 10,
+    "mode": "hip",
+    "ammoId": "item_shotgunAmmo_Armor",
+    "ammoName": "12 GA Heavy Buckshot Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 0,
+    "effectivePelletCount": 10,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 12
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 120
+      }
+    ],
+    "projectile": "HandmadeShotgunChokeShotProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "item_shotgunHandmade_choke",
+    "weaponName": "KF \"Drobulet\" Shotgun",
+    "weaponSource": "HandmadeShotgunChoke",
+    "action": "HandmadeShotgun_chokeAttack_Hip",
+    "actionSource": "HandmadeShotgunChoke",
+    "actionTargetData": 10,
+    "actionSpreadCount": 10,
+    "mode": "hip",
+    "ammoId": "item_shotgunAmmo_Fire",
+    "ammoName": "12 GA Dragon Breath Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 22
+      },
+      {
+        "type": "Fire",
+        "amount": 12
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 22
+      },
+      {
+        "type": "Fire",
+        "amount": 12
+      }
+    ],
+    "projectile": "HandmadeShotgunChokeShotProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "item_shotgunHandmade_choke",
+    "weaponName": "KF \"Drobulet\" Shotgun",
+    "weaponSource": "HandmadeShotgunChoke",
+    "action": "HandmadeShotgun_chokeAttack_Hip",
+    "actionSource": "HandmadeShotgunChoke",
+    "actionTargetData": 10,
+    "actionSpreadCount": 10,
+    "mode": "hip",
+    "ammoId": "item_shotgunAmmo_Toxic",
+    "ammoName": "12 GA Toxic Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 0,
+    "effectivePelletCount": 10,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 22
+      },
+      {
+        "type": "Poison",
+        "amount": 9
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 220
+      },
+      {
+        "type": "Poison",
+        "amount": 90
+      }
+    ],
+    "projectile": "HandmadeShotgunChokeShotProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "item_shotgunHandmade_choke",
+    "weaponName": "KF \"Drobulet\" Shotgun",
+    "weaponSource": "HandmadeShotgunChoke",
+    "action": "HandmadeShotgun_chokeAttack_Hip",
+    "actionSource": "HandmadeShotgunChoke",
+    "actionTargetData": 10,
+    "actionSpreadCount": 10,
+    "mode": "hip",
+    "ammoId": "item_shotgunAmmo_slug",
+    "ammoName": "12 GA Slug Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 150
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 150
+      }
+    ],
+    "projectile": "HandmadeShotgunChokeShotProjectile",
+    "ammoCustomProjectile": "ShotgunAmmoSlugProjectile"
+  },
+  {
+    "weaponId": "item_shotgunHandmade_choke",
+    "weaponName": "KF \"Drobulet\" Shotgun",
+    "weaponSource": "HandmadeShotgunChoke",
+    "action": "HandmadeShotgun_chokeAttack_Hip",
+    "actionSource": "HandmadeShotgunChoke",
+    "actionTargetData": 10,
+    "actionSpreadCount": 10,
+    "mode": "hip",
+    "ammoId": "item_shotgunAmmo_explosive",
+    "ammoName": "12 GA Dragon Breath Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 15,
+    "effectivePelletCount": 15,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 10
+      },
+      {
+        "type": "Siege",
+        "amount": 10
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 150
+      },
+      {
+        "type": "Siege",
+        "amount": 150
+      }
+    ],
+    "projectile": "HandmadeShotgunChokeShotProjectile",
+    "ammoCustomProjectile": "ShotgunAmmoExplosiveProjectile"
+  },
+  {
+    "weaponId": "item_shotgunHandmade_choke",
+    "weaponName": "KF \"Drobulet\" Shotgun",
+    "weaponSource": "HandmadeShotgunChoke",
+    "action": "HandmadeShotgun_chokeAttack_Scope",
+    "actionSource": "HandmadeShotgunChoke",
+    "actionTargetData": 10,
+    "actionSpreadCount": 14,
+    "mode": "scope",
+    "ammoId": "item_shotgunAmmo",
+    "ammoName": "12 GA Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 0,
+    "effectivePelletCount": 14,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 22
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 308
+      }
+    ],
+    "projectile": "HandmadeShotgunChokeShotProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "item_shotgunHandmade_choke",
+    "weaponName": "KF \"Drobulet\" Shotgun",
+    "weaponSource": "HandmadeShotgunChoke",
+    "action": "HandmadeShotgun_chokeAttack_Scope",
+    "actionSource": "HandmadeShotgunChoke",
+    "actionTargetData": 10,
+    "actionSpreadCount": 14,
+    "mode": "scope",
+    "ammoId": "item_shotgunAmmo_Armor",
+    "ammoName": "12 GA Heavy Buckshot Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 0,
+    "effectivePelletCount": 14,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 12
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 168
+      }
+    ],
+    "projectile": "HandmadeShotgunChokeShotProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "item_shotgunHandmade_choke",
+    "weaponName": "KF \"Drobulet\" Shotgun",
+    "weaponSource": "HandmadeShotgunChoke",
+    "action": "HandmadeShotgun_chokeAttack_Scope",
+    "actionSource": "HandmadeShotgunChoke",
+    "actionTargetData": 10,
+    "actionSpreadCount": 14,
+    "mode": "scope",
+    "ammoId": "item_shotgunAmmo_Fire",
+    "ammoName": "12 GA Dragon Breath Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 22
+      },
+      {
+        "type": "Fire",
+        "amount": 12
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 22
+      },
+      {
+        "type": "Fire",
+        "amount": 12
+      }
+    ],
+    "projectile": "HandmadeShotgunChokeShotProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "item_shotgunHandmade_choke",
+    "weaponName": "KF \"Drobulet\" Shotgun",
+    "weaponSource": "HandmadeShotgunChoke",
+    "action": "HandmadeShotgun_chokeAttack_Scope",
+    "actionSource": "HandmadeShotgunChoke",
+    "actionTargetData": 10,
+    "actionSpreadCount": 14,
+    "mode": "scope",
+    "ammoId": "item_shotgunAmmo_Toxic",
+    "ammoName": "12 GA Toxic Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 0,
+    "effectivePelletCount": 14,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 22
+      },
+      {
+        "type": "Poison",
+        "amount": 9
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 308
+      },
+      {
+        "type": "Poison",
+        "amount": 126
+      }
+    ],
+    "projectile": "HandmadeShotgunChokeShotProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "item_shotgunHandmade_choke",
+    "weaponName": "KF \"Drobulet\" Shotgun",
+    "weaponSource": "HandmadeShotgunChoke",
+    "action": "HandmadeShotgun_chokeAttack_Scope",
+    "actionSource": "HandmadeShotgunChoke",
+    "actionTargetData": 10,
+    "actionSpreadCount": 14,
+    "mode": "scope",
+    "ammoId": "item_shotgunAmmo_slug",
+    "ammoName": "12 GA Slug Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 150
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 150
+      }
+    ],
+    "projectile": "HandmadeShotgunChokeShotProjectile",
+    "ammoCustomProjectile": "ShotgunAmmoSlugProjectile"
+  },
+  {
+    "weaponId": "item_shotgunHandmade_choke",
+    "weaponName": "KF \"Drobulet\" Shotgun",
+    "weaponSource": "HandmadeShotgunChoke",
+    "action": "HandmadeShotgun_chokeAttack_Scope",
+    "actionSource": "HandmadeShotgunChoke",
+    "actionTargetData": 10,
+    "actionSpreadCount": 14,
+    "mode": "scope",
+    "ammoId": "item_shotgunAmmo_explosive",
+    "ammoName": "12 GA Dragon Breath Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 15,
+    "effectivePelletCount": 15,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 10
+      },
+      {
+        "type": "Siege",
+        "amount": 10
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 150
+      },
+      {
+        "type": "Siege",
+        "amount": 150
+      }
+    ],
+    "projectile": "HandmadeShotgunChokeShotProjectile",
+    "ammoCustomProjectile": "ShotgunAmmoExplosiveProjectile"
+  },
+  {
+    "weaponId": "item_shotgunTriplet",
+    "weaponName": "O'Donnel \"Pepper Mill\" Shothgun",
+    "weaponSource": "ShotgunTriplet",
+    "action": "ShotgunTripletAttack_Hip",
+    "actionSource": "ShotgunTriplet",
+    "actionTargetData": 10,
+    "actionSpreadCount": 30,
+    "mode": "hip",
+    "ammoId": "item_shotgunAmmo",
+    "ammoName": "12 GA Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 0,
+    "effectivePelletCount": 30,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 22
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 660
+      }
+    ],
+    "projectile": "ShotgunTripletShotProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "item_shotgunTriplet",
+    "weaponName": "O'Donnel \"Pepper Mill\" Shothgun",
+    "weaponSource": "ShotgunTriplet",
+    "action": "ShotgunTripletAttack_Scope",
+    "actionSource": "ShotgunTriplet",
+    "actionTargetData": 10,
+    "actionSpreadCount": 60,
+    "mode": "scope",
+    "ammoId": "item_shotgunAmmo",
+    "ammoName": "12 GA Ammo",
+    "ammoSource": "Shotgun",
+    "ammoSpreadOverrideCount": 0,
+    "effectivePelletCount": 60,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 22
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 1320
+      }
+    ],
+    "projectile": "ShotgunTripletShotProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurret",
+    "weaponName": "walker_shotgunMountedTurret",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryTurret",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "",
+    "ammoId": "item_shotgunTurretAmmo",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 0,
+    "effectivePelletCount": 42,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 110
+      },
+      {
+        "type": "Siege",
+        "amount": 30
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 4620
+      },
+      {
+        "type": "Siege",
+        "amount": 1260
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurret",
+    "weaponName": "walker_shotgunMountedTurret",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryTurret",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "",
+    "ammoId": "item_shotgunTurretAmmo_slug",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 1000
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 1000
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": "ShotgunTurretProjectileSlug"
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurretArmored",
+    "weaponName": "walker_shotgunMountedTurretArmored",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryTurret",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "",
+    "ammoId": "item_shotgunTurretAmmo",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 0,
+    "effectivePelletCount": 42,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 110
+      },
+      {
+        "type": "Siege",
+        "amount": 30
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 4620
+      },
+      {
+        "type": "Siege",
+        "amount": 1260
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurretArmored",
+    "weaponName": "walker_shotgunMountedTurretArmored",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryTurret",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "",
+    "ammoId": "item_shotgunTurretAmmo_slug",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 1000
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 1000
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": "ShotgunTurretProjectileSlug"
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurretArmored_T1",
+    "weaponName": "walker_shotgunMountedTurretArmored_T1",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryArmoredTurretT1",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "",
+    "ammoId": "item_shotgunTurretAmmo",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 0,
+    "effectivePelletCount": 42,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 110
+      },
+      {
+        "type": "Siege",
+        "amount": 30
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 4620
+      },
+      {
+        "type": "Siege",
+        "amount": 1260
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurretArmored_T1",
+    "weaponName": "walker_shotgunMountedTurretArmored_T1",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryArmoredTurretT1",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "",
+    "ammoId": "item_shotgunTurretAmmo_slug",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 1000
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 1000
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": "ShotgunTurretProjectileSlug"
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurretArmored_T1",
+    "weaponName": "walker_shotgunMountedTurretArmored_T1",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryArmoredTurretT1",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "",
+    "ammoId": "item_shotgunTurretAmmo_smoke",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 50
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 50
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": "ShotgunTurretProjectileSmoke"
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurretArmored_T1",
+    "weaponName": "walker_shotgunMountedTurretArmored_T1",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryArmoredTurretT1",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "",
+    "ammoId": "item_shotgunTurretAmmo_interiorExplosion",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 500
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 500
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": "ShotgunTurretProjectileInteriorExplosion"
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurretArmored_T2",
+    "weaponName": "walker_shotgunMountedTurretArmored_T2",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryArmoredTurretT2",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "",
+    "ammoId": "item_shotgunTurretAmmo",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 0,
+    "effectivePelletCount": 42,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 110
+      },
+      {
+        "type": "Siege",
+        "amount": 30
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 4620
+      },
+      {
+        "type": "Siege",
+        "amount": 1260
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurretArmored_T2",
+    "weaponName": "walker_shotgunMountedTurretArmored_T2",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryArmoredTurretT2",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "",
+    "ammoId": "item_shotgunTurretAmmo_slug",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 1000
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 1000
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": "ShotgunTurretProjectileSlug"
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurretArmored_T2",
+    "weaponName": "walker_shotgunMountedTurretArmored_T2",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryArmoredTurretT2",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "",
+    "ammoId": "item_shotgunTurretAmmo_smoke",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 50
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 50
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": "ShotgunTurretProjectileSmoke"
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurretArmored_T2",
+    "weaponName": "walker_shotgunMountedTurretArmored_T2",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryArmoredTurretT2",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "",
+    "ammoId": "item_shotgunTurretAmmo_interiorExplosion",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 500
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 500
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": "ShotgunTurretProjectileInteriorExplosion"
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurretArmored_T3",
+    "weaponName": "walker_shotgunMountedTurretArmored_T3",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryArmoredTurretT3",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "",
+    "ammoId": "item_shotgunTurretAmmo",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 0,
+    "effectivePelletCount": 42,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 110
+      },
+      {
+        "type": "Siege",
+        "amount": 30
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 4620
+      },
+      {
+        "type": "Siege",
+        "amount": 1260
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurretArmored_T3",
+    "weaponName": "walker_shotgunMountedTurretArmored_T3",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryArmoredTurretT3",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "",
+    "ammoId": "item_shotgunTurretAmmo_slug",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 1000
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 1000
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": "ShotgunTurretProjectileSlug"
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurretArmored_T3",
+    "weaponName": "walker_shotgunMountedTurretArmored_T3",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryArmoredTurretT3",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "",
+    "ammoId": "item_shotgunTurretAmmo_smoke",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 50
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 50
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": "ShotgunTurretProjectileSmoke"
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurretArmored_T3",
+    "weaponName": "walker_shotgunMountedTurretArmored_T3",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryArmoredTurretT3",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "",
+    "ammoId": "item_shotgunTurretAmmo_interiorExplosion",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 500
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 500
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": "ShotgunTurretProjectileInteriorExplosion"
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurretArmored_T4_DoubleBarrel",
+    "weaponName": "walker_shotgunMountedTurretArmored_T4_DoubleBarrel",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryTurretArmoredT4_DoubleBarrel",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "doublebarrel",
+    "ammoId": "item_shotgunTurretAmmo",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 0,
+    "effectivePelletCount": 42,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 110
+      },
+      {
+        "type": "Siege",
+        "amount": 30
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 4620
+      },
+      {
+        "type": "Siege",
+        "amount": 1260
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurretArmored_T4_DoubleBarrel",
+    "weaponName": "walker_shotgunMountedTurretArmored_T4_DoubleBarrel",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryTurretArmoredT4_DoubleBarrel",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "doublebarrel",
+    "ammoId": "item_shotgunTurretAmmo_slug",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 1000
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 1000
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": "ShotgunTurretProjectileSlug"
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurretArmored_T4_DoubleBarrel",
+    "weaponName": "walker_shotgunMountedTurretArmored_T4_DoubleBarrel",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryTurretArmoredT4_DoubleBarrel",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "doublebarrel",
+    "ammoId": "item_shotgunTurretAmmo_smoke",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 50
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 50
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": "ShotgunTurretProjectileSmoke"
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurretArmored_T4_DoubleBarrel",
+    "weaponName": "walker_shotgunMountedTurretArmored_T4_DoubleBarrel",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryTurretArmoredT4_DoubleBarrel",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "doublebarrel",
+    "ammoId": "item_shotgunTurretAmmo_interiorExplosion",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 500
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 500
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": "ShotgunTurretProjectileInteriorExplosion"
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurret_T1",
+    "weaponName": "walker_shotgunMountedTurret_T1",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryTurretT1",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "",
+    "ammoId": "item_shotgunTurretAmmo",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 0,
+    "effectivePelletCount": 42,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 110
+      },
+      {
+        "type": "Siege",
+        "amount": 30
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 4620
+      },
+      {
+        "type": "Siege",
+        "amount": 1260
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurret_T1",
+    "weaponName": "walker_shotgunMountedTurret_T1",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryTurretT1",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "",
+    "ammoId": "item_shotgunTurretAmmo_slug",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 1000
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 1000
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": "ShotgunTurretProjectileSlug"
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurret_T1",
+    "weaponName": "walker_shotgunMountedTurret_T1",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryTurretT1",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "",
+    "ammoId": "item_shotgunTurretAmmo_smoke",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 50
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 50
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": "ShotgunTurretProjectileSmoke"
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurret_T1",
+    "weaponName": "walker_shotgunMountedTurret_T1",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryTurretT1",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "",
+    "ammoId": "item_shotgunTurretAmmo_interiorExplosion",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 500
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 500
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": "ShotgunTurretProjectileInteriorExplosion"
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurret_T2",
+    "weaponName": "walker_shotgunMountedTurret_T2",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryTurretT2",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "",
+    "ammoId": "item_shotgunTurretAmmo",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 0,
+    "effectivePelletCount": 42,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 110
+      },
+      {
+        "type": "Siege",
+        "amount": 30
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 4620
+      },
+      {
+        "type": "Siege",
+        "amount": 1260
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurret_T2",
+    "weaponName": "walker_shotgunMountedTurret_T2",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryTurretT2",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "",
+    "ammoId": "item_shotgunTurretAmmo_slug",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 1000
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 1000
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": "ShotgunTurretProjectileSlug"
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurret_T2",
+    "weaponName": "walker_shotgunMountedTurret_T2",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryTurretT2",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "",
+    "ammoId": "item_shotgunTurretAmmo_smoke",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 50
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 50
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": "ShotgunTurretProjectileSmoke"
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurret_T2",
+    "weaponName": "walker_shotgunMountedTurret_T2",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryTurretT2",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "",
+    "ammoId": "item_shotgunTurretAmmo_interiorExplosion",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 500
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 500
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": "ShotgunTurretProjectileInteriorExplosion"
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurret_T3",
+    "weaponName": "walker_shotgunMountedTurret_T3",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryTurretT3",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "",
+    "ammoId": "item_shotgunTurretAmmo",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 0,
+    "effectivePelletCount": 42,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 110
+      },
+      {
+        "type": "Siege",
+        "amount": 30
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 4620
+      },
+      {
+        "type": "Siege",
+        "amount": 1260
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurret_T3",
+    "weaponName": "walker_shotgunMountedTurret_T3",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryTurretT3",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "",
+    "ammoId": "item_shotgunTurretAmmo_slug",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 1000
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 1000
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": "ShotgunTurretProjectileSlug"
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurret_T3",
+    "weaponName": "walker_shotgunMountedTurret_T3",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryTurretT3",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "",
+    "ammoId": "item_shotgunTurretAmmo_smoke",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 50
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 50
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": "ShotgunTurretProjectileSmoke"
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurret_T3",
+    "weaponName": "walker_shotgunMountedTurret_T3",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryTurretT3",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "",
+    "ammoId": "item_shotgunTurretAmmo_interiorExplosion",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 500
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 500
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": "ShotgunTurretProjectileInteriorExplosion"
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurret_T4_DoubleBarrel",
+    "weaponName": "walker_shotgunMountedTurret_T4_DoubleBarrel",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryTurretT4_DoubleBarrel",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "doublebarrel",
+    "ammoId": "item_shotgunTurretAmmo",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 0,
+    "effectivePelletCount": 42,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 110
+      },
+      {
+        "type": "Siege",
+        "amount": 30
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 4620
+      },
+      {
+        "type": "Siege",
+        "amount": 1260
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": ""
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurret_T4_DoubleBarrel",
+    "weaponName": "walker_shotgunMountedTurret_T4_DoubleBarrel",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryTurretT4_DoubleBarrel",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "doublebarrel",
+    "ammoId": "item_shotgunTurretAmmo_slug",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 1000
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 1000
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": "ShotgunTurretProjectileSlug"
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurret_T4_DoubleBarrel",
+    "weaponName": "walker_shotgunMountedTurret_T4_DoubleBarrel",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryTurretT4_DoubleBarrel",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "doublebarrel",
+    "ammoId": "item_shotgunTurretAmmo_smoke",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 50
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 50
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": "ShotgunTurretProjectileSmoke"
+  },
+  {
+    "weaponId": "walker_shotgunMountedTurret_T4_DoubleBarrel",
+    "weaponName": "walker_shotgunMountedTurret_T4_DoubleBarrel",
+    "weaponSource": "ShotgunTurret",
+    "action": "SpreadShotStationaryTurretT4_DoubleBarrel",
+    "actionSource": "ShotgunTurret",
+    "actionTargetData": 8,
+    "actionSpreadCount": 42,
+    "mode": "doublebarrel",
+    "ammoId": "item_shotgunTurretAmmo_interiorExplosion",
+    "ammoName": "70mm Shotgun Cannon Shell",
+    "ammoSource": "ShotgunTurret",
+    "ammoSpreadOverrideCount": 1,
+    "effectivePelletCount": 1,
+    "damagePerPelletParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 500
+      }
+    ],
+    "allPelletsDamageParts": [
+      {
+        "type": "Physical",
+        "amount": 300
+      },
+      {
+        "type": "Siege",
+        "amount": 500
+      }
+    ],
+    "projectile": "ShotgunTurretBaseProjectile",
+    "ammoCustomProjectile": "ShotgunTurretProjectileInteriorExplosion"
   }
 ];
 

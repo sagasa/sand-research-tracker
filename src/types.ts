@@ -114,6 +114,26 @@ export type AmmoStat = {
   spawnBlueprint: string;
 };
 
+export type ShotgunPelletStat = {
+  weaponId: string;
+  weaponName: string;
+  weaponSource: string;
+  action: string;
+  actionSource: string;
+  actionTargetData: number | null;
+  actionSpreadCount: number | null;
+  mode: string;
+  ammoId: string;
+  ammoName: string;
+  ammoSource: string;
+  ammoSpreadOverrideCount: number | null;
+  effectivePelletCount: number | null;
+  damagePerPelletParts: DamagePart[];
+  allPelletsDamageParts: DamagePart[];
+  projectile: string;
+  ammoCustomProjectile: string;
+};
+
 export type ProjectileStat = {
   textAsset: string;
   projectileName: string;

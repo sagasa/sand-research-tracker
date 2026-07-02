@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { type MouseEvent, useMemo, useState } from "react";
 import {
   Alert,
   Box,
@@ -18,15 +18,17 @@ import {
   TableHead,
   TableRow,
   Typography,
+  ToggleButton,
+  ToggleButtonGroup,
 } from "@mui/material";
 import type { SelectChangeEvent } from "@mui/material";
 import GpsFixedIcon from "@mui/icons-material/GpsFixed";
 import Inventory2Icon from "@mui/icons-material/Inventory2";
 import SecurityIcon from "@mui/icons-material/Security";
 import TrackChangesIcon from "@mui/icons-material/TrackChanges";
-import { ammoStats, armorStats, projectileStats, weaponStats } from "../../generated/equipmentStatsData";
+import { ammoStats, armorStats, projectileStats, shotgunPelletStats, weaponStats } from "../../generated/equipmentStatsData";
 import { formatNumber } from "../../tracker";
-import type { AmmoStat, ArmorStat, DamagePart, RangeModifierPoint, StateNumberMap, WeaponStat } from "../../types";
+import type { AmmoStat, ArmorStat, DamagePart, RangeModifierPoint, ShotgunPelletStat, StateNumberMap, WeaponStat } from "../../types";
 
 type DamagePoint = {
   distance: number;
@@ -46,6 +48,14 @@ const rarityColors: Record<string, "default" | "primary" | "secondary" | "succes
   EXPERIMENTAL: "error",
 };
 
+const damageReferenceLines = [
+  { value: 50, label: "HP 50" },
+  { value: 150, label: "HP 150" },
+  { value: 200, label: "Armor 200" },
+  { value: 250, label: "Armor 250" },
+  { value: 300, label: "Armor 300" },
+];
+
 function displayName(value: string, fallback: string) {
   return value && !value.startsWith("###TODO") ? value : fallback;
 }
@@ -64,6 +74,31 @@ function secondaryName(primary: string, englishName: string, itemId: string) {
   return primary && primary !== english ? english : itemId;
 }
 
+function pelletKey(weaponId: string, ammoId: string) {
+  return `${weaponId}\u0000${ammoId}`;
+}
+
+function pelletModeLabel(mode: string) {
+  if (mode === "hip") return "腰だめ";
+  if (mode === "scope") return "照準";
+  return mode || "射撃";
+}
+
+function sortPelletProfiles(a: ShotgunPelletStat, b: ShotgunPelletStat) {
+  const order = { hip: 0, scope: 1 } as Record<string, number>;
+  return (order[a.mode] ?? 9) - (order[b.mode] ?? 9) || a.action.localeCompare(b.action);
+}
+
+function selectPelletProfile(profiles: ShotgunPelletStat[], preferredMode: string) {
+  if (profiles.length === 0) return undefined;
+  return (
+    profiles.find((profile) => profile.mode === preferredMode) ??
+    profiles.find((profile) => profile.mode === "scope") ??
+    profiles.find((profile) => profile.mode === "hip") ??
+    profiles[0]
+  );
+}
+
 function totalDamage(parts: DamagePart[]) {
   return parts.reduce((sum, part) => sum + part.amount, 0);
 }
@@ -76,6 +111,15 @@ function formatDamage(value: number) {
 function damageBreakdown(parts: DamagePart[]) {
   if (parts.length === 0) return [];
   return parts.map((part) => `${part.type} ${formatDamage(part.amount)}`);
+}
+
+function damagePartsFor(ammo: AmmoStat | undefined, pelletProfile?: ShotgunPelletStat) {
+  if (!ammo) return [];
+  return pelletProfile?.allPelletsDamageParts.length ? pelletProfile.allPelletsDamageParts : ammo.damageParts;
+}
+
+function baseDamageFor(ammo: AmmoStat | undefined, pelletProfile?: ShotgunPelletStat) {
+  return totalDamage(damagePartsFor(ammo, pelletProfile));
 }
 
 function numericRangePoints(points: RangeModifierPoint[]) {
@@ -102,9 +146,9 @@ function primaryMultiplier(value: StateNumberMap, fallback = 1) {
   return values.length > 0 ? Math.max(...values) : fallback;
 }
 
-function damageAtDistance(weapon: WeaponStat, ammo: AmmoStat | undefined, distance: number) {
+function damageAtDistance(weapon: WeaponStat, ammo: AmmoStat | undefined, distance: number, pelletProfile?: ShotgunPelletStat) {
   if (!ammo) return 0;
-  const baseDamage = totalDamage(ammo.damageParts);
+  const baseDamage = baseDamageFor(ammo, pelletProfile);
   if (baseDamage <= 0) return 0;
   return baseDamage * modifierAt(weapon.weaponRangeModifiers, distance) * modifierAt(ammo.rangeModifiers, distance);
 }
@@ -116,10 +160,10 @@ function curveDistances(weapon: WeaponStat, ammo: AmmoStat | undefined) {
   return [...distances].filter((distance) => distance >= 0).sort((a, b) => a - b);
 }
 
-function buildDamageCurve(weapon: WeaponStat, ammo: AmmoStat | undefined): DamagePoint[] {
+function buildDamageCurve(weapon: WeaponStat, ammo: AmmoStat | undefined, pelletProfile?: ShotgunPelletStat): DamagePoint[] {
   return curveDistances(weapon, ammo).map((distance) => ({
     distance,
-    damage: damageAtDistance(weapon, ammo, distance),
+    damage: damageAtDistance(weapon, ammo, distance, pelletProfile),
   }));
 }
 
@@ -220,20 +264,23 @@ function AmmoIcon({ ammo, size = 40 }: { ammo: AmmoStat | undefined; size?: numb
 function DamageChart({
   weapon,
   ammo,
+  pelletProfile,
   selectedDistance,
 }: {
   weapon: WeaponStat;
   ammo: AmmoStat | undefined;
+  pelletProfile?: ShotgunPelletStat;
   selectedDistance: number;
 }) {
-  const points = useMemo(() => buildDamageCurve(weapon, ammo), [ammo, weapon]);
+  const points = useMemo(() => buildDamageCurve(weapon, ammo, pelletProfile), [ammo, pelletProfile, weapon]);
   const headshotMultiplier = primaryMultiplier(weapon.headshotMultiplier);
   const headshotPoints = points.map((point) => ({
     distance: point.distance,
     damage: point.damage * headshotMultiplier,
   }));
   const maxDistance = Math.max(...points.map((point) => point.distance), 300);
-  const maxDamage = Math.max(...headshotPoints.map((point) => point.damage), ...points.map((point) => point.damage), 1);
+  const referenceMaxDamage = Math.max(...damageReferenceLines.map((line) => line.value));
+  const maxDamage = Math.max(...headshotPoints.map((point) => point.damage), ...points.map((point) => point.damage), referenceMaxDamage, 1);
 
   if (!ammo || maxDamage <= 0) {
     return (
@@ -254,11 +301,12 @@ function DamageChart({
   const x = (distance: number) => paddingLeft + (distance / maxDistance) * plotWidth;
   const y = (damage: number) => paddingTop + plotHeight - (damage / maxDamage) * plotHeight;
   const selectedX = x(Math.min(selectedDistance, maxDistance));
-  const selectedDamage = damageAtDistance(weapon, ammo, selectedDistance);
+  const selectedDamage = damageAtDistance(weapon, ammo, selectedDistance, pelletProfile);
   const selectedHeadshotDamage = selectedDamage * headshotMultiplier;
   const path = points.map((point) => `${x(point.distance)},${y(point.damage)}`).join(" ");
   const headshotPath = headshotPoints.map((point) => `${x(point.distance)},${y(point.damage)}`).join(" ");
   const ticks = [...new Set([0, Math.round(maxDamage / 2), Math.round(maxDamage)])].sort((a, b) => a - b);
+  const visibleReferenceLines = damageReferenceLines.filter((line) => line.value <= maxDamage);
 
   return (
     <Box sx={{ overflowX: "auto" }}>
@@ -280,6 +328,17 @@ function DamageChart({
             </text>
           </g>
         ))}
+        {visibleReferenceLines.map((line) => (
+          <line
+            key={line.value}
+            x1={paddingLeft}
+            y1={y(line.value)}
+            x2={width - paddingRight}
+            y2={y(line.value)}
+            stroke="rgba(216,226,234,0.16)"
+            strokeDasharray="3 7"
+          />
+        ))}
         <polyline fill="none" stroke="#79d48b" strokeWidth="4" strokeLinejoin="round" strokeLinecap="round" points={path} />
         <polyline fill="none" stroke="#ffb15f" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round" points={headshotPath} />
         <line x1={selectedX} y1={paddingTop} x2={selectedX} y2={height - paddingBottom} stroke="#d8e2ea" strokeDasharray="5 5" />
@@ -292,6 +351,12 @@ function DamageChart({
       <Stack direction="row" spacing={1} flexWrap="wrap" sx={{ mt: 1 }}>
         <Chip label="通常" size="small" sx={{ borderColor: "#79d48b", color: "#79d48b" }} variant="outlined" />
         <Chip label="ヘッドショット" size="small" sx={{ borderColor: "#ffb15f", color: "#ffb15f" }} variant="outlined" />
+        <Chip
+          label="補助線: HP 50/150、Armor 200/250/300"
+          size="small"
+          sx={{ borderColor: "rgba(216,226,234,0.2)", color: "text.secondary" }}
+          variant="outlined"
+        />
       </Stack>
     </Box>
   );
@@ -317,12 +382,14 @@ function AmmoComparisonTable({
   ammoRows,
   selectedAmmoId,
   selectedDistance,
+  pelletProfileForAmmo,
   onSelectAmmo,
 }: {
   weapon: WeaponStat;
   ammoRows: AmmoStat[];
   selectedAmmoId: string;
   selectedDistance: number;
+  pelletProfileForAmmo: (ammo: AmmoStat) => ShotgunPelletStat | undefined;
   onSelectAmmo: (id: string) => void;
 }) {
   return (
@@ -332,39 +399,51 @@ function AmmoComparisonTable({
           <TableRow>
             <TableCell>弾</TableCell>
             <TableCell align="right">基礎</TableCell>
+            <TableCell align="right">ペレット</TableCell>
             <TableCell align="right">{selectedDistance}m</TableCell>
             <TableCell align="right">ヘッドショット {selectedDistance}m</TableCell>
             <TableCell>補足</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {ammoRows.map((ammo) => (
-            <TableRow
-              hover
-              selected={ammo.itemId === selectedAmmoId}
-              key={ammo.itemId}
-              onClick={() => onSelectAmmo(ammo.itemId)}
-              sx={{ cursor: "pointer" }}
-            >
-              <TableCell sx={{ minWidth: 260 }}>
-                <Stack direction="row" spacing={1} alignItems="center">
-                  <AmmoIcon ammo={ammo} size={34} />
-                  <Box>
-                    <Typography fontWeight={700}>{ammoName(ammo)}</Typography>
-                    <Typography variant="caption" color="text.secondary">
-                      {secondaryName(ammoName(ammo), ammo.niceName, ammo.itemId)} / {ammo.rarity || "UNKNOWN"}
-                    </Typography>
-                  </Box>
-                </Stack>
-              </TableCell>
-              <TableCell align="right">{formatDamage(totalDamage(ammo.damageParts))}</TableCell>
-              <TableCell align="right">{formatDamage(damageAtDistance(weapon, ammo, selectedDistance))}</TableCell>
-              <TableCell align="right">
-                {formatDamage(damageAtDistance(weapon, ammo, selectedDistance) * primaryMultiplier(weapon.headshotMultiplier))}
-              </TableCell>
-              <TableCell>{ammo.customProjectile || "-"}</TableCell>
-            </TableRow>
-          ))}
+          {ammoRows.map((ammo) => {
+            const pelletProfile = pelletProfileForAmmo(ammo);
+            const distanceDamage = damageAtDistance(weapon, ammo, selectedDistance, pelletProfile);
+            return (
+              <TableRow
+                hover
+                selected={ammo.itemId === selectedAmmoId}
+                key={ammo.itemId}
+                onClick={() => onSelectAmmo(ammo.itemId)}
+                sx={{ cursor: "pointer" }}
+              >
+                <TableCell sx={{ minWidth: 260 }}>
+                  <Stack direction="row" spacing={1} alignItems="center">
+                    <AmmoIcon ammo={ammo} size={34} />
+                    <Box>
+                      <Typography fontWeight={700}>{ammoName(ammo)}</Typography>
+                      <Typography variant="caption" color="text.secondary">
+                        {secondaryName(ammoName(ammo), ammo.niceName, ammo.itemId)} / {ammo.rarity || "UNKNOWN"}
+                      </Typography>
+                    </Box>
+                  </Stack>
+                </TableCell>
+                <TableCell align="right">{formatDamage(baseDamageFor(ammo, pelletProfile))}</TableCell>
+                <TableCell align="right">
+                  {pelletProfile?.effectivePelletCount ? `${pelletProfile.effectivePelletCount}発` : "-"}
+                </TableCell>
+                <TableCell align="right">{formatDamage(distanceDamage)}</TableCell>
+                <TableCell align="right">
+                  {formatDamage(distanceDamage * primaryMultiplier(weapon.headshotMultiplier))}
+                </TableCell>
+                <TableCell>
+                  {pelletProfile
+                    ? `${pelletModeLabel(pelletProfile.mode)} / ${pelletProfile.ammoCustomProjectile || ammo.customProjectile || "-"}`
+                    : ammo.customProjectile || "-"}
+                </TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </TableContainer>
@@ -412,6 +491,7 @@ function ArmorTable({ rows }: { rows: ArmorStat[] }) {
 export function EquipmentStatsPage() {
   const [selectedWeaponId, setSelectedWeaponId] = useState(selectableWeapons[0]?.itemId ?? weaponStats[0]?.itemId ?? "");
   const [selectedAmmoId, setSelectedAmmoId] = useState("");
+  const [selectedPelletMode, setSelectedPelletMode] = useState("");
   const [selectedDistance, setSelectedDistance] = useState(50);
 
   const ammoById = useMemo(() => new Map(ammoStats.map((ammo) => [ammo.itemId, ammo])), []);
@@ -419,6 +499,17 @@ export function EquipmentStatsPage() {
     () => new Map(projectileStats.map((projectile) => [projectile.projectileName, projectile])),
     [],
   );
+  const pelletProfilesByPair = useMemo(() => {
+    const profiles = new Map<string, ShotgunPelletStat[]>();
+    for (const profile of shotgunPelletStats) {
+      const key = pelletKey(profile.weaponId, profile.ammoId);
+      const rows = profiles.get(key) ?? [];
+      rows.push(profile);
+      profiles.set(key, rows);
+    }
+    for (const rows of profiles.values()) rows.sort(sortPelletProfiles);
+    return profiles;
+  }, []);
 
   const selectedWeapon =
     selectableWeapons.find((weapon) => weapon.itemId === selectedWeaponId) ??
@@ -441,15 +532,33 @@ export function EquipmentStatsPage() {
   const selectedProjectile = selectedAmmo?.customProjectile
     ? projectileByName.get(selectedAmmo.customProjectile)
     : undefined;
-  const selectedDamage = damageAtDistance(selectedWeapon, selectedAmmo, selectedDistance);
+
+  const pelletProfilesForAmmo = (ammo: AmmoStat | undefined) => (
+    ammo ? pelletProfilesByPair.get(pelletKey(selectedWeapon.itemId, ammo.itemId)) ?? [] : []
+  );
+  const pelletProfileForAmmo = (ammo: AmmoStat) => selectPelletProfile(pelletProfilesForAmmo(ammo), selectedPelletMode);
+  const selectedPelletProfiles = pelletProfilesForAmmo(selectedAmmo);
+  const selectedPelletProfile = selectPelletProfile(selectedPelletProfiles, selectedPelletMode);
+  const selectedDamageParts = damagePartsFor(selectedAmmo, selectedPelletProfile);
+  const selectedDamage = damageAtDistance(selectedWeapon, selectedAmmo, selectedDistance, selectedPelletProfile);
   const selectedHeadshotMultiplier = primaryMultiplier(selectedWeapon.headshotMultiplier);
   const selectedHeadshotDamage = selectedDamage * selectedHeadshotMultiplier;
-  const baseDamage = selectedAmmo ? totalDamage(selectedAmmo.damageParts) : 0;
+  const baseDamage = totalDamage(selectedDamageParts);
+  const perPelletDamage = selectedPelletProfile ? totalDamage(selectedPelletProfile.damagePerPelletParts) : 0;
   const weaponDamage = totalDamage(selectedWeapon.damageParts);
 
   function handleWeaponChange(event: SelectChangeEvent) {
     setSelectedWeaponId(event.target.value);
     setSelectedAmmoId("");
+    setSelectedPelletMode("");
+  }
+
+  function handleAmmoChange(event: SelectChangeEvent) {
+    setSelectedAmmoId(event.target.value);
+  }
+
+  function handlePelletModeChange(_event: MouseEvent<HTMLElement>, value: string | null) {
+    if (value) setSelectedPelletMode(value);
   }
 
   return (
@@ -502,24 +611,57 @@ export function EquipmentStatsPage() {
                 labelId="ammo-select-label"
                 label="弾"
                 value={selectedAmmo?.itemId ?? ""}
-                onChange={(event) => setSelectedAmmoId(event.target.value)}
+                onChange={handleAmmoChange}
                 renderValue={() => ammoName(selectedAmmo)}
               >
-                {ammoRows.map((ammo) => (
-                  <MenuItem key={ammo.itemId} value={ammo.itemId}>
-                    <Stack direction="row" spacing={1.25} alignItems="center">
-                      <AmmoIcon ammo={ammo} size={34} />
-                      <Box>
-                        <Typography>{ammoName(ammo)}</Typography>
-                        <Typography variant="caption" color="text.secondary">
-                          {secondaryName(ammoName(ammo), ammo.niceName, ammo.itemId)} / 基礎 {formatDamage(totalDamage(ammo.damageParts))}
-                        </Typography>
-                      </Box>
-                    </Stack>
-                  </MenuItem>
-                ))}
+                {ammoRows.map((ammo) => {
+                  const pelletProfile = pelletProfileForAmmo(ammo);
+                  const baseLabel = pelletProfile
+                    ? `全弾 ${formatDamage(baseDamageFor(ammo, pelletProfile))} / ${pelletProfile.effectivePelletCount ?? "-"}発`
+                    : `基礎 ${formatDamage(totalDamage(ammo.damageParts))}`;
+                  return (
+                    <MenuItem key={ammo.itemId} value={ammo.itemId}>
+                      <Stack direction="row" spacing={1.25} alignItems="center">
+                        <AmmoIcon ammo={ammo} size={34} />
+                        <Box>
+                          <Typography>{ammoName(ammo)}</Typography>
+                          <Typography variant="caption" color="text.secondary">
+                            {secondaryName(ammoName(ammo), ammo.niceName, ammo.itemId)} / {baseLabel}
+                          </Typography>
+                        </Box>
+                      </Stack>
+                    </MenuItem>
+                  );
+                })}
               </Select>
             </FormControl>
+
+            {selectedPelletProfiles.length > 1 ? (
+              <Box>
+                <Typography variant="caption" color="text.secondary">射撃モード</Typography>
+                <ToggleButtonGroup
+                  exclusive
+                  size="small"
+                  value={selectedPelletProfile?.mode ?? ""}
+                  onChange={handlePelletModeChange}
+                  sx={{
+                    display: "flex",
+                    mt: 0.5,
+                    "& .MuiToggleButton-root": {
+                      flex: 1,
+                      px: 1.25,
+                      whiteSpace: "nowrap",
+                    },
+                  }}
+                >
+                  {selectedPelletProfiles.map((profile) => (
+                    <ToggleButton key={profile.action} value={profile.mode}>
+                      {pelletModeLabel(profile.mode)} / {profile.effectivePelletCount ?? "-"}発
+                    </ToggleButton>
+                  ))}
+                </ToggleButtonGroup>
+              </Box>
+            ) : null}
 
             <Box>
               <Typography variant="caption" color="text.secondary">距離: {selectedDistance}m</Typography>
@@ -579,9 +721,25 @@ export function EquipmentStatsPage() {
                 <Typography>{selectedHeadshotMultiplier}x</Typography>
               </Box>
               <Box>
-                <Typography variant="caption" color="text.secondary">弾の基礎ダメージ</Typography>
+                <Typography variant="caption" color="text.secondary">
+                  {selectedPelletProfile ? "全弾基礎ダメージ" : "弾の基礎ダメージ"}
+                </Typography>
                 <Typography>{formatDamage(baseDamage)}</Typography>
               </Box>
+              {selectedPelletProfile ? (
+                <>
+                  <Box>
+                    <Typography variant="caption" color="text.secondary">ペレット</Typography>
+                    <Typography>
+                      {selectedPelletProfile.effectivePelletCount ?? "-"}発（{pelletModeLabel(selectedPelletProfile.mode)}）
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Typography variant="caption" color="text.secondary">1ペレット</Typography>
+                    <Typography>{formatDamage(perPelletDamage)}</Typography>
+                  </Box>
+                </>
+              ) : null}
               <Box>
                 <Typography variant="caption" color="text.secondary">装弾数</Typography>
                 <Typography>{selectedWeapon.clipSize ?? "-"}</Typography>
@@ -595,8 +753,10 @@ export function EquipmentStatsPage() {
             </Box>
 
             <Box>
-              <Typography variant="caption" color="text.secondary">ダメージ内訳</Typography>
-              <DamageBreakdown parts={selectedAmmo?.damageParts ?? []} />
+              <Typography variant="caption" color="text.secondary">
+                {selectedPelletProfile ? "全弾命中内訳" : "ダメージ内訳"}
+              </Typography>
+              <DamageBreakdown parts={selectedDamageParts} />
             </Box>
 
             {selectedProjectile ? (
@@ -620,7 +780,12 @@ export function EquipmentStatsPage() {
                 {ammoName(selectedAmmo)}
               </Typography>
             </Stack>
-            <DamageChart weapon={selectedWeapon} ammo={selectedAmmo} selectedDistance={selectedDistance} />
+            <DamageChart
+              weapon={selectedWeapon}
+              ammo={selectedAmmo}
+              pelletProfile={selectedPelletProfile}
+              selectedDistance={selectedDistance}
+            />
           </Stack>
         </Paper>
       </Box>
@@ -638,6 +803,7 @@ export function EquipmentStatsPage() {
             ammoRows={ammoRows}
             selectedAmmoId={selectedAmmo?.itemId ?? ""}
             selectedDistance={selectedDistance}
+            pelletProfileForAmmo={pelletProfileForAmmo}
             onSelectAmmo={setSelectedAmmoId}
           />
         </Stack>

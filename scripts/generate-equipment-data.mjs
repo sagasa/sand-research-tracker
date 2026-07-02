@@ -11,6 +11,7 @@ const SOURCE_FILES = {
   armor: "player_armor_summary.tsv",
   icons: "infantry_weapon_icon_manifest.tsv",
   itemGui: "item_gui_manifest.tsv",
+  shotgunPellets: "shotgun_pellet_summary.tsv",
 };
 
 const JA_NAME_OVERRIDES = {
@@ -144,14 +145,18 @@ function parseActionList(value) {
   return splitList(value).map((part) => {
     const pieces = part.split(":");
     const name = clean(pieces[0]);
-    const modeMatch = name.match(/_([^_]+)$/);
     return {
       name,
-      mode: modeMatch ? modeMatch[1].toLowerCase() : "",
+      mode: actionMode(name),
       intervalSeconds: pieces[1]?.endsWith("s") ? toNumber(pieces[1].slice(0, -1)) : toNumber(pieces[1]),
       projectileName: clean(pieces[2] ?? ""),
     };
   });
+}
+
+function actionMode(name) {
+  const modeMatch = clean(name).match(/_([^_]+)$/);
+  return modeMatch ? modeMatch[1].toLowerCase() : "";
 }
 
 function iconFileFromPath(path) {
@@ -227,6 +232,28 @@ function mapAmmo(row, itemGuiByItemId) {
   };
 }
 
+function mapShotgunPellet(row) {
+  return {
+    weaponId: row.weapon_id,
+    weaponName: row.weapon_name,
+    weaponSource: row.weapon_source,
+    action: row.action,
+    actionSource: row.action_source,
+    actionTargetData: toNumber(row.action_target_data),
+    actionSpreadCount: toNumber(row.action_spread_count),
+    mode: actionMode(row.action),
+    ammoId: row.ammo_id,
+    ammoName: row.ammo_name,
+    ammoSource: row.ammo_source,
+    ammoSpreadOverrideCount: toNumber(row.ammo_spread_override_count),
+    effectivePelletCount: toNumber(row.effective_pellet_count),
+    damagePerPelletParts: parseDamage(row.damage_per_pellet),
+    allPelletsDamageParts: parseDamage(row.all_pellets_damage_before_falloff),
+    projectile: row.projectile,
+    ammoCustomProjectile: row.ammo_custom_projectile,
+  };
+}
+
 function mapProjectile(row) {
   return {
     textAsset: row.text_asset,
@@ -268,11 +295,12 @@ async function readTsv(fileName) {
 }
 
 async function main() {
-  const [weaponRows, ammoRows, projectileRows, armorRows] = await Promise.all([
+  const [weaponRows, ammoRows, projectileRows, armorRows, shotgunPelletRows] = await Promise.all([
     readTsv(SOURCE_FILES.weapons),
     readTsv(SOURCE_FILES.ammo),
     readTsv(SOURCE_FILES.projectiles),
     readTsv(SOURCE_FILES.armor),
+    readTsv(SOURCE_FILES.shotgunPellets),
   ]);
   const iconManifestRows = await readTsv(SOURCE_FILES.icons);
   const itemGuiRows = await readTsv(SOURCE_FILES.itemGui);
@@ -286,21 +314,23 @@ async function main() {
       "Generated from local SAND reference tables bundled at build time.",
       "Japanese display names use local overrides when no local Japanese table is available.",
       "Damage display uses item damage and distance data from the local data tables. Runtime server or balance modifiers may differ.",
+      "Shotgun damage display uses effective pellet counts from shotgun_pellet_summary.tsv.",
       "Headshot display uses weapon headshot data from the local data tables.",
-      "Weapon icons are bundled for convenience; SAND assets and trademarks belong to their respective rightsholders.",
+      "Weapon and ammo icons are bundled for convenience; SAND assets and trademarks belong to their respective rightsholders.",
     ],
   };
 
-  const content = `import type { AmmoStat, ArmorStat, EquipmentStatsSource, ProjectileStat, WeaponStat } from "../types";\n\n`
+  const content = `import type { AmmoStat, ArmorStat, EquipmentStatsSource, ProjectileStat, ShotgunPelletStat, WeaponStat } from "../types";\n\n`
     + `export const equipmentStatsSource: EquipmentStatsSource = ${JSON.stringify(source, null, 2)};\n\n`
     + `export const weaponStats: WeaponStat[] = ${JSON.stringify(weaponRows.map((row) => mapWeapon(row, iconManifestByItemId, itemGuiByItemId)), null, 2)};\n\n`
     + `export const ammoStats: AmmoStat[] = ${JSON.stringify(ammoRows.map((row) => mapAmmo(row, itemGuiByItemId)), null, 2)};\n\n`
+    + `export const shotgunPelletStats: ShotgunPelletStat[] = ${JSON.stringify(shotgunPelletRows.map(mapShotgunPellet), null, 2)};\n\n`
     + `export const projectileStats: ProjectileStat[] = ${JSON.stringify(projectileRows.map(mapProjectile), null, 2)};\n\n`
     + `export const armorStats: ArmorStat[] = ${JSON.stringify(armorRows.map(mapArmor), null, 2)};\n`;
 
   await mkdir(dirname(OUT_FILE), { recursive: true });
   await writeFile(OUT_FILE, content, "utf8");
-  console.log(`Generated ${weaponRows.length} weapons, ${ammoRows.length} ammo rows, ${projectileRows.length} projectiles, ${armorRows.length} armor/health rows -> ${OUT_FILE}`);
+  console.log(`Generated ${weaponRows.length} weapons, ${ammoRows.length} ammo rows, ${shotgunPelletRows.length} shotgun pellet rows, ${projectileRows.length} projectiles, ${armorRows.length} armor/health rows -> ${OUT_FILE}`);
 }
 
 main().catch((error) => {
