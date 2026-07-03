@@ -13,6 +13,7 @@ This is an unofficial fan utility for SAND: Raiders of Sophie. It is not affilia
 - ブラウザ実行時に研究ツリーデータを取得したり再構築したりしません。
 - 研究ツリーデータは `scripts/generate-tech-tree.mjs` で生成し、`src/generated/techTreeData.ts` としてバンドルします。
 - 研究ノードのコスト/素材は SAND Guide、研究ノードID/ゲーム内進行スロットは SAND Game DB、前提リンクは Cog & Crown の公開情報を生成時に取り込みます。
+- 研究名の日本語表示は、抽出済みデータ内に公式日本語表が見つからないためローカル辞書で付与します。
 - 前提リンクは公開情報で突合できたものだけを使い、Tier順や見た目の近さからは推測しません。
 - 武器/弾アイコンは利便性のため同梱します。権利帰属は [ATTRIBUTION.md](./ATTRIBUTION.md) にまとめています。
 

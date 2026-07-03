@@ -15,6 +15,7 @@ export type TechNode = {
   id: string;
   guid?: string;
   name: string;
+  displayNameJa?: string;
   branch: string;
   branchSlug: string;
   branchOrder: number;

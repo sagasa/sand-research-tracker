@@ -73,6 +73,15 @@ function branchLabel(node: TechNode) {
   return `${node.branch} / ${node.tierLabel}`;
 }
 
+function researchNodeName(node: TechNode) {
+  return node.displayNameJa || node.name;
+}
+
+function researchNodeSecondaryName(node: TechNode) {
+  const displayName = researchNodeName(node);
+  return displayName !== node.name ? node.name : "";
+}
+
 function materialText(node: TechNode) {
   if (node.materials.length === 0) return "素材なし";
   return node.materials.map((material) => `${formatNumber(material.count)} ${material.name}`).join(", ");
@@ -89,6 +98,7 @@ function nodeMatchesSearch(node: TechNode, search: string) {
   if (!search) return true;
   const query = search.toLowerCase();
   return [
+    node.displayNameJa,
     node.name,
     node.branch,
     node.category,
@@ -197,7 +207,10 @@ function MaterialSummaryTable({
                 <TableCell sx={{ maxWidth: 340 }}>
                   <Typography variant="body2" color="text.secondary">
                     {summary.nodeIds
-                      .map((nodeId) => nodesById.get(nodeId)?.name)
+                      .map((nodeId) => {
+                        const node = nodesById.get(nodeId);
+                        return node ? researchNodeName(node) : "";
+                      })
                       .filter(Boolean)
                       .join(", ")}
                   </Typography>
@@ -277,9 +290,16 @@ function ResearchNodeCard({
             />
           </Tooltip>
         </Stack>
-        <Typography fontWeight={800} sx={{ lineHeight: 1.2 }}>
-          {node.name}
-        </Typography>
+        <Box>
+          <Typography fontWeight={800} sx={{ lineHeight: 1.2 }}>
+            {researchNodeName(node)}
+          </Typography>
+          {researchNodeSecondaryName(node) ? (
+            <Typography variant="caption" color="text.secondary">
+              {researchNodeSecondaryName(node)}
+            </Typography>
+          ) : null}
+        </Box>
         <Stack direction="row" spacing={0.75} flexWrap="wrap">
           <Chip label={node.tierCostRange || node.tierLabel} size="small" />
           {node.treeSlot ? (
@@ -306,7 +326,7 @@ function ResearchNodeCard({
                       key={`${node.id}-${requiredId}`}
                     >
                       <Chip
-                        label={requiredNode?.name ?? requiredId}
+                        label={requiredNode ? researchNodeName(requiredNode) : requiredId}
                         color={unknown ? "error" : missing ? "warning" : "default"}
                         size="small"
                         variant={requiredNode && unlockedIds.has(requiredId) ? "filled" : "outlined"}
@@ -340,7 +360,7 @@ function sortResearchNodes(a: TechNode, b: TechNode): number {
   });
   if (slotCompare !== 0) return slotCompare;
 
-  return a.name.localeCompare(b.name, "ja");
+  return researchNodeName(a).localeCompare(researchNodeName(b), "ja");
 }
 
 function ResearchDependencyTree({
@@ -367,7 +387,7 @@ function ResearchDependencyTree({
       branch,
       nodes: nodes
         .filter((node) => node.branchSlug === branch.slug)
-        .sort((a, b) => a.tier - b.tier || a.name.localeCompare(b.name)),
+        .sort((a, b) => a.tier - b.tier || researchNodeName(a).localeCompare(researchNodeName(b), "ja")),
     }))
     .filter((group) => group.nodes.length > 0);
 
@@ -812,7 +832,10 @@ export default function App() {
                     prerequisiteIds.length === 0
                       ? "前提なし"
                       : prerequisiteIds
-                          .map((id) => nodesById.get(id)?.name ?? id)
+                          .map((id) => {
+                            const requiredNode = nodesById.get(id);
+                            return requiredNode ? researchNodeName(requiredNode) : id;
+                          })
                           .join(", ");
                   return (
                     <Stack
@@ -828,7 +851,7 @@ export default function App() {
                         size="small"
                       />
                       <Typography fontWeight={700} sx={{ minWidth: 220 }}>
-                        {node.name}
+                        {researchNodeName(node)}
                       </Typography>
                       <Typography variant="body2" color="text.secondary" sx={{ flex: 1 }}>
                         {branchLabel(node)} / {materialText(node)}

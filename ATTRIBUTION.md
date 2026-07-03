@@ -21,6 +21,8 @@ The generated data uses SAND Guide for unlock costs/materials, SAND Game DB for 
 
 Prerequisite links are used only when the generator can match the public fan-site node to a bundled research node. The app does not infer prerequisite lines from tier order or visual proximity.
 
+Japanese research-node display names are local labels added by this project because no official Japanese research-name table was found in the extracted local reference data.
+
 ## Asset and Content Policy
 
 - This repository includes small weapon and ammo icon images for convenience.
